@@ -25,3 +25,34 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+ext {
+    supportLibrary = "28.0.0"
+
+    supportDependencies = [
+            supportv4   : "com.android.support:support-v4:${supportLibrary}",
+            cardview    : "com.android.support:cardview-v7:${supportLibrary}",
+            appCompat   : "com.android.support:appcompat-v7:${supportLibrary}",
+            recyclerview: "com.android.support:recyclerview-v7:${supportLibrary}",
+            design      : "com.android.support:design:${supportLibrary}",
+            annotations : "com.android.support:support-annotations:${supportLibrary}",
+            constraint  : "com.android.support.constraint:constraint-layout:1.1.3",
+            multidex    : "com.android.support:multidex:1.0.1",
+    ]
+
+    thirdDependencies = [
+            exoPlayerVersion  : '2.9.6'
+    ]
+    app = [
+            compileSdkVersion  : 28,
+            buildToolsVersion  : "29.0.0",
+            minSdkVersion      : 19,
+            targetSdkVersion   : 28,
+            versionCode        : 1,
+            versionName        : "1.0.00",
+            applicationId      : "com.wisn.video",
+            targetCompatibility: 1.8,
+            sourceCompatibility: 1.8,
+    ]
+}
