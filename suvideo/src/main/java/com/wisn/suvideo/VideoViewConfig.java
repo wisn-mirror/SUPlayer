@@ -50,13 +50,13 @@ public class VideoViewConfig {
 
     public final static class Builder {
 
-        private boolean mIsEnableLog;
-        private boolean mPlayOnMobileNetwork;
-        private boolean mUsingSurfaceView;
-        private boolean mAutoRotate;
-        private boolean mEnableMediaCodec;
+        private boolean mIsEnableLog=true;
+        private boolean mPlayOnMobileNetwork=false;
+        private boolean mUsingSurfaceView=false;
+        private boolean mAutoRotate=false;
+        private boolean mEnableMediaCodec=false;
         private boolean mEnableAudioFocus = true;
-        private boolean mEnableParallelPlay;
+        private boolean mEnableParallelPlay=true;
         private ProgressManager mProgressManager;
         private PlayerFactory mPlayerFactory;
         private int mScreenScaleType;

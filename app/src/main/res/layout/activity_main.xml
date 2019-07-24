@@ -9,6 +9,11 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/Simple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple" />
+    <Button
         android:id="@+id/videolist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

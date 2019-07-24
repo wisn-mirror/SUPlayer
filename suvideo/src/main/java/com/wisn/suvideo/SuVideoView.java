@@ -1,5 +1,10 @@
 package com.wisn.suvideo;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -20,6 +25,8 @@ import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.wisn.suvideo.control.BaseVideoController;
@@ -153,7 +160,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             mCurrentScreenScale = config.mScreenScaleType;
 
             //读取xml中的配置，并综合全局配置
-          /*  TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.VideoView);
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.VideoView);
             mAutoRotate = a.getBoolean(R.styleable.VideoView_autoRotate, mAutoRotate);
             mUsingSurfaceView = a.getBoolean(R.styleable.VideoView_usingSurfaceView, mUsingSurfaceView);
             mEnableAudioFocus = a.getBoolean(R.styleable.VideoView_enableAudioFocus, mEnableAudioFocus);
@@ -162,7 +169,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             mIsLooping = a.getBoolean(R.styleable.VideoView_looping, false);
             mCurrentScreenScale = a.getInt(R.styleable.VideoView_screenScaleType, mCurrentScreenScale);
             a.recycle();
-*/
+
             initView();
         }
 
@@ -776,7 +783,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
          * 开启小屏
          */
         public void startTinyScreen() {
-            if (mIsTinyScreen) return;
+         /*   if (mIsTinyScreen) return;
             Activity activity = PlayerUtils.scanForActivity(getContext());
             if (activity == null) return;
             mOrientationEventListener.disable();
@@ -796,14 +803,61 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             params.gravity = Gravity.BOTTOM | Gravity.END;
             contentView.addView(mPlayerContainer, params);
             mIsTinyScreen = true;
-            setPlayerState(PLAYER_TINY_SCREEN);
+            setPlayerState(PLAYER_TINY_SCREEN);*/
+            if (mIsTinyScreen) return;
+            Activity activity = PlayerUtils.scanForActivity(getContext());
+            if (activity == null) return;
+
+            int screenWidth = PlayerUtils.getScreenWidth(activity, false);
+            int screenHeight = PlayerUtils.getScreenHeight(activity, false);
+            int width = mTinyScreenSize[0];
+            if (width <= 0) {
+                width =screenWidth / 2;
+            }
+            int height = mTinyScreenSize[1];
+            if (height <= 0) {
+                height = width * 9 / 16;
+            }
+            ViewGroup contentView = activity.findViewById(android.R.id.content);
+            mOrientationEventListener.disable();
+            this.removeView(mPlayerContainer);
+            LayoutParams params = new LayoutParams(mPlayerContainer.getWidth(), mPlayerContainer.getHeight());
+            contentView.addView(mPlayerContainer,params);
+
+            AnimatorSet animatorSet = new AnimatorSet();  //组合动画
+            float sc = (float) width/ (float) params.width;
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(mPlayerContainer, "scaleX", 1f, sc);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(mPlayerContainer, "scaleY", 1f, sc);
+            float translationX= screenWidth -  mPlayerContainer.getWidth();
+            ObjectAnimator animatortranslationX = ObjectAnimator.ofFloat(mPlayerContainer, "translationX", mPlayerContainer.getTranslationX(),
+                    mPlayerContainer.getTranslationX() + translationX);
+            float translationY = screenHeight -  mPlayerContainer.getHeight();
+            ObjectAnimator animatortranslationY = ObjectAnimator.ofFloat(mPlayerContainer, "translationY", mPlayerContainer.getTranslationY(),
+                    mPlayerContainer.getTranslationY() + translationY);
+            animatorSet.setDuration(1000);  //动画时间
+            animatorSet.setInterpolator(new DecelerateInterpolator());  //设置插值器
+            animatorSet.setInterpolator(new AccelerateInterpolator());  //设置插值器
+            animatortranslationX.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mIsTinyScreen = true;
+                    setPlayerState(PLAYER_TINY_SCREEN);
+
+                }
+            });
+            animatorSet.play(scaleX).with(scaleY).with(animatortranslationX)
+                    .with(animatortranslationY);
+            animatorSet.start();
+            mIsTinyScreen = true;
+
         }
 
         /**
          * 退出小屏
          */
         public void stopTinyScreen() {
-            if (!mIsTinyScreen) return;
+            /*if (!mIsTinyScreen) return;
 
             Activity activity = PlayerUtils.scanForActivity(getContext());
             if (activity == null) return;
@@ -817,7 +871,64 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             if (mAutoRotate) mOrientationEventListener.enable();
 
             mIsTinyScreen = false;
-            setPlayerState(PLAYER_NORMAL);
+            setPlayerState(PLAYER_NORMAL);*/
+            if (!mIsTinyScreen) return;
+            Activity activity = PlayerUtils.scanForActivity(getContext());
+            if (activity == null) return;
+
+            int screenWidth = PlayerUtils.getScreenWidth(activity, false);
+            int screenHeight = PlayerUtils.getScreenHeight(activity, false);
+            int width = mTinyScreenSize[0];
+            if (width <= 0) {
+                width =screenWidth / 2;
+            }
+            int height = mTinyScreenSize[1];
+            if (height <= 0) {
+                height = width * 9 / 16;
+            }
+            ViewGroup contentView = activity.findViewById(android.R.id.content);
+            mOrientationEventListener.disable();
+            this.removeView(mPlayerContainer);
+            LayoutParams params = new LayoutParams(mPlayerContainer.getWidth(), mPlayerContainer.getHeight());
+            contentView.addView(mPlayerContainer,params);
+
+             /*
+            mOrientationEventListener.disable();
+            this.removeView(mPlayerContainer);
+            LayoutParams params = new LayoutParams(width, height);
+            params.gravity = Gravity.BOTTOM | Gravity.END;
+            contentView.addView(mPlayerContainer, params);
+            mIsTinyScreen = true;
+            setPlayerState(PLAYER_TINY_SCREEN);*/
+
+            AnimatorSet animatorSet = new AnimatorSet();  //组合动画
+            float sc = (float) width/ (float) params.width;
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(mPlayerContainer, "scaleX", 1f, sc);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(mPlayerContainer, "scaleY", 1f, sc);
+            float translationX= screenWidth -  mPlayerContainer.getWidth()/3;
+            ObjectAnimator animatortranslationX = ObjectAnimator.ofFloat(mPlayerContainer, "translationX", mPlayerContainer.getTranslationX(),
+                    mPlayerContainer.getTranslationX() + translationX);
+            float translationY = screenHeight/2 -  mPlayerContainer.getHeight();
+            ObjectAnimator animatortranslationY = ObjectAnimator.ofFloat(mPlayerContainer, "translationY", mPlayerContainer.getTranslationY(),
+                    mPlayerContainer.getTranslationY() + translationY);
+            animatorSet.setDuration(1000);  //动画时间
+            animatorSet.setInterpolator(new DecelerateInterpolator());  //设置插值器
+            animatorSet.setInterpolator(new AccelerateInterpolator());  //设置插值器
+            animatortranslationX.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mIsTinyScreen = true;
+                    setPlayerState(PLAYER_TINY_SCREEN);
+
+                }
+            });
+            animatorSet.play(scaleX).with(scaleY).with(animatortranslationX)
+                    .with(animatortranslationY);
+//            animatorSet.play(scaleX).with(scaleY);
+//            animatorSet.play(animatortranslationX)
+//                    .with(animatortranslationY);
+            animatorSet.start();
         }
 
         public boolean isTinyScreen() {

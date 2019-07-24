@@ -10,12 +10,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.VideoView;
 
 import com.wisn.suvideo.R;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.helper.PlayerUtils;
 import com.wisn.suvideo.manager.VideoViewManager;
+import com.wisn.suvideo.view.StatusView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +35,7 @@ public abstract class BaseVideoController extends FrameLayout {
     private StringBuilder mFormatBuilder;
     private Formatter mFormatter;
     protected int mCurrentPlayState;
-//    protected StatusView mStatusView;
+    protected StatusView mStatusView;
 
 
     public BaseVideoController(@NonNull Context context) {
@@ -81,7 +81,7 @@ public abstract class BaseVideoController extends FrameLayout {
     public void setPlayState(int playState) {
         mCurrentPlayState = playState;
         hideStatusView();
-        /*if (playState == SuVideoView.STATE_ERROR) {
+         if (playState == SuVideoView.STATE_ERROR) {
             mStatusView.setMessage(getResources().getString(R.string.dkplayer_error_message));
             mStatusView.setButtonTextAndAction(getResources().getString(R.string.dkplayer_retry), new View.OnClickListener() {
                 @Override
@@ -91,11 +91,11 @@ public abstract class BaseVideoController extends FrameLayout {
                 }
             });
             this.addView(mStatusView, 0);
-        }*/
+        }
     }
 
     public void showStatusView() {
-      /*  this.removeView(mStatusView);
+        this.removeView(mStatusView);
         mStatusView.setMessage(getResources().getString(R.string.dkplayer_wifi_tip));
         mStatusView.setButtonTextAndAction(getResources().getString(R.string.dkplayer_continue_play), new View.OnClickListener() {
             @Override
@@ -105,11 +105,11 @@ public abstract class BaseVideoController extends FrameLayout {
                 mMediaPlayer.start();
             }
         });
-        this.addView(mStatusView);*/
+        this.addView(mStatusView);
     }
 
     public void hideStatusView() {
-//        this.removeView(mStatusView);
+         this.removeView(mStatusView);
     }
 
     public void setPlayerState(int playerState) {
