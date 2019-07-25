@@ -24,4 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="productDetail" />
+    <Button
+        android:id="@+id/douyin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="douyin" />
 </LinearLayout>

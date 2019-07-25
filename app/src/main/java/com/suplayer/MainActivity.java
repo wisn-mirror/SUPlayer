@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.suplayer.douyin.DouYinActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.exoplayer.ExoMediaPlayerFactory;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button videolist;
     private Button productDetail;
     private Button Simple;
+    private Button douyin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videolist = findViewById(R.id.videolist);
         productDetail = findViewById(R.id.productDetail);
         Simple = findViewById(R.id.Simple);
+        douyin = findViewById(R.id.douyin);
         videolist.setOnClickListener(this);
         productDetail.setOnClickListener(this);
         Simple.setOnClickListener(this);
+        douyin.setOnClickListener(this);
         initconfig();
+        startActivity(new Intent(this, SimpleActivity.class));
+
     }
 
     private void initconfig() {
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, SimpleActivity.class));
         } else if (v == productDetail) {
             startActivity(new Intent(this, SimpleActivity.class));
+        } else if (v == douyin) {
+            startActivity(new Intent(this, DouYinActivity.class));
         }
     }
 }

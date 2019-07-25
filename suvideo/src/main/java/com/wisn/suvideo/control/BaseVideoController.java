@@ -56,7 +56,7 @@ public abstract class BaseVideoController extends FrameLayout {
         mControllerView = LayoutInflater.from(getContext()).inflate(getLayoutId(), this);
         mFormatBuilder = new StringBuilder();
         mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
-//        mStatusView = new StatusView(getContext());
+        mStatusView = new StatusView(getContext());
         setClickable(true);
         setFocusable(true);
     }

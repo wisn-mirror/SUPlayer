@@ -1,12 +1,18 @@
 package com.suplayer;
 
+import com.suplayer.douyin.VideoBean;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Wisn on 2019-07-24 12:10.
  */
 public class Url {
     public static final String VOD_URL = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4";
 
-    public static final String ip = "http://192.168.132.35:8080/";
+    //    public static final String ip = "http://192.168.132.35:8080/";
+    public static final String ip = "http://172.19.54.203:8080/";
 
     public static final String[] local_resvideo = {
             ip + "media/video/newhome.mp4",
@@ -15,6 +21,15 @@ public class Url {
             ip + "media/video/video_ccc.mp4",
             ip + "media/video/video_ddd.mkv"
     };
+
+    public static List<VideoBean> getVideoBean() {
+        ArrayList<VideoBean> videoBeans = new ArrayList<>();
+        for (int i = 0; i < local_resvideo.length; i++) {
+            VideoBean videoBean = new VideoBean("标题" + i, res[i], local_resvideo[i]);
+            videoBeans.add(videoBean);
+        }
+        return videoBeans;
+    }
 
     public static final String[] res = {
             "http://img.hb.aicdn.com/3e1247e78d3f3fbe744acf4908be5ee36212fd1d1852b-DHtPYL_sq320",
