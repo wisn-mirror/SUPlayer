@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
-import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.suplayer.R;
@@ -38,8 +37,6 @@ public class DouYinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-           /* actionBar.setTitle(R.string.str_tiktok);
-            actionBar.setDisplayHomeAsUpEnabled(true);*/
             actionBar.hide();
         }
 

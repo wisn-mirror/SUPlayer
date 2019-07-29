@@ -44,7 +44,6 @@ public class DouYinController extends BaseVideoController {
     @Override
     public void setPlayState(int playState) {
         super.setPlayState(playState);
-
         switch (playState) {
             case SuVideoView.STATE_IDLE:
                 L.e("STATE_IDLE");

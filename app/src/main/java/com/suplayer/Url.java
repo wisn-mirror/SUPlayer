@@ -11,15 +11,20 @@ import java.util.List;
 public class Url {
     public static final String VOD_URL = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4";
 
-    //    public static final String ip = "http://192.168.132.35:8080/";
-    public static final String ip = "http://172.19.54.203:8080/";
+        public static final String ip = "http://192.168.132.35:8080/";
+//    public static final String ip = "http://172.19.54.203:8080/";
 
     public static final String[] local_resvideo = {
-            ip + "media/video/newhome.mp4",
+           /* ip + "media/video/newhome.mp4",
             ip + "media/video/video_aaa.mp4",
             ip + "media/video/video_ddd.mkv",
             ip + "media/video/video_ccc.mp4",
-            ip + "media/video/video_ddd.mkv"
+            ip + "media/video/video_ddd.mkv"*/
+           VOD_URL,
+           VOD_URL,
+           VOD_URL,
+           VOD_URL,
+           VOD_URL
     };
 
     public static List<VideoBean> getVideoBean() {

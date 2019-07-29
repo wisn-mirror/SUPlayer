@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.suplayer.douyin.DouYinActivity;
+import com.suplayer.productdetail.ProdetailActivity;
+import com.suplayer.xiaohongshu.HongshuActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.exoplayer.ExoMediaPlayerFactory;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Simple.setOnClickListener(this);
         douyin.setOnClickListener(this);
         initconfig();
-        startActivity(new Intent(this, SimpleActivity.class));
+        startActivity(new Intent(this, ProdetailActivity.class));
 
     }
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == videolist) {
             startActivity(new Intent(this, SimpleActivity.class));
         } else if (v == productDetail) {
-            startActivity(new Intent(this, SimpleActivity.class));
+            startActivity(new Intent(this, ProdetailActivity.class));
         } else if (v == douyin) {
             startActivity(new Intent(this, DouYinActivity.class));
         }
