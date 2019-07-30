@@ -25,8 +25,5 @@
         <item name="android:thumb">@drawable/account_shape_switch</item>
         &lt;!&ndash;<item name="android:thumbOffset">-10.0dip</item>&ndash;&gt;
     </style>-->
-    <style name="ProgressBar_Scale" parent="@android:style/Widget.ProgressBar.Horizontal">
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
-        <item name="android:progressDrawable">@drawable/progress_scale</item>
-    </style>
+
 </resources>

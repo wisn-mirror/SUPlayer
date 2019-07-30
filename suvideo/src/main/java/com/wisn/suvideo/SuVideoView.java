@@ -1,9 +1,5 @@
 package com.wisn.suvideo;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,8 +20,6 @@ import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.wisn.suvideo.control.BaseVideoController;
@@ -753,7 +747,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             if (activity == null) return;
             if (!mAutoRotate) mOrientationEventListener.disable();
             //显示ActionBar
-            PlayerUtils.showActionBar(activity);
+//            PlayerUtils.showActionBar(activity);
             //显示NavigationBar
             this.removeView(mHideNavBarView);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
