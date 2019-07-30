@@ -14,6 +14,7 @@ import com.suplayer.R;
  * Created by Wisn on 2019-07-26 17:33.
  */
 public class TestFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

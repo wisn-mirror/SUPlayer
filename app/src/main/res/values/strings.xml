@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SUPlayer</string>
+    <string name="title_activity_progress">ProgressActivity</string>
 </resources>

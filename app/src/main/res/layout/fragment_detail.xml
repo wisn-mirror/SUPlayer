@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
+    android:layout_height="match_parent" >
 
-    <com.wisn.suvideo.SuVideoView
-        android:id="@+id/player"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        app:autoRotate="true" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <com.wisn.suvideo.SuVideoView
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:autoRotate="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="内容0" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="内容1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="center"
+
+            android:text="内容2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:gravity="center"
+            android:text="内容3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:gravity="center"
+
+            android:text="内容4" />
+    </LinearLayout>
+
+</ScrollView>

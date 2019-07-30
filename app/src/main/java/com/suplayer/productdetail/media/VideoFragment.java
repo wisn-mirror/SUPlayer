@@ -1,4 +1,4 @@
-package com.suplayer.productdetail;
+package com.suplayer.productdetail.media;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,18 +12,19 @@ import com.suplayer.R;
 import com.suplayer.Url;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.ProductVideoController;
+import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
 
 /**
- * Created by Wisn on 2019-07-26 17:29.
+ * Created by Wisn on 2019-07-30 14:29.
  */
-public class DetailFragment extends Fragment {
+public class VideoFragment extends Fragment {
     private SuVideoView mVideoView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_detail, null);
+        View view = inflater.inflate(R.layout.fragment_video, null);
         mVideoView = view.findViewById(R.id.player);
         return view;
     }
@@ -33,7 +34,9 @@ public class DetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //播放raw
         mVideoView.setUrl(Url.VOD_URL);
+        mVideoView.setProgressManager(new ProgressManagerMemory());
         mVideoView.setVideoController(new ProductVideoController(getContext()));
         mVideoView.start();
     }
+
 }

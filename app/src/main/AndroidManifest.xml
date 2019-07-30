@@ -6,16 +6,29 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/httpxenable"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".xiaohongshu.HongshuActivity"></activity>
-        <activity android:name=".productdetail.ProdetailActivity"></activity>
+        <activity
+            android:name=".ProgressActivity"
+            android:label="@string/title_activity_progress"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".xiaohongshu.HongshuActivity" />
+        <activity android:name=".productdetail.ProdetailActivity" />
         <activity
             android:name=".douyin.DouYinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".SimpleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".productdetail.media.ProductMediaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".MainActivity">
             <intent-filter>

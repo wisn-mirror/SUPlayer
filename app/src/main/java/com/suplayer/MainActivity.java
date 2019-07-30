@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.suplayer.douyin.DouYinActivity;
 import com.suplayer.productdetail.ProdetailActivity;
+import com.suplayer.productdetail.media.ProductMediaActivity;
 import com.suplayer.xiaohongshu.HongshuActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.manager.VideoViewManager;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Simple.setOnClickListener(this);
         douyin.setOnClickListener(this);
         initconfig();
-        startActivity(new Intent(this, ProdetailActivity.class));
+        startActivity(new Intent(this, ProductMediaActivity.class));
 
     }
 
