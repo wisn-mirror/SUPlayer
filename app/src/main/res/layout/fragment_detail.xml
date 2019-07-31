@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.wisn.suvideo.view.LyfScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.wisn.suvideo.SuVideoView
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+      <!--  <com.wisn.suvideo.SuVideoView
             android:id="@+id/player"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            app:autoRotate="true" />
+            app:autoRotate="true" />-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
             android:text="内容0" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -47,4 +52,4 @@
             android:text="内容4" />
     </LinearLayout>
 
-</ScrollView>
+</com.wisn.suvideo.view.LyfScrollView>

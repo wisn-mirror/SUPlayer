@@ -3,6 +3,7 @@ package com.wisn.suvideo.control.impl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wisn.suvideo.R;
 import com.wisn.suvideo.SuVideoView;
@@ -36,7 +36,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
     protected RelativeLayout mTopContainer;
     protected SeekBar mVideoProgress;
     protected ImageView mBackButton;
-    private boolean mIsLive;
     private boolean mIsDragging;
 
     private ProgressBar mBottomProgress;
@@ -53,6 +52,9 @@ public class ProductVideoController extends GestureVideoController implements Vi
     private ImageView iv_jindui;
     private TextView iv_newtime;
     private long lastPosition;
+    private ImageView voice_enable;
+    private int streamVolume;
+    private boolean isEnable = true;
 
 
     public ProductVideoController(@NonNull Context context) {
@@ -80,6 +82,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
         mTopContainer = mControllerView.findViewById(R.id.top_container);
         mVideoProgress = mControllerView.findViewById(R.id.seekBar);
         mTotalTime = mControllerView.findViewById(R.id.total_time);
+        voice_enable = mControllerView.findViewById(R.id.voice_enable);
         mCurrTime = mControllerView.findViewById(R.id.curr_time);
         mBackButton = mControllerView.findViewById(R.id.back);
         mThumb = mControllerView.findViewById(R.id.thumb);
@@ -101,7 +104,18 @@ public class ProductVideoController extends GestureVideoController implements Vi
         rePlayButton.setOnClickListener(this);
         mCompleteContainer.setOnClickListener(this);
         mStopFullscreen.setOnClickListener(this);
+        voice_enable.setOnClickListener(this);
+        setVoice(isEnable);
+    }
 
+    private void setVoice(boolean isEnable) {
+        if (isEnable) {
+            streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+        } else {
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
+        }
+        voice_enable.setSelected(!isEnable);
     }
 
     @Override
@@ -123,7 +137,13 @@ public class ProductVideoController extends GestureVideoController implements Vi
             doPauseResume();
         } else if (i == R.id.iv_replay || i == R.id.iv_refresh) {
             mMediaPlayer.replay(true);
+        } else if (i == R.id.voice_enable) {
+            setVoice(voice_enable.isSelected());
         }
+    }
+
+    public void setDefaultVoiceEnable(boolean isEnable) {
+        this.isEnable = isEnable;
     }
 
 
@@ -132,7 +152,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
         switch (playerState) {
             case SuVideoView.PLAYER_NORMAL:
                 L.e("PLAYER_NORMAL");
-                if (mIsLocked) return;
                 setLayoutParams(new LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
@@ -144,7 +163,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 break;
             case SuVideoView.PLAYER_FULL_SCREEN:
                 L.e("PLAYER_FULL_SCREEN");
-                if (mIsLocked) return;
                 mIsGestureEnabled = true;
                 mFullScreenButton.setSelected(true);
                 mBackButton.setVisibility(VISIBLE);
@@ -164,7 +182,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
             case SuVideoView.STATE_IDLE:
                 L.e("STATE_IDLE");
                 hide();
-                mIsLocked = false;
                 mMediaPlayer.setLock(false);
                 mBottomProgress.setProgress(0);
                 mBottomProgress.setSecondaryProgress(0);
@@ -173,6 +190,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mCompleteContainer.setVisibility(GONE);
                 mBottomProgress.setVisibility(GONE);
                 mLoadingProgress.setVisibility(GONE);
+                fl_newprogress.setVisibility(GONE);
                 mStartPlayButton.setVisibility(VISIBLE);
                 mThumb.setVisibility(VISIBLE);
                 break;
@@ -184,6 +202,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mCompleteContainer.setVisibility(GONE);
                 mThumb.setVisibility(GONE);
                 mStartPlayButton.setVisibility(GONE);
+                fl_newprogress.setVisibility(GONE);
                 break;
             case SuVideoView.STATE_PAUSED:
                 L.e("STATE_PAUSED");
@@ -199,7 +218,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 break;
             case SuVideoView.STATE_PREPARED:
                 L.e("STATE_PREPARED");
-                if (!mIsLive) mBottomProgress.setVisibility(VISIBLE);
+                mBottomProgress.setVisibility(VISIBLE);
 //                mLoadingProgress.setVisibility(GONE);
                 mStartPlayButton.setVisibility(GONE);
                 break;
@@ -207,6 +226,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 L.e("STATE_ERROR");
                 mStartPlayButton.setVisibility(GONE);
                 mLoadingProgress.setVisibility(GONE);
+                fl_newprogress.setVisibility(GONE);
+
                 mThumb.setVisibility(GONE);
                 mBottomProgress.setVisibility(GONE);
                 mTopContainer.setVisibility(GONE);
@@ -236,7 +257,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mBottomProgress.setVisibility(GONE);
                 mBottomProgress.setProgress(0);
                 mBottomProgress.setSecondaryProgress(0);
-                mIsLocked = false;
                 mMediaPlayer.setLock(false);
                 break;
         }
@@ -248,6 +268,12 @@ public class ProductVideoController extends GestureVideoController implements Vi
         mIsDragging = true;
         removeCallbacks(mShowProgress);
         removeCallbacks(mFadeOut);
+    }
+
+    @Override
+    protected void MotionEventUp() {
+        super.MotionEventUp();
+        fl_newprogress.setVisibility(GONE);
     }
 
     @Override
@@ -270,30 +296,28 @@ public class ProductVideoController extends GestureVideoController implements Vi
         long newPosition = (duration * progress) / mVideoProgress.getMax();
         String currentTime = stringForTime((int) newPosition);
         String durationStr = stringForTime((int) duration);
-        iv_newtime.setText(currentTime + "/" +durationStr);
+        iv_newtime.setText(currentTime + "/" + durationStr);
         newprogressBar.setProgress(progress);
         if (mCurrTime != null)
             mCurrTime.setText(currentTime);
         fl_newprogress.setVisibility(View.VISIBLE);
-        iv_jindui.setSelected((lastPosition-newPosition)>0);
+        iv_jindui.setSelected((lastPosition - newPosition) > 0);
         lastPosition = newPosition;
     }
+
 
     @Override
     public void hide() {
         if (mShowing) {
+            fl_newprogress.setVisibility(View.GONE);
             if (mMediaPlayer.isFullScreen()) {
-                if (!mIsLocked) {
-                    hideAllViews();
-                }
+                hideAllViews();
             } else {
                 mBottomContainer.setVisibility(GONE);
                 mBottomContainer.startAnimation(mHideAnim);
             }
-            if (!mIsLive && !mIsLocked) {
-                mBottomProgress.setVisibility(VISIBLE);
-                mBottomProgress.startAnimation(mShowAnim);
-            }
+            mBottomProgress.setVisibility(VISIBLE);
+            mBottomProgress.startAnimation(mShowAnim);
             mShowing = false;
         }
     }
@@ -303,23 +327,20 @@ public class ProductVideoController extends GestureVideoController implements Vi
         mTopContainer.startAnimation(mHideAnim);
         mBottomContainer.setVisibility(GONE);
         mBottomContainer.startAnimation(mHideAnim);
+        fl_newprogress.setVisibility(GONE);
     }
 
     private void show(int timeout) {
-
         if (!mShowing) {
+            fl_newprogress.setVisibility(View.GONE);
             if (mMediaPlayer.isFullScreen()) {
-                if (!mIsLocked) {
-                    showAllViews();
-                }
+                showAllViews();
             } else {
                 mBottomContainer.setVisibility(VISIBLE);
                 mBottomContainer.startAnimation(mShowAnim);
             }
-            if (!mIsLocked && !mIsLive) {
-                mBottomProgress.setVisibility(GONE);
-                mBottomProgress.startAnimation(mHideAnim);
-            }
+            mBottomProgress.setVisibility(GONE);
+            mBottomProgress.startAnimation(mHideAnim);
             mShowing = true;
         }
         removeCallbacks(mFadeOut);
@@ -345,9 +366,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
         if (mMediaPlayer == null || mIsDragging) {
             return 0;
         }
-
-        if (mIsLive) return 0;
-
         int position = (int) mMediaPlayer.getCurrentPosition();
         int duration = (int) mMediaPlayer.getDuration();
         if (mVideoProgress != null) {
@@ -371,7 +389,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
         }
         String currentTime = stringForTime(position);
         String durationStr = stringForTime(duration);
-        iv_newtime.setText(currentTime + "/" +durationStr);
+        iv_newtime.setText(currentTime + "/" + durationStr);
         if (mTotalTime != null)
             mTotalTime.setText(durationStr);
         if (mCurrTime != null)
@@ -380,13 +398,37 @@ public class ProductVideoController extends GestureVideoController implements Vi
         return position;
     }
 
+    @Override
+    protected void slideToChangeVolume(float deltaY) {
+    }
 
     @Override
-    protected void slideToChangePosition(float deltaX) {
-        if (mIsLive) {
-            mNeedSeek = false;
-        } else {
-            super.slideToChangePosition(deltaX);
+    protected void slideToChangeBrightness(float deltaY) {
+    }
+
+    public void slideToChangePosition(float deltaX) {
+        try {
+            hide();
+            mCenterView.setProVisibility(View.GONE);
+            deltaX = -deltaX;
+            int width = getMeasuredWidth();
+            int duration = (int) mMediaPlayer.getDuration();
+            if(duration<0)return ;
+            int currentPosition = (int) mMediaPlayer.getCurrentPosition();
+            int position = (int) (deltaX / width * 120000 + currentPosition);
+            if (position > duration) position = duration;
+            if (position < 0) position = 0;
+            mPosition = position;
+            int progress = position * 1000 / duration;
+            newprogressBar.setProgress(progress);
+            iv_newtime.setText(stringForTime(position) + "/" + stringForTime(duration));
+            mTopContainer.setVisibility(View.VISIBLE);
+            fl_newprogress.setVisibility(View.VISIBLE);
+            iv_jindui.setSelected((lastPosition - mPosition) > 0);
+            lastPosition = mPosition;
+            mNeedSeek = true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -396,10 +438,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
 
     @Override
     public boolean onBackPressed() {
-        if (mIsLocked) {
-            show();
-            return true;
-        }
 
         Activity activity = PlayerUtils.scanForActivity(getContext());
         if (activity == null) return super.onBackPressed();

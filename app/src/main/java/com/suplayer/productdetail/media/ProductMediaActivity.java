@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.suplayer.R;
@@ -68,6 +69,13 @@ public class ProductMediaActivity extends AppCompatActivity {
         setStatusBarTransparent();
         magicIndicator = (MagicIndicator) findViewById(R.id.indicator);
         viewPager = findViewById(R.id.viewpager);
+        ImageView media_iv_back = findViewById(R.id.media_iv_back);
+        media_iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductMediaActivity.this.finish();
+            }
+        });
         mVideoViewManager = VideoViewManager.instance();
 
         tabs.add("视频");

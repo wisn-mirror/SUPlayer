@@ -127,6 +127,7 @@ public abstract class GestureVideoController extends BaseVideoController{
     public boolean onTouchEvent(MotionEvent event) {
         boolean detectedUp = event.getAction() == MotionEvent.ACTION_UP;
         if (!mGestureDetector.onTouchEvent(event) && detectedUp) {
+            MotionEventUp();
             if (mCenterView.getVisibility() == VISIBLE) {
                 mCenterView.setVisibility(GONE);
             }
@@ -137,6 +138,10 @@ public abstract class GestureVideoController extends BaseVideoController{
         }
         return super.onTouchEvent(event);
     }
+    protected void MotionEventUp(){
+
+    }
+
 
     protected void slideToChangePosition(float deltaX) {
         mCenterView.setVisibility(VISIBLE);
@@ -148,9 +153,9 @@ public abstract class GestureVideoController extends BaseVideoController{
         int currentPosition = (int) mMediaPlayer.getCurrentPosition();
         int position = (int) (deltaX / width * 120000 + currentPosition);
         if (position > currentPosition) {
-            mCenterView.setIcon(R.drawable.dkplayer_ic_action_fast_forward);
+            mCenterView.setIcon(R.drawable.commoditydetails_icon_play_speed);
         } else {
-            mCenterView.setIcon(R.drawable.dkplayer_ic_action_fast_rewind);
+            mCenterView.setIcon(R.drawable.commoditydetails_icon_play_reverse);
         }
         if (position > duration) position = duration;
         if (position < 0) position = 0;
@@ -190,10 +195,10 @@ public abstract class GestureVideoController extends BaseVideoController{
         float index = mStreamVolume + deltaV;
         if (index > streamMaxVolume) index = streamMaxVolume;
         if (index < 0) {
-            mCenterView.setIcon(R.drawable.dkplayer_ic_action_volume_off);
+            mCenterView.setIcon(R.drawable.commoditydetails_icon_voice_close);
             index = 0;
         } else {
-            mCenterView.setIcon(R.drawable.dkplayer_ic_action_volume_up);
+            mCenterView.setIcon(R.drawable.commoditydetails_icon_voice_open);
         }
         int percent = (int) (index / streamMaxVolume * 100);
         mCenterView.setTextView(percent + "%");

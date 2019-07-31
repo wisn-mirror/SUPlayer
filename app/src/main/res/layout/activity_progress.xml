@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_card_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="00:17/00:300:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:1700:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:32/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:322"
+            android:textSize="12sp" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="140dp"
@@ -32,11 +46,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_marginLeft="16dp"
-                android:textSize="12sp"
+                android:gravity="center"
                 android:text="00:17/00:32"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </FrameLayout>

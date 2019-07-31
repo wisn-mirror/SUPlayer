@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    api supportDependencies.appCompat
     api supportDependencies.recyclerview
     api thirdDependencies.glide
     api "com.google.android.exoplayer:exoplayer-core:$thirdDependencies.exoPlayerVersion"
@@ -39,6 +39,8 @@ dependencies {
     api "com.google.android.exoplayer:exoplayer-hls:$thirdDependencies.exoPlayerVersion"
     api "com.google.android.exoplayer:exoplayer-smoothstreaming:$thirdDependencies.exoPlayerVersion"
     api "com.google.android.exoplayer:extension-rtmp:$thirdDependencies.exoPlayerVersion"
+    api 'com.yanzhenjie.permission:support:2.0.1'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -35,7 +35,9 @@ public class VideoFragment extends Fragment {
         //播放raw
         mVideoView.setUrl(Url.VOD_URL);
         mVideoView.setProgressManager(new ProgressManagerMemory());
-        mVideoView.setVideoController(new ProductVideoController(getContext()));
+        ProductVideoController productVideoController = new ProductVideoController(getContext());
+        productVideoController.setDefaultVoiceEnable(false);
+        mVideoView.setVideoController(productVideoController);
         mVideoView.start();
     }
 

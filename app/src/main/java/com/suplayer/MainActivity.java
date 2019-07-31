@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Simple.setOnClickListener(this);
         douyin.setOnClickListener(this);
         initconfig();
-        startActivity(new Intent(this, ProductMediaActivity.class));
+        startActivity(new Intent(this, ProdetailActivity.class));
 
     }
 

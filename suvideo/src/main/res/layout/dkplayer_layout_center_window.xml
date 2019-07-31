@@ -10,7 +10,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        tools:src="@drawable/dkplayer_ic_action_volume_up"/>
+        tools:src="@drawable/commoditydetails_icon_voice_open"/>
 
     <TextView
         android:id="@+id/tv_percent"

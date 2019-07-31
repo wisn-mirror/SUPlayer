@@ -1,5 +1,6 @@
 package com.wisn.suvideo;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -10,16 +11,21 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.wisn.suvideo.control.BaseVideoController;
@@ -83,7 +89,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
         protected Map<String, String> mHeaders;//当前视频地址的请求头
         protected AssetFileDescriptor mAssetFileDescriptor;//assets文件
         protected long mCurrentPosition;//当前正在播放视频的位置
-
+        private  Context mContext;
         //播放器的各种状态
         public static final int STATE_ERROR = -1;
         public static final int STATE_IDLE = 0;
@@ -139,7 +145,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
 
     public SuVideoView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
             super(context, attrs, defStyleAttr);
-
+            this.mContext=context;
             //读取全局配置
             VideoViewConfig config = VideoViewManager.getConfig();
             mAutoRotate = config.mAutoRotate;
@@ -162,6 +168,8 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             mIsLooping = a.getBoolean(R.styleable.VideoView_looping, false);
             mCurrentScreenScale = a.getInt(R.styleable.VideoView_screenScaleType, mCurrentScreenScale);
             a.recycle();
+//        mWindowManager = PlayerUtils.getWindowManager(getContext().getApplicationContext());
+//        mParams = new WindowManager.LayoutParams();
 
             initView();
         }
@@ -780,23 +788,30 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             Activity activity = PlayerUtils.scanForActivity(getContext());
             if (activity == null) return;
             mOrientationEventListener.disable();
-            this.removeView(mPlayerContainer);
-            ViewGroup contentView = activity.findViewById(android.R.id.content);
-            int width = mTinyScreenSize[0];
-            if (width <= 0) {
-                width = PlayerUtils.getScreenWidth(activity, false) / 2;
-            }
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    SuVideoView.this.removeView(mPlayerContainer);
+                    ViewGroup contentView = activity.findViewById(android.R.id.content);
+                    int width = mTinyScreenSize[0];
+                    if (width <= 0) {
+                        width = PlayerUtils.getScreenWidth(activity, false) / 2;
+                    }
 
-            int height = mTinyScreenSize[1];
-            if (height <= 0) {
-                height = width * 9 / 16;
-            }
+                    int height = mTinyScreenSize[1];
+                    if (height <= 0) {
+                        height = width * 9 / 16;
+                    }
 
-            LayoutParams params = new LayoutParams(width, height);
-            params.gravity = Gravity.BOTTOM | Gravity.END;
-            contentView.addView(mPlayerContainer, params);
-            mIsTinyScreen = true;
-            setPlayerState(PLAYER_TINY_SCREEN);
+                    LayoutParams params = new LayoutParams(width, height);
+                    params.gravity = Gravity.RIGHT ;
+                    params.topMargin=PlayerUtils.dp2px(mContext,50);
+                    contentView.addView(mPlayerContainer, params);
+                    mIsTinyScreen = true;
+                    setPlayerState(PLAYER_TINY_SCREEN);
+                }
+            },30);
+
 
            /* if (mIsTinyScreen) return;
             Activity activity = PlayerUtils.scanForActivity(getContext());
@@ -857,15 +872,22 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             if (activity == null) return;
 
             ViewGroup contentView = activity.findViewById(android.R.id.content);
-            contentView.removeView(mPlayerContainer);
-            LayoutParams params = new LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
-            this.addView(mPlayerContainer, params);
-            if (mAutoRotate) mOrientationEventListener.enable();
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    contentView.removeView(mPlayerContainer);
+                    LayoutParams params = new LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT);
+                    SuVideoView.this.addView(mPlayerContainer, params);
+                    if (mAutoRotate) mOrientationEventListener.enable();
 
-            mIsTinyScreen = false;
-            setPlayerState(PLAYER_NORMAL);
+                    mIsTinyScreen = false;
+                    setPlayerState(PLAYER_NORMAL);
+                }
+
+        },30);
+
           /*  if (!mIsTinyScreen) return;
             Activity activity = PlayerUtils.scanForActivity(getContext());
             if (activity == null) return;
@@ -1280,86 +1302,44 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             return super.onSaveInstanceState();
         }
 
-/*
+  /*  private WindowManager mWindowManager;
+    private WindowManager.LayoutParams mParams;
+
+    private int mDownRawX, mDownRawY;//手指按下时相对于屏幕的坐标
+    private int mDownX, mDownY;//手指按下时相对于悬浮窗的坐标
+
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int rawX = (int) event.getRawX();
-        int rawY = (int) event.getRawY();
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean intercepted = false;
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                setPressed(true);
-                getParent().requestDisallowInterceptTouchEvent(true);
-                lastX = rawX;
-                lastY = rawY;
-                changx=initx = (int) getX();
-                changy=inity = (int) getY();
-                ViewGroup parent;
-                if (getParent() != null) {
-                    parent = (ViewGroup) getParent();
-                    parentHeight = parent.getHeight();
-                    parentWidth = parent.getWidth();
-                }
+                intercepted = false;
+                mDownRawX = (int) ev.getRawX();
+                mDownRawY = (int) ev.getRawY();
+                mDownX = (int) ev.getX();
+                mDownY = (int) (ev.getY() + PlayerUtils.getStatusBarHeight(getContext()));
                 break;
             case MotionEvent.ACTION_MOVE:
-                int dx = rawX - lastX;
-                int dy = rawY - lastY;
-                //这里修复一些华为手机无法触发点击事件
-                int distance = (int) Math.sqrt(dx * dx + dy * dy);
-                if (distance == 0) {
-                    break;
-                }
-                float   x =changx= getX() + dx;
-                float   y =changy= getY() + dy;
-                //检测是否到达边缘 左上右下
-                x = x < 0 ? 0 : x > parentWidth - getWidth() ? parentWidth - getWidth() : x;
-                y = getY() < 0 ? 0 : getY() + getHeight() > parentHeight ? parentHeight - getHeight() : y;
-                setX(x);
-                setY(y);
-                lastX = rawX;
-                lastY = rawY;
-                L.i("Log isDrag=" + isDrag + "getX=" + getX() + ";getY=" + getY() + ";parentWidth=" + parentWidth);
-                break;
-            case MotionEvent.ACTION_UP:
-                if (!isNotDrag()) {
-                    //恢复按压效果
-                    setPressed(false);
-                    //Log.i("getX="+getX()+"；screenWidthHalf="+screenWidthHalf);
-                    if (rawX >= parentWidth / 2) {
-                        //靠右吸附
-                        animate().setInterpolator(new DecelerateInterpolator())
-                                .setDuration(300)
-                                .xBy(parentWidth - getWidth() - getX())
-                                .start();
-                    } else {
-                        //靠左吸附
-                        ObjectAnimator oa = ObjectAnimator.ofFloat(this, "x", getX(), 0);
-                        oa.setInterpolator(new DecelerateInterpolator());
-                        oa.setDuration(300);
-                        oa.start();
-                    }
-                }
+                float absDeltaX = Math.abs(ev.getRawX() - mDownRawX);
+                float absDeltaY = Math.abs(ev.getRawY() - mDownRawY);
+                intercepted = absDeltaX > ViewConfiguration.get(getContext()).getScaledTouchSlop() ||
+                        absDeltaY > ViewConfiguration.get(getContext()).getScaledTouchSlop();
                 break;
         }
-        //如果是拖拽则消s耗事件，否则正常传递即可。
-        return !isNotDrag() || super.onTouchEvent(event);
+        return intercepted;
     }
 
-    private boolean isNotDrag() {
-        return !isDrag;
-    }
-
-
-    private boolean isDrag = true;
-    private int parentHeight;
-    private int parentWidth;
-
-    private int lastX;
-    private int lastY;
-
-    private int initx;
-    private int inity;
-
-    private float changx;
-    private float changy;*/
-
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                int x = (int) event.getRawX();
+                int y = (int) event.getRawY();
+                mParams.x = x - mDownX;
+                mParams.y = y - mDownY;
+                mWindowManager.updateViewLayout(this, mParams);
+                break;
+        }
+        return super.onTouchEvent(event);
+    }*/
 }
