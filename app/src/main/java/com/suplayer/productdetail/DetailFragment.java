@@ -10,18 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
 
 import com.suplayer.R;
 import com.suplayer.Url;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.FloatController;
 import com.wisn.suvideo.control.impl.ProductVideoController;
-import com.wisn.suvideo.helper.L;
-import com.wisn.suvideo.manager.PIPManager;
 import com.wisn.suvideo.view.LyfScrollView;
-import com.yanzhenjie.permission.AndPermission;
-
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 /**
@@ -34,14 +29,16 @@ public class DetailFragment extends Fragment {
     private ProductVideoController productVideoController;
     private FloatController mFloatController;
     private  boolean isXiaopin;
+    private FrameLayout viewContent;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return super.onCreateView(inflater, container, savedInstanceState);
-        containerRoot= (LyfScrollView) inflater.inflate(R.layout.fragment_detail, null);
-        fl_content = containerRoot.findViewById(R.id.fl_content);
-        return containerRoot;
+       View view = inflater.inflate(R.layout.fragment_detail, null);
+        containerRoot = view.findViewById(R.id.container);
+        fl_content = view.findViewById(R.id.fl_content);
+        viewContent = view.findViewById(R.id.viewContent);
+        return view;
     }
 
     @Override
@@ -83,7 +80,8 @@ public class DetailFragment extends Fragment {
                 if (y >dip130) {
                     if (isXiaopin) return;
                     isXiaopin=true;
-                    mVideoView.startTinyScreen();
+//                    viewContent.setVisibility(View.VISIBLE);
+                    mVideoView.startTinyScreen(true,viewContent);
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -96,11 +94,8 @@ public class DetailFragment extends Fragment {
                 } else {
                     if (isXiaopin) {
                         isXiaopin=false;
-                        mVideoView.stopTinyScreen();
-                        /*if (mVideoView.getParent() instanceof ViewGroup) {
-                            ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
-                            fl_content.addView(mVideoView);
-                        }*/
+//                        viewContent.setVisibility(View.GONE);
+                        mVideoView.stopTinyScreen(viewContent);
                         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                             @Override
                             public void run() {

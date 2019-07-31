@@ -1,55 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.wisn.suvideo.view.LyfScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.wisn.suvideo.view.LyfScrollView
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/fl_content"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
-      <!--  <com.wisn.suvideo.SuVideoView
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:autoRotate="true" />-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            android:text="内容0" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            android:text="内容1" />
+            <FrameLayout
+                android:id="@+id/fl_content"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:gravity="center"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:text="内容0" />
 
-            android:text="内容2" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:text="内容1" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:gravity="center"
-            android:text="内容3" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="center"
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:gravity="center"
+                android:text="内容2" />
 
-            android:text="内容4" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:gravity="center"
+                android:text="内容3" />
 
-</com.wisn.suvideo.view.LyfScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:gravity="center"
+
+                android:text="内容4" />
+        </LinearLayout>
+
+
+    </com.wisn.suvideo.view.LyfScrollView>
+
+    <com.wisn.suvideo.view.FlowFrameLayout
+        android:id="@+id/viewContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ff0" />
+</FrameLayout>

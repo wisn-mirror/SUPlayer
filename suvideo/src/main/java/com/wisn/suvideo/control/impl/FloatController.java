@@ -1,26 +1,21 @@
 package com.wisn.suvideo.control.impl;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 
 import com.wisn.suvideo.R;
 import com.wisn.suvideo.SuVideoView;
-import com.wisn.suvideo.control.GestureVideoController;
-import com.wisn.suvideo.helper.L;
-import com.wisn.suvideo.manager.PIPManager;
+import com.wisn.suvideo.control.BaseVideoController;
 
 /**
  * Created by Wisn on 2019-07-31 14:46.
  */
-public class FloatController  extends GestureVideoController implements View.OnClickListener {
+public class FloatController  extends BaseVideoController implements View.OnClickListener {
 
 
     private ProgressBar proLoading;
@@ -50,8 +45,7 @@ public class FloatController  extends GestureVideoController implements View.OnC
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_close) {
-            PIPManager.getInstance(getContext()).stopFloatWindow();
-            PIPManager.getInstance(getContext()).reset();
+
         } else if (id == R.id.start_play) {
             doPauseResume();
         }
@@ -117,86 +111,4 @@ public class FloatController  extends GestureVideoController implements View.OnC
             mShowing = false;
         }
     }
-    ViewGroup parent;
-/*
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int rawX = (int) event.getRawX();
-        int rawY = (int) event.getRawY();
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                setPressed(true);
-                if (getParent() != null) {
-                    parent = (ViewGroup) getParent();
-                    getParent().requestDisallowInterceptTouchEvent(true);
-
-                }
-                lastX = rawX;
-                lastY = rawY;
-                changx=initx = (int) parent.getX();
-                changy=inity = (int) parent.getY();
-                parentHeight = parent.getHeight();
-                parentWidth = parent.getWidth();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                int dx = rawX - lastX;
-                int dy = rawY - lastY;
-                //这里修复一些华为手机无法触发点击事件
-                int distance = (int) Math.sqrt(dx * dx + dy * dy);
-                if (distance == 0) {
-                    break;
-                }
-                float   x =changx= parent.getX() + dx;
-                float   y =changy= parent.getY() + dy;
-                //检测是否到达边缘 左上右下
-                x = x < 0 ? 0 : x > parentWidth -parent. getWidth() ? parentWidth - parent.getWidth() : x;
-                y = parent.getY() < 0 ? 0 : parent.getY() + parent.getHeight() > parentHeight ? parentHeight - parent.getHeight() : y;
-                parent.setX(x);
-                parent.setY(y);
-                lastX = rawX;
-                lastY = rawY;
-                L.i("Log isDrag=" + isDrag + "getX=" + parent.getX() + ";getY=" +parent. getY() + ";parentWidth=" + parentWidth);
-                break;
-            case MotionEvent.ACTION_UP:
-                if (!isNotDrag()) {
-                    //恢复按压效果
-                    setPressed(false);
-                    //Log.i("getX="+getX()+"；screenWidthHalf="+screenWidthHalf);
-                    if (rawX >= parentWidth / 2) {
-                        //靠右吸附
-                        animate().setInterpolator(new DecelerateInterpolator())
-                                .setDuration(300)
-                                .xBy(parentWidth - parent.getWidth() -parent. getX())
-                                .start();
-                    } else {
-                        //靠左吸附
-                        ObjectAnimator oa = ObjectAnimator.ofFloat(parent, "x", parent.getX(), 0);
-                        oa.setInterpolator(new DecelerateInterpolator());
-                        oa.setDuration(300);
-                        oa.start();
-                    }
-                }
-                break;
-        }
-        //如果是拖拽则消s耗事件，否则正常传递即可。
-        return !isNotDrag() || super.onTouchEvent(event);
-    }
-
-    private boolean isNotDrag() {
-        return !isDrag;
-    }
-
-
-    private boolean isDrag = true;
-    private int parentHeight;
-    private int parentWidth;
-
-    private int lastX;
-    private int lastY;
-
-    private int initx;
-    private int inity;
-
-    private float changx;
-    private float changy;*/
 }
