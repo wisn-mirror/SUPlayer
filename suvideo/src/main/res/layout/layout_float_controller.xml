@@ -20,6 +20,4 @@
         android:layout_gravity="end"
         android:layout_margin="4dp"
         android:src="@drawable/dkplayer_ic_action_close" />
-
-
 </FrameLayout>

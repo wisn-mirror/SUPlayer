@@ -1,16 +1,18 @@
 package com.wisn.suvideo.control.impl;
 
 import android.content.Context;
+import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import com.wisn.suvideo.R;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.BaseVideoController;
+import com.wisn.suvideo.helper.L;
 
 /**
  * Created by Wisn on 2019-07-31 14:46.
@@ -19,6 +21,7 @@ public class FloatController  extends BaseVideoController implements View.OnClic
 
 
     private ProgressBar proLoading;
+    private ImageView btn_close;
 
     public FloatController(@NonNull Context context) {
         super(context);
@@ -36,8 +39,8 @@ public class FloatController  extends BaseVideoController implements View.OnClic
     @Override
     protected void initView() {
         super.initView();
-        this.setOnClickListener(this);
-        mControllerView.findViewById(R.id.btn_close).setOnClickListener(this);
+        btn_close = mControllerView.findViewById(R.id.btn_close);
+        btn_close.setOnClickListener(this);
         proLoading = mControllerView.findViewById(R.id.loading);
     }
 
@@ -45,10 +48,35 @@ public class FloatController  extends BaseVideoController implements View.OnClic
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_close) {
-
+            L.e("click-----");
         } else if (id == R.id.start_play) {
             doPauseResume();
         }
+    }
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean intercept= super.onInterceptTouchEvent(ev);
+        return intercept;
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+//        boolean result= super.onTouchEvent(event);
+        float x = event.getRawX(); // 获取相对于屏幕左上角的 x 坐标值
+        float y = event.getRawY(); // 获取相对于屏幕左上角的 y 坐标值
+        // View view;
+        RectF rect = calcViewScreenLocation(btn_close);
+        boolean isInViewRect = rect.contains(x, y);
+        return isInViewRect;
+    }
+    /**
+     * 计算指定的 View 在屏幕中的坐标。
+     */
+    public static RectF calcViewScreenLocation(View view) {
+        int[] location = new int[2];
+        // 获取控件在屏幕中的位置，返回的数组分别为控件左顶点的 x、y 的值
+        view.getLocationOnScreen(location);
+        return new RectF(location[0], location[1], location[0] + view.getWidth(),
+                location[1] + view.getHeight());
     }
 
     @Override

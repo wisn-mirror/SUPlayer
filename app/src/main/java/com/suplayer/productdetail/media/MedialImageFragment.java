@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by Wisn on 2019-07-30 14:29.
  */
-public class ImageFragment extends Fragment {
+public class MedialImageFragment extends Fragment {
 
     private ViewPager viewpager;
 
@@ -72,7 +72,7 @@ public class ImageFragment extends Fragment {
                 @Override
                 public void onPhotoTap(View view, float x, float y) {
                     // TODO Auto-generated method stub
-//                    ImageFragment.this.finish();
+//                    MedialImageFragment.this.finish();
                 }
             });*/
             String sdr = sDrawables.get(position);

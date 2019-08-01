@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
@@ -80,8 +79,8 @@ public class ProductMediaActivity extends AppCompatActivity {
 
         tabs.add("视频");
         tabs.add("图片");
-        VideoFragment videoFragment = new VideoFragment();
-        ImageFragment testFragment1 = new ImageFragment();
+        MedialVideoFragment videoFragment = new MedialVideoFragment();
+        MedialImageFragment testFragment1 = new MedialImageFragment();
 //        magicIndicator.setBackgroundColor(Color.parseColor("#00000000"));
         CommonNavigator commonNavigator7 = new CommonNavigator(this);
         commonNavigatorAdapter = new CommonNavigatorAdapter() {
@@ -217,6 +216,10 @@ public class ProductMediaActivity extends AppCompatActivity {
         if (!mVideoViewManager.onBackPressed()) {
             super.onBackPressed();
         }
+    }
+    @Override
+    public void overridePendingTransition(int enterAnim, int exitAnim) {
+        super.overridePendingTransition(0, 0);
     }
 
 }

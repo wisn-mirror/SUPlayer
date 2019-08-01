@@ -7,13 +7,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.wisn.suvideo.helper.L;
-import com.wisn.suvideo.helper.PlayerUtils;
 
 /**
  * Created by Wisn on 2019-07-31 18:34.
@@ -124,11 +122,11 @@ public class FlowFrameLayout extends FrameLayout {
         //如果是拖拽则消s耗事件，否则正常传递即可。
         return !isNotDrag() || super.onTouchEvent(event);
     }
-    @Override
+  /*  @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-        return true;
-    }
+        return false;
+    }*/
 
     private boolean isNotDrag() {
         return !isDrag;

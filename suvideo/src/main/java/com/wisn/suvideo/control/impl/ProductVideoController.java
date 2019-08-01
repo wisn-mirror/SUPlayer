@@ -54,7 +54,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
     private long lastPosition;
     private ImageView voice_enable;
     private int streamVolume;
-    private boolean isEnable = true;
+    private boolean isEnableVoice = true;
+    private boolean isInProduct = true;
 
 
     public ProductVideoController(@NonNull Context context) {
@@ -105,7 +106,12 @@ public class ProductVideoController extends GestureVideoController implements Vi
         mCompleteContainer.setOnClickListener(this);
         mStopFullscreen.setOnClickListener(this);
         voice_enable.setOnClickListener(this);
-        setVoice(isEnable);
+        if (isInProduct) {
+            mFullScreenButton.setImageResource(R.drawable.commoditydetails_icon_big);
+        } else {
+            mFullScreenButton.setImageResource(R.drawable.dkplayer_selector_full_screen_button);
+        }
+        setVoice(isEnableVoice);
     }
 
     private void setVoice(boolean isEnable) {
@@ -131,7 +137,13 @@ public class ProductVideoController extends GestureVideoController implements Vi
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.fullscreen || i == R.id.back || i == R.id.stop_fullscreen) {
+        if (i == R.id.fullscreen) {
+            if (isInProduct) {
+                if (ProductMediaDetais != null) ProductMediaDetais.jumpProductMediaDetais();
+            } else {
+                doStartStopFullScreen();
+            }
+        } else if (i == R.id.back||i == R.id.stop_fullscreen) {
             doStartStopFullScreen();
         } else if (i == R.id.iv_play || i == R.id.thumb) {
             doPauseResume();
@@ -143,9 +155,22 @@ public class ProductVideoController extends GestureVideoController implements Vi
     }
 
     public void setDefaultVoiceEnable(boolean isEnable) {
-        this.isEnable = isEnable;
+        this.isEnableVoice = isEnable;
     }
 
+    public void setDefaultisInProduct(boolean isInProduct) {
+        this.isInProduct = isInProduct;
+    }
+
+    public ProductMediaDetais ProductMediaDetais;
+
+    public void setProductMediaDetais(ProductVideoController.ProductMediaDetais productMediaDetais) {
+        ProductMediaDetais = productMediaDetais;
+    }
+
+    public  interface ProductMediaDetais {
+        void jumpProductMediaDetais();
+    }
 
     @Override
     public void setPlayerState(int playerState) {
@@ -413,7 +438,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
             deltaX = -deltaX;
             int width = getMeasuredWidth();
             int duration = (int) mMediaPlayer.getDuration();
-            if(duration<0)return ;
+            if (duration < 0) return;
             int currentPosition = (int) mMediaPlayer.getCurrentPosition();
             int position = (int) (deltaX / width * 120000 + currentPosition);
             if (position > duration) position = duration;

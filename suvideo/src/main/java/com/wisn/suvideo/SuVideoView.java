@@ -22,10 +22,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.wisn.suvideo.control.BaseVideoController;
@@ -803,7 +801,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
                     FrameLayout.LayoutParams layoutParams = (LayoutParams) viewGroup.getLayoutParams();
                     layoutParams.width = width;
                     layoutParams.height = height;
-                    layoutParams.topMargin = PlayerUtils.dp2px(mContext, 50);
+//                    layoutParams.topMargin = PlayerUtils.dp2px(mContext, 50);
                     viewGroup.setLayoutParams(layoutParams);
                 } else {
                     LayoutParams params = new LayoutParams(width, height);
@@ -1325,6 +1323,17 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
         return super.onSaveInstanceState();
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean intercept = super.onInterceptTouchEvent(ev);
+        return intercept;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean result = super.onTouchEvent(event);
+        return result;
+    }
   /*  private WindowManager mWindowManager;
     private WindowManager.LayoutParams mParams;
 
