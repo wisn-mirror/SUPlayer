@@ -24,7 +24,6 @@ public class CenterView  extends LinearLayout {
 
     public CenterView(Context context) {
         super(context);
-
         init();
     }
 

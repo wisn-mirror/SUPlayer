@@ -119,9 +119,11 @@ public class ProductVideoController extends GestureVideoController implements Vi
             streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
             mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
         } else {
-            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
+            if(streamVolume!=0){
+                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
+            }
         }
-        voice_enable.setSelected(!isEnable);
+        voice_enable.setSelected(isEnable);
     }
 
     @Override
@@ -150,7 +152,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
         } else if (i == R.id.iv_replay || i == R.id.iv_refresh) {
             mMediaPlayer.replay(true);
         } else if (i == R.id.voice_enable) {
-            setVoice(voice_enable.isSelected());
+            setVoice(!voice_enable.isSelected());
         }
     }
 

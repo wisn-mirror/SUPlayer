@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button productDetail;
     private Button Simple;
     private Button douyin;
+    private Button hongshu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +30,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         productDetail = findViewById(R.id.productDetail);
         Simple = findViewById(R.id.Simple);
         douyin = findViewById(R.id.douyin);
+        hongshu = findViewById(R.id.hongshu);
         videolist.setOnClickListener(this);
         productDetail.setOnClickListener(this);
         Simple.setOnClickListener(this);
         douyin.setOnClickListener(this);
+        hongshu.setOnClickListener(this);
         initconfig();
     }
 
@@ -46,11 +49,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == Simple) {
             startActivity(new Intent(this, SimpleActivity.class));
         } else if (v == videolist) {
-            startActivity(new Intent(this, SimpleActivity.class));
+//            startActivity(new Intent(this, SimpleActivity.class));
         } else if (v == productDetail) {
             startActivity(new Intent(this, ProdetailActivity.class));
         } else if (v == douyin) {
             startActivity(new Intent(this, DouYinActivity.class));
+        } else if (v == hongshu) {
+            startActivity(new Intent(this, HongshuActivity.class));
         }
     }
 }

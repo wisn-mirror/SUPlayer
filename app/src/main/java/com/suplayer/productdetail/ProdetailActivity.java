@@ -37,7 +37,7 @@ public class ProdetailActivity extends AppCompatActivity {
         tabs.add("详情");
         tabs.add("测试1");
         tabs.add("测试2");
-        DetailFragment detailFragment = new DetailFragment();
+        DetailFragment2 detailFragment = new DetailFragment2();
         TestFragment testFragment1 = new TestFragment();
         TestFragment testFragment2 = new TestFragment();
         tabMode.setupWithViewPager(viewPager);

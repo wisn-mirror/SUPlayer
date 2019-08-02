@@ -12,21 +12,26 @@
         android:id="@+id/Simple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simple" />
+        android:text="简单" />
     <Button
         android:id="@+id/videolist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="videolist" />
+        android:text="列表自动播放" />
 
     <Button
         android:id="@+id/productDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="productDetail" />
+        android:text="商品详情" />
     <Button
         android:id="@+id/douyin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="douyin" />
+        android:text="抖音实现" />
+    <Button
+        android:id="@+id/hongshu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小红书" />
 </LinearLayout>

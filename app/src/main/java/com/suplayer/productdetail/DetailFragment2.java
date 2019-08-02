@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.wisn.suvideo.control.impl.FloatController;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.helper.L;
 import com.wisn.suvideo.listener.OnVideoViewStateChangeListener;
+import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.view.LyfScrollView;
 import com.wisn.suvideo.view.banner.Banner;
 import com.wisn.suvideo.view.banner.BannerConfig;
@@ -38,26 +40,24 @@ import java.util.List;
 /**
  * Created by Wisn on 2019-07-26 17:29.
  */
-public class DetailFragment extends Fragment {
+public class DetailFragment2 extends Fragment {
     private SuVideoView mVideoView;
     private LyfScrollView containerRoot;
-    private FrameLayout fl_content;
     private ProductVideoController productVideoController;
     private FloatController mFloatController;
     private boolean isXiaopin;
     private FrameLayout viewContent;
     private boolean playing;
-    private int currentPlayState;
-    private int currentPlayerState;
     private Banner banner_slider;
+    private VideoViewManager mVideoViewManager;
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail, null);
+        View view = inflater.inflate(R.layout.fragment_detail2, null);
         containerRoot = view.findViewById(R.id.container);
-        fl_content = view.findViewById(R.id.fl_content);
         banner_slider = view.findViewById(R.id.banner_slider);
         viewContent = view.findViewById(R.id.viewContent);
         return view;
@@ -66,6 +66,8 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mVideoViewManager = VideoViewManager.instance();
+
         List<BannerData> bannerData = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             BannerData bannerData1 = new BannerData();
@@ -79,29 +81,47 @@ public class DetailFragment extends Fragment {
         CustomViewHolder2 creator = new CustomViewHolder2();
         creator.setOnStartCallback(new CustomViewHolder2.OnStartCallback() {
             @Override
-            public void startPlay() {
-                fl_content.setVisibility(View.VISIBLE);
-                banner_slider.setVisibility(View.GONE);
-                dealVideo();
+            public void startPlay(CustomViewHolder2.ViewHolder frameLayout) {
+                dealVideo(frameLayout);
             }
         });
         banner_slider.setAutoPlay(false)
                 .setDelayTime(5000)
+                .setLoop(false)
                 .setPages(bannerData, creator)
                 .setCurrentPage(0)
                 .setBannerStyle(BannerConfig.NOT_INDICATOR)
-                .setBannerAnimation(Transformer.Scale)
+//                .setBannerAnimation(Transformer.Scale)
                 .start();
-        fl_content.setVisibility(View.GONE);
+        banner_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i != 0) {
+                    mVideoViewManager.pause();
+                } else {
+                    mVideoViewManager.resume();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
 
     public static class CustomViewHolder2 implements BannerViewHolder<BannerData> {
-        private ImageView iv_target;
-        private ImageView start_play;
+
         private OnStartCallback onStartCallback;
+        private View view;
 
         public interface OnStartCallback {
-            void startPlay();
+            void startPlay(ViewHolder viewHolder);
         }
 
         public void setOnStartCallback(OnStartCallback onStartCallback) {
@@ -110,40 +130,69 @@ public class DetailFragment extends Fragment {
 
         @Override
         public View createView(Context context) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_productdetail_media, null);
-            try {
-                iv_target = (ImageView) view.findViewById(R.id.iv_target);
-                start_play = (ImageView) view.findViewById(R.id.start_play);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            view = LayoutInflater.from(context).inflate(R.layout.item_productdetail_media2, null);
+            ViewHolder viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder);
             return view;
         }
 
         @Override
         public void onBind(Context context, int position, BannerData data) {
+            ViewHolder tag = (ViewHolder) view.getTag();
             Glide.with(context)
                     .load(data.url)
-                    .into(iv_target);
+                    .into(tag.iv_target);
             if (data.type == -1) {
-                start_play.setVisibility(View.VISIBLE);
-                start_play.setOnClickListener(new View.OnClickListener() {
+                tag.start_play.setVisibility(View.VISIBLE);
+                tag.start_play.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         try {
-                            if (onStartCallback != null) onStartCallback.startPlay();
+                            if (onStartCallback != null) {
+                                onStartCallback.startPlay(tag);
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 });
             } else {
-                start_play.setVisibility(View.GONE);
+                tag.start_play.setVisibility(View.GONE);
             }
         }
+
+        public static class ViewHolder {
+            public ImageView iv_target;
+            public ImageView start_play;
+            public FrameLayout fl_content;
+
+            public ViewHolder(View view) {
+                try {
+                    iv_target = (ImageView) view.findViewById(R.id.iv_target);
+                    fl_content = (FrameLayout) view.findViewById(R.id.fl_content);
+                    start_play = (ImageView) view.findViewById(R.id.start_play);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            public void isPlay(boolean isPlay) {
+                if (isPlay) {
+                    iv_target.setVisibility(View.GONE);
+                    fl_content.setVisibility(View.VISIBLE);
+                    start_play.setVisibility(View.GONE);
+                } else {
+                    iv_target.setVisibility(View.VISIBLE);
+                    fl_content.setVisibility(View.GONE);
+                    start_play.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+
     }
 
-    private void dealVideo() {
+    private void dealVideo(CustomViewHolder2.ViewHolder frameLayout) {
 
         OnVideoViewStateChangeListener mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
             @Override
@@ -160,28 +209,44 @@ public class DetailFragment extends Fragment {
             public void onPlayStateChanged(int playState) {
                 switch (playState) {
                     case SuVideoView.STATE_IDLE:
+                        L.d("details STATE_IDLE：");
+
                         break;
                     case SuVideoView.STATE_PREPARING:
+                        L.d("details STATE_PREPARING：");
+
                         break;
                     case SuVideoView.STATE_PREPARED:
+                        L.d("details STATE_PREPARED：");
+
                         //需在此时获取视频宽高
                         int[] videoSize = mVideoView.getVideoSize();
-                        L.d("视频宽：" + videoSize[0]);
-                        L.d("视频高：" + videoSize[1]);
+                        L.d("details 视频宽：" + videoSize[0]);
+                        L.d("details视频高：" + videoSize[1]);
+                        frameLayout.isPlay(true);
                         break;
                     case SuVideoView.STATE_PLAYING:
+                        L.d("details STATE_PLAYING：");
                         break;
                     case SuVideoView.STATE_PAUSED:
+                        L.d("details STATE_PAUSED：");
+
                         break;
                     case SuVideoView.STATE_BUFFERING:
+                        L.d("details STATE_BUFFERING：");
+
                         break;
                     case SuVideoView.STATE_BUFFERED:
+                        L.d("details STATE_BUFFERED：");
+
                         break;
                     case SuVideoView.STATE_PLAYBACK_COMPLETED:
-                        fl_content.setVisibility(View.GONE);
-                        banner_slider.setVisibility(View.VISIBLE);
+                        L.d("details STATE_PLAYBACK_COMPLETED：");
+                        frameLayout.isPlay(false);
                         break;
                     case SuVideoView.STATE_ERROR:
+                        L.d("details STATE_ERROR：");
+
                         break;
                 }
             }
@@ -194,6 +259,7 @@ public class DetailFragment extends Fragment {
         mVideoView.release();
         mVideoView.setUrl(Url.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
+        productVideoController.setDefaultVoiceEnable(false);
         productVideoController.setProductMediaDetais(new ProductVideoController.ProductMediaDetais() {
             @Override
             public void jumpProductMediaDetais() {
@@ -204,8 +270,7 @@ public class DetailFragment extends Fragment {
         });
         mVideoView.setVideoController(productVideoController);
         mVideoView.start();
-        fl_content.addView(mVideoView);
-
+        frameLayout.fl_content.addView(mVideoView);
         mFloatController = new FloatController(getContext());
         int dip130 = UIUtil.dip2px(getContext(), 300);
         containerRoot.setScrollListener(new LyfScrollView.ScrollViewListener() {
@@ -243,7 +308,7 @@ public class DetailFragment extends Fragment {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                fl_content.addView(mVideoView);
+                                frameLayout.fl_content.addView(mVideoView);
                             }
                         }, 20);
 
@@ -257,24 +322,24 @@ public class DetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mVideoView != null && !mVideoView.isPlaying()) {
+       /* if (mVideoView != null && !mVideoView.isPlaying()) {
             if (playing) {
 //                productVideoController.setPlayState(currentPlayState);
 //                productVideoController.setPlayerState(currentPlayState);
 //                mVideoView.setVideoController(productVideoController);
                 mVideoView.start();
             }
-        }
+        }*/
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mVideoView != null) {
+       /* if (mVideoView != null) {
             currentPlayState = mVideoView.getCurrentPlayState();
             currentPlayerState = mVideoView.getCurrentPlayerState();
             mVideoView.pause();
-        }
+        }*/
 
     }
 

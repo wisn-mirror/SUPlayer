@@ -76,7 +76,6 @@ public class ProductMediaActivity extends AppCompatActivity {
             }
         });
         mVideoViewManager = VideoViewManager.instance();
-
         tabs.add("视频");
         tabs.add("图片");
         MedialVideoFragment videoFragment = new MedialVideoFragment();
