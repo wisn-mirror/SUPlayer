@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 
 import com.suplayer.R;
@@ -20,7 +19,6 @@ import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.FloatController;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.helper.L;
-import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
 import com.wisn.suvideo.view.LyfScrollView;
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
@@ -35,6 +33,10 @@ public class DetailFragment extends Fragment {
     private FloatController mFloatController;
     private  boolean isXiaopin;
     private FrameLayout viewContent;
+    private boolean playing;
+    private int currentPlayState;
+    private int currentPlayerState;
+
 
     @Nullable
     @Override
@@ -49,7 +51,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //播放raw
         mVideoView =new  SuVideoView(getActivity());
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
@@ -59,6 +60,7 @@ public class DetailFragment extends Fragment {
         productVideoController.setProductMediaDetais(new ProductVideoController.ProductMediaDetais() {
             @Override
             public void jumpProductMediaDetais() {
+                playing = mVideoView.isPlaying();
                 getActivity().startActivity(new Intent(getActivity(),ProductMediaActivity.class));
                 getActivity().overridePendingTransition(0,0);
             }
@@ -73,7 +75,6 @@ public class DetailFragment extends Fragment {
             @Override
             public void onScrollChanged(LyfScrollView scrollView, int x, int y, int oldx, int oldy) {
                 L.e("onScrollChanged x:"+x+" y:"+y+" oldx:"+oldx+" oldy:"+oldy);
-
                 if (y >dip130) {
                     if (isXiaopin) return;
                     isXiaopin=true;
@@ -86,7 +87,7 @@ public class DetailFragment extends Fragment {
                             mFloatController.setPlayerState(mVideoView.getCurrentPlayerState());
                             mVideoView.setVideoController(mFloatController);
                         }
-                    },100);
+                    },20);
 
                 } else {
                     if (isXiaopin) {
@@ -106,14 +107,14 @@ public class DetailFragment extends Fragment {
                                 }
                                 fl_content.addView(mVideoView);
                             }
-                        },100);
+                        },20);
 
                     }
                 }
             }
         });
     }
-
+/*
     private void addTopView(boolean isinit) {
         if(fl_content.getChildCount()==0){
             mVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
@@ -132,12 +133,27 @@ public class DetailFragment extends Fragment {
             }
             fl_content.addView(mVideoView);
         }
-    }
+    }*/
 
     @Override
     public void onResume() {
         super.onResume();
-//        addTopView(false);
+        if(!mVideoView.isPlaying()){
+            if(playing){
+//                productVideoController.setPlayState(currentPlayState);
+//                productVideoController.setPlayerState(currentPlayState);
+//                mVideoView.setVideoController(productVideoController);
+                mVideoView.start();
+            }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        currentPlayState = mVideoView.getCurrentPlayState();
+        currentPlayerState = mVideoView.getCurrentPlayerState();
+        mVideoView.pause();
     }
 
     @Override

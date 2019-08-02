@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.FrameLayout;
 
 import com.suplayer.R;
 import com.suplayer.Url;
-import com.suplayer.productdetail.SeamlessPlayerHelper;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
@@ -48,7 +48,12 @@ public class MedialVideoFragment extends Fragment {
         suVideoView.start();
         fl_container.removeAllViews();
         removePlayerFormParent();
-        fl_container.addView(suVideoView);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity= Gravity.CENTER;
+        //将播放器视图添加到当前FrameLayout中即退出了全屏
+        fl_container.addView(suVideoView,params);
     }
 
     /**
