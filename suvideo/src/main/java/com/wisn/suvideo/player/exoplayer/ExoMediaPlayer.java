@@ -62,8 +62,8 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
     public ExoMediaPlayer(Context context) {
         mAppContext = context.getApplicationContext();
         lastReportedPlaybackState = Player.STATE_IDLE;
-        mediaDataSourceFactory = getDataSourceFactory(true);
-//        mediaDataSourceFactory = getCacheDataSourceFactory();
+//        mediaDataSourceFactory = getDataSourceFactory(true);
+        mediaDataSourceFactory = getCacheDataSourceFactory();
     }
 
     @Override
@@ -120,9 +120,10 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
     private DataSource.Factory getCacheDataSourceFactory() {
         DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(mAppContext,
                 Util.getUserAgent(mAppContext, mAppContext.getString(R.string.app_name)));
-        File cacheFile = new File(mAppContext.getExternalCacheDir().getAbsolutePath(), "video");
-        // 本地最多保存512M, 按照LRU原则删除老数据
-        simpleCache = new SimpleCache(cacheFile, new LeastRecentlyUsedCacheEvictor(1024 * 1024 *     1024));
+//        File cacheFile = new File(mAppContext.getExternalCacheDir().getAbsolutePath(), "video");
+//        // 本地最多保存512M, 按照LRU原则删除老数据
+//        simpleCache = new SimpleCache(cacheFile, new LeastRecentlyUsedCacheEvictor(1024 * 1024 *     1024));
+        simpleCache =CacheHelper.getSimpleCache(mAppContext.getExternalCacheDir().getAbsolutePath());
          return new CacheDataSourceFactory(simpleCache,    dataSourceFactory);
     }
 
