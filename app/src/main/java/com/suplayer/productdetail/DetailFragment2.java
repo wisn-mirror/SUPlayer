@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,7 @@ import com.suplayer.Constants;
 import com.suplayer.R;
 import com.suplayer.productdetail.media.ProductMediaActivity;
 import com.wisn.suvideo.SuVideoView;
+import com.wisn.suvideo.base.BaseFragment;
 import com.wisn.suvideo.control.impl.FloatController;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.helper.L;
@@ -30,14 +31,16 @@ import com.wisn.suvideo.view.banner.Banner;
 import com.wisn.suvideo.view.banner.BannerConfig;
 import com.wisn.suvideo.view.banner.BannerViewHolder;
 import com.wisn.suvideo.view.banner2.BannerData;
+
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Wisn on 2019-07-26 17:29.
  */
-public class DetailFragment2 extends Fragment {
+public class DetailFragment2 extends BaseFragment {
     private SuVideoView mVideoView;
     private LyfScrollView containerRoot;
     private ProductVideoController productVideoController;
@@ -47,22 +50,28 @@ public class DetailFragment2 extends Fragment {
     private boolean playing;
     private Banner banner_slider;
     private VideoViewManager mVideoViewManager;
+    public static final String tag = "DetailFragment2";
 
-
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail2, null);
-        containerRoot = view.findViewById(R.id.container);
-        banner_slider = view.findViewById(R.id.banner_slider);
-        viewContent = view.findViewById(R.id.viewContent);
-        return view;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d(tag, "onAttach");
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(tag, "onCreate");
+
+    }
+
+
+    @Override
+    protected void initView(View view) {
+        containerRoot = view.findViewById(R.id.container);
+        banner_slider = view.findViewById(R.id.banner_slider);
+        viewContent = view.findViewById(R.id.viewContent);
+
         mVideoViewManager = VideoViewManager.instance();
 
         List<BannerData> bannerData = new ArrayList<>();
@@ -110,6 +119,95 @@ public class DetailFragment2 extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_detail2;
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(tag, "onCreateView");
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(tag, "onViewCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(tag, "onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(tag, "onResume");
+        if(needResume){
+            mVideoViewManager.resume();
+        }
+
+       /* if (mVideoView != null && !mVideoView.isPlaying()) {
+            if (playing) {
+//                productVideoController.setPlayState(currentPlayState);
+//                productVideoController.setPlayerState(currentPlayState);
+//                mVideoView.setVideoController(productVideoController);
+                mVideoView.start();
+            }
+        }*/
+    }
+
+    public boolean needResume =false;
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(tag, "onPause");
+        if(mVideoView.isPlaying()){
+            mVideoViewManager.pause();
+            needResume =true;
+        }else{
+            needResume =false;
+        }
+
+       /* if (mVideoView != null) {
+            currentPlayState = mVideoView.getCurrentPlayState();
+            currentPlayerState = mVideoView.getCurrentPlayerState();
+            mVideoView.pause();
+        }*/
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(tag, "onStop");
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(tag, "onDestroyView");
+
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mVideoView != null) mVideoView.release();
+        super.onDestroy();
+        Log.d(tag, "onDestroy");
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(tag, "onDetach");
+
     }
 
     public static class CustomViewHolder2 implements BannerViewHolder<BannerData> {
@@ -190,7 +288,6 @@ public class DetailFragment2 extends Fragment {
     }
 
     private void dealVideo(CustomViewHolder2.ViewHolder frameLayout) {
-
         OnVideoViewStateChangeListener mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
             @Override
             public void onPlayerStateChanged(int playerState) {
@@ -315,35 +412,5 @@ public class DetailFragment2 extends Fragment {
         });
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-       /* if (mVideoView != null && !mVideoView.isPlaying()) {
-            if (playing) {
-//                productVideoController.setPlayState(currentPlayState);
-//                productVideoController.setPlayerState(currentPlayState);
-//                mVideoView.setVideoController(productVideoController);
-                mVideoView.start();
-            }
-        }*/
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-       /* if (mVideoView != null) {
-            currentPlayState = mVideoView.getCurrentPlayState();
-            currentPlayerState = mVideoView.getCurrentPlayerState();
-            mVideoView.pause();
-        }*/
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        if (mVideoView != null) mVideoView.release();
-        super.onDestroyView();
-    }
 
 }

@@ -9,7 +9,6 @@ import android.widget.Button;
 import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
-import com.suplayer.tv.TVAliveActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.exoplayer.ExoMediaPlayerFactory;
@@ -25,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, TVAliveActivity.class));
-        this.finish();
+        startActivity(new Intent(this, ProdetailActivity.class));
+//        this.finish();
         setContentView(R.layout.activity_main);
         videolist = findViewById(R.id.videolist);
         productDetail = findViewById(R.id.productDetail);
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         douyin.setOnClickListener(this);
         hongshu.setOnClickListener(this);
         initconfig();
-
-
 
     }
 

@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.widget.TableLayout;
 
 import com.suplayer.R;
+import com.wisn.suvideo.manager.VideoViewManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +67,26 @@ public class ProdetailActivity extends AppCompatActivity {
                 return "";
             }
         });
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i != 0) {
+                    VideoViewManager.instance().pause();
+                } else {
+                    VideoViewManager.instance().resume();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
+
 }

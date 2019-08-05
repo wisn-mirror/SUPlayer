@@ -207,15 +207,15 @@ public class ProductMediaActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mVideoViewManager.release();
+//        mVideoViewManager.release();
     }
 
-    @Override
+   /* @Override
     public void onBackPressed() {
-        if (!mVideoViewManager.onBackPressed()) {
-            super.onBackPressed();
-        }
-    }
+//        if (!mVideoViewManager.onBackPressed()) {
+//            super.onBackPressed();
+//        }
+    }*/
     @Override
     public void overridePendingTransition(int enterAnim, int exitAnim) {
         super.overridePendingTransition(0, 0);
