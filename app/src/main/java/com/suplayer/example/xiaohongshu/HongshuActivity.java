@@ -1,6 +1,5 @@
-package com.suplayer.xiaohongshu;
+package com.suplayer.example.xiaohongshu;
 
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 
 import com.suplayer.R;

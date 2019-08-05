@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.suplayer.douyin.DouYinActivity;
+import com.suplayer.example.douyin.DouYinActivity;
+import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
-import com.suplayer.productdetail.media.ProductMediaActivity;
 import com.suplayer.tv.TVAliveActivity;
-import com.suplayer.xiaohongshu.HongshuActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.exoplayer.ExoMediaPlayerFactory;

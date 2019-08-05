@@ -1,4 +1,4 @@
-package com.suplayer.douyin;
+package com.suplayer.example.douyin;
 
 /**
  * Created by Wisn on 2019-07-25 17:44.

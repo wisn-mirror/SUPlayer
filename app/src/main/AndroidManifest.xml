@@ -17,7 +17,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProgressActivity"
+            android:name=".example.ProgressActivity"
             android:label="@string/title_activity_progress"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -25,12 +25,12 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".xiaohongshu.HongshuActivity" />
+        <activity android:name=".example.xiaohongshu.HongshuActivity" />
         <activity
             android:name=".productdetail.ProdetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".douyin.DouYinActivity"
+            android:name=".example.douyin.DouYinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".SimpleActivity"

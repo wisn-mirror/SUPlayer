@@ -1,7 +1,7 @@
 package com.suplayer;
 
 import com.suplayer.bean.AliveBean;
-import com.suplayer.douyin.VideoBean;
+import com.suplayer.example.douyin.VideoBean;
 
 import java.util.ArrayList;
 import java.util.List;
