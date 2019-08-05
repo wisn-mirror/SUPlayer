@@ -15,15 +15,16 @@ import android.widget.FrameLayout;
 
 import com.bumptech.glide.Glide;
 import com.suplayer.R;
-import com.suplayer.Url;
+import com.suplayer.Constants;
 import com.wisn.suvideo.SuVideoView;
+import com.wisn.suvideo.base.BaseActivity;
 import com.wisn.suvideo.control.impl.DouYinController;
 import com.wisn.suvideo.listener.OnViewPagerListener;
 import com.wisn.suvideo.manager.ViewPagerLayoutManager;
 
 import java.util.List;
 
-public class DouYinActivity extends AppCompatActivity {
+public class DouYinActivity extends BaseActivity {
     private SuVideoView mVideoView;
     private RecyclerView mRecyclerView;
     private ViewPagerLayoutManager viewPagerLayoutManager;
@@ -35,13 +36,7 @@ public class DouYinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-
         setContentView(R.layout.activity_douyin);
-        setStatusBarTransparent();
         mVideoView = new SuVideoView(this);
         mVideoView.setLooping(true);
         douYinController = new DouYinController(this);
@@ -71,7 +66,7 @@ public class DouYinActivity extends AppCompatActivity {
 
             }
         });
-        mVideoList = Url.getVideoBean();
+        mVideoList = Constants.getVideoBean();
         DouyinAdapter douyinAdapter = new DouyinAdapter(mVideoList, this);
         mRecyclerView.setAdapter(douyinAdapter);
     }

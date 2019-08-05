@@ -20,9 +20,9 @@ public class SimpleActivity extends AppCompatActivity {
         mVideoView = findViewById(R.id.player);
         StandardVideoController controller = new StandardVideoController(this);
         mVideoView.setVideoController(controller);
-//        mVideoView.setUrl(Url.VOD_URL);
+//        mVideoView.setUrl(Constants.VOD_URL);
         mVideoView.setProgressManager(new ProgressManagerMemory());
-        mVideoView.setUrl(Url.local_resvideo[2]);
+        mVideoView.setUrl(Constants.local_resvideo[2]);
         mVideoView.start();
         mVideoView.addOnVideoViewStateChangeListener(mOnVideoViewStateChangeListener);
 

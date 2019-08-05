@@ -16,8 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.suplayer.Constants;
 import com.suplayer.R;
-import com.suplayer.Url;
 import com.suplayer.productdetail.media.ProductMediaActivity;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.FloatController;
@@ -29,11 +29,8 @@ import com.wisn.suvideo.view.LyfScrollView;
 import com.wisn.suvideo.view.banner.Banner;
 import com.wisn.suvideo.view.banner.BannerConfig;
 import com.wisn.suvideo.view.banner.BannerViewHolder;
-import com.wisn.suvideo.view.banner.Transformer;
 import com.wisn.suvideo.view.banner2.BannerData;
-
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +71,7 @@ public class DetailFragment2 extends Fragment {
             if (i == 0) {
                 bannerData1.type = -1;
             }
-            bannerData1.url = Url.res[i];
+            bannerData1.url = Constants.res[i];
             bannerData.add(bannerData1);
         }
 
@@ -257,7 +254,7 @@ public class DetailFragment2 extends Fragment {
 
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
         mVideoView.release();
-        mVideoView.setUrl(Url.VOD_URL);
+        mVideoView.setUrl(Constants.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
         productVideoController.setDefaultVoiceEnable(false);
         productVideoController.setProductMediaDetais(new ProductVideoController.ProductMediaDetais() {

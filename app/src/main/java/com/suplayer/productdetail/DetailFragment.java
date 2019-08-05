@@ -15,8 +15,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.suplayer.Constants;
 import com.suplayer.R;
-import com.suplayer.Url;
 import com.suplayer.productdetail.media.ProductMediaActivity;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.FloatController;
@@ -72,7 +72,7 @@ public class DetailFragment extends Fragment {
             if (i == 0) {
                 bannerData1.type = -1;
             }
-            bannerData1.url = Url.res[i];
+            bannerData1.url = Constants.res[i];
             bannerData.add(bannerData1);
         }
 
@@ -192,7 +192,7 @@ public class DetailFragment extends Fragment {
 
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
         mVideoView.release();
-        mVideoView.setUrl(Url.VOD_URL);
+        mVideoView.setUrl(Constants.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
         productVideoController.setProductMediaDetais(new ProductVideoController.ProductMediaDetais() {
             @Override

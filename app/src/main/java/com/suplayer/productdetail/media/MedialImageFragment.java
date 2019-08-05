@@ -14,10 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.suplayer.R;
-import com.suplayer.Url;
-import com.wisn.suvideo.control.impl.ProductVideoController;
+import com.suplayer.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +40,7 @@ public class MedialImageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         List<String> urls=new ArrayList<>();
         for(int i=0;i<5;i++){
-            urls.add(Url.res[i]);
+            urls.add(Constants.res[i]);
         }
         viewpager.setAdapter(new SamplePagerAdapter(urls));
 

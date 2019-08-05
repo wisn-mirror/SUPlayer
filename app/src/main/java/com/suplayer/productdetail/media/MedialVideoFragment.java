@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 
+import com.suplayer.Constants;
 import com.suplayer.R;
-import com.suplayer.Url;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
@@ -39,7 +39,7 @@ public class MedialVideoFragment extends Fragment {
 //        suVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
         suVideoView = new SuVideoView(getContext());;
         //播放raw
-        suVideoView.setUrl(Url.VOD_URL);
+        suVideoView.setUrl(Constants.VOD_URL);
         suVideoView.setProgressManager(new ProgressManagerMemory());
         ProductVideoController productVideoController = new ProductVideoController(getContext());
         productVideoController.setDefaultVoiceEnable(false);

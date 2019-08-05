@@ -13,22 +13,30 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".tv.AliveActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ProgressActivity"
             android:label="@string/title_activity_progress"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
         <activity android:name=".xiaohongshu.HongshuActivity" />
-        <activity android:name=".productdetail.ProdetailActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".productdetail.ProdetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".douyin.DouYinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".SimpleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".tv.TVAliveActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".productdetail.media.ProductMediaActivity"

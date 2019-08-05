@@ -1,5 +1,6 @@
 package com.suplayer;
 
+import com.suplayer.bean.AliveBean;
 import com.suplayer.douyin.VideoBean;
 
 import java.util.ArrayList;
@@ -8,23 +9,27 @@ import java.util.List;
 /**
  * Created by Wisn on 2019-07-24 12:10.
  */
-public class Url {
+public class Constants {
+    public static String data="data";
+    public static String name="name";
+
+
     public static final String VOD_URL = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4";
 
-        public static final String ip = "http://192.168.132.35:8080/";
+    public static final String ip = "http://192.168.132.35:8080/";
 //    public static final String ip = "http://172.19.54.203:8080/";
 
     public static final String[] local_resvideo = {
-           /* ip + "media/video/newhome.mp4",
-            ip + "media/video/video_aaa.mp4",
-            ip + "media/video/video_ddd.mkv",
-            ip + "media/video/video_ccc.mp4",
-            ip + "media/video/video_ddd.mkv"*/
-           VOD_URL,
-           VOD_URL,
-           VOD_URL,
-           VOD_URL,
-           VOD_URL
+            /* ip + "media/video/newhome.mp4",
+             ip + "media/video/video_aaa.mp4",
+             ip + "media/video/video_ddd.mkv",
+             ip + "media/video/video_ccc.mp4",
+             ip + "media/video/video_ddd.mkv"*/
+            VOD_URL,
+            VOD_URL,
+            VOD_URL,
+            VOD_URL,
+            VOD_URL
     };
 
     public static List<VideoBean> getVideoBean() {
@@ -164,4 +169,77 @@ public class Url {
             "http://img.hb.aicdn.com/52abfb758d9c4f88fc648414037665c837f586cc1a62a-uW5yjm_sq320",
             "http://img.hb.aicdn.com/6775e359b4f49e28c00143db622e5e045bb08ce61390a-1wO40p_sq320",
     };
+
+    /**
+     * 测试直播app
+     */
+
+    public static final String[][] aliveData = {
+            {"CCTV-1综合", "http://ivi.bupt.edu.cn/hls/cctv1.m3u8"},
+            {"CCTV-2财经", "http://ivi.bupt.edu.cn/hls/cctv2.m3u8"},
+            {"CCTV-3综艺", "http://ivi.bupt.edu.cn/hls/cctv3.m3u8"},
+            {"CCTV-4中文国际 ", "http://ivi.bupt.edu.cn/hls/cctv4.m3u8"},
+            {"CCTV-6", "http://ivi.bupt.edu.cn/hls/cctv6.m3u8"},
+            {"CCTV-7军事农业 ", "http://ivi.bupt.edu.cn/hls/cctv7.m3u8"},
+            {"CCTV-8电视剧", "http://ivi.bupt.edu.cn/hls/cctv8.m3u8"},
+            {"CCTV-9纪录", "http://ivi.bupt.edu.cn/hls/cctv9.m3u8"},
+            {"CCTV-10科教", "http://ivi.bupt.edu.cn/hls/cctv10.m3u8"},
+            {"CCTV-11戏曲", "http://ivi.bupt.edu.cn/hls/cctv11.m3u8"},
+            {"CCTV-12社会与法", "http://ivi.bupt.edu.cn/hls/cctv12.m3u8"},
+            {"CCTV-13新闻", "http://ivi.bupt.edu.cn/hls/cctv13.m3u8"},
+            {"CCTV-14少儿", "http://ivi.bupt.edu.cn/hls/cctv14.m3u8"},
+            {"CCTV-15音乐", "http://ivi.bupt.edu.cn/hls/cctv15.m3u8"},
+            {"CCTV-NEWS", "http://ivi.bupt.edu.cn/hls/cctv16.m3u8"},
+            {"北京卫视", "http://ivi.bupt.edu.cn/hls/btv1.m3u8"},
+            {"北京文艺", "http://ivi.bupt.edu.cn/hls/btv2.m3u8"},
+            {"北京科教", "http://ivi.bupt.edu.cn/hls/btv3.m3u8"},
+            {"北京影视", "http://ivi.bupt.edu.cn/hls/btv4.m3u8"},
+            {"北京财经", "http://ivi.bupt.edu.cn/hls/btv5.m3u8"},
+            {"北京生活", "http://ivi.bupt.edu.cn/hls/btv7.m3u8"},
+            {"北京青年", "http://ivi.bupt.edu.cn/hls/btv8.m3u8"},
+            {"北京新闻", "http://ivi.bupt.edu.cn/hls/btv9.m3u8"},
+            {"北京卡酷少儿", "http://ivi.bupt.edu.cn/hls/btv10.m3u8"},
+            {"深圳卫视", "http://ivi.bupt.edu.cn/hls/sztv.m3u8"},
+            {"安徽卫视", "http://ivi.bupt.edu.cn/hls/ahtv.m3u8"},
+            {"河南卫视", "http://ivi.bupt.edu.cn/hls/hntv.m3u8"},
+            {"陕西卫视", "http://ivi.bupt.edu.cn/hls/sxtv.m3u8"},
+            {"吉林卫视", "http://ivi.bupt.edu.cn/hls/jltv.m3u8"},
+            {"广东卫视", "http://ivi.bupt.edu.cn/hls/gdtv.m3u8"},
+            {"山东卫视", "http://ivi.bupt.edu.cn/hls/sdtv.m3u8"},
+            {"湖北卫视", "http://ivi.bupt.edu.cn/hls/hbtv.m3u8"},
+            {"广西卫视", "http://ivi.bupt.edu.cn/hls/gxtv.m3u8"},
+            {"河北卫视", "http://ivi.bupt.edu.cn/hls/hebtv.m3u8"},
+            {"西藏卫视", "http://ivi.bupt.edu.cn/hls/xztv.m3u8"},
+            {"内蒙古卫视", "http://ivi.bupt.edu.cn/hls/nmtv.m3u8"},
+            {"青海卫视", "http://ivi.bupt.edu.cn/hls/qhtv.m3u8"},
+            {"四川卫视", "http://ivi.bupt.edu.cn/hls/sctv.m3u8"},
+            {"江苏卫视", "http://ivi.bupt.edu.cn/hls/jstv.m3u8"},
+            {"天津卫视", "http://ivi.bupt.edu.cn/hls/tjtv.m3u8"},
+            {"山西卫视", "http://ivi.bupt.edu.cn/hls/sxrtv.m3u8"},
+            {"辽宁卫视", "http://ivi.bupt.edu.cn/hls/lntv.m3u8"},
+            {"厦门卫视", "http://ivi.bupt.edu.cn/hls/xmtv.m3u8"},
+            {"新疆卫视", "http://ivi.bupt.edu.cn/hls/xjtv.m3u8"},
+            {"东方卫视", "http://ivi.bupt.edu.cn/hls/dftv.m3u8"},
+            {"黑龙江卫视", "http://ivi.bupt.edu.cn/hls/hljtv.m3u8"},
+            {"湖南卫视", "http://ivi.bupt.edu.cn/hls/hunantv.m3u8"},
+            {"云南卫视", "http://ivi.bupt.edu.cn/hls/yntv.m3u8"},
+            {"江西卫视", "http://ivi.bupt.edu.cn/hls/jxtv.m3u8"},
+            {"福建东南卫视", "http://ivi.bupt.edu.cn/hls/dntv.m3u8"},
+            {"浙江卫视", "http://ivi.bupt.edu.cn/hls/zjtv.m3u8"},
+            {"贵州卫视", "http://ivi.bupt.edu.cn/hls/gztv.m3u8"},
+            {"宁夏卫视", "http://ivi.bupt.edu.cn/hls/nxtv.m3u8"},
+            {"甘肃卫视", "http://ivi.bupt.edu.cn/hls/gstv.m3u8"},
+            {"重庆卫视", "http://ivi.bupt.edu.cn/hls/cqtv.m3u8"},
+            {"兵团卫视", "http://ivi.bupt.edu.cn/hls/bttv.m3u8"},
+            {"旅游卫视", "http://ivi.bupt.edu.cn/hls/lytv.m3u8"}};
+
+    public static List<AliveBean> getTestBean() {
+        List<AliveBean> resut = new ArrayList<>();
+        for (String[] data : aliveData) {
+            resut.add(new AliveBean(data[0], data[1]));
+        }
+        return resut;
+    }
 }
+
+

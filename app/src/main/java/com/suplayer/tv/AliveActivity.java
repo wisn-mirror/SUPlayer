@@ -1,31 +1,35 @@
-package com.suplayer.xiaohongshu;
+package com.suplayer.tv;
 
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 
 import com.suplayer.R;
 import com.suplayer.Constants;
+import com.suplayer.bean.AliveBean;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.base.BaseActivity;
-import com.wisn.suvideo.control.impl.StandardVideoController;
+import com.wisn.suvideo.control.impl.FullScreenController;
+import com.wisn.suvideo.control.impl.FullScreenVideoView;
+import com.wisn.suvideo.control.impl.RotateInFullscreenController;
 import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
 
-public class HongshuActivity extends BaseActivity {
-    private SuVideoView mVideoView;
+public class AliveActivity extends BaseActivity {
+    private FullScreenVideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hongshu);
+        setContentView(R.layout.activity_alive);
+        String url = (String) this.getIntent().getSerializableExtra(Constants.data);
+        String name = (String) this.getIntent().getSerializableExtra(Constants.name);
         mVideoView = findViewById(R.id.player);
-        StandardVideoController controller = new StandardVideoController(this);
+        FullScreenController controller = new FullScreenController(this);
+        controller.setLive();
+        controller.setTitle(name);
         mVideoView.setVideoController(controller);
-//        mVideoView.setUrl(Constants.VOD_URL);
+        mVideoView.setUrl(url);
         mVideoView.setProgressManager(new ProgressManagerMemory());
-        mVideoView.setUrl(Constants.local_resvideo[2]);
         mVideoView.start();
     }
-
 
     @Override
     protected void onPause() {

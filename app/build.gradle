@@ -11,22 +11,52 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+            properties.load(inputStream)
+            storeFile file(properties.getProperty('RELEASE_STOREFILE'))
+            keyAlias properties.getProperty('RELEASE_KEY_ALIAS')
+            keyPassword properties.getProperty('RELEASE_KEY_PASSWORD')
+            storePassword properties.getProperty('RELEASE_STOREPASSWORD')
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility app.sourceCompatibility
         targetCompatibility app.targetCompatibility
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = releaseTime()
+            def applicationId = variant.applicationId
+            def versionName = defaultConfig.versionName
+            def versionCode = defaultConfig.versionCode
+            def debugType = variant.buildType.name
+            outputFileName = "${debugType}_${versionName}_${date}_${applicationId}.apk"
+        }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation      supportDependencies.supportv4
-    implementation      supportDependencies.design
+    implementation supportDependencies.supportv4
+    implementation supportDependencies.design
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
