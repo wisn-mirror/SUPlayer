@@ -82,8 +82,8 @@ public abstract class BaseVideoController extends FrameLayout {
         mCurrentPlayState = playState;
         hideStatusView();
          if (playState == SuVideoView.STATE_ERROR) {
-            mStatusView.setMessage(getResources().getString(R.string.dkplayer_error_message));
-            mStatusView.setButtonTextAndAction(getResources().getString(R.string.dkplayer_retry), new View.OnClickListener() {
+            mStatusView.setMessage(getResources().getString(R.string.suplayer_error_message));
+            mStatusView.setButtonTextAndAction(getResources().getString(R.string.suplayer_retry), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     hideStatusView();
@@ -96,8 +96,8 @@ public abstract class BaseVideoController extends FrameLayout {
 
     public void showStatusView() {
         this.removeView(mStatusView);
-        mStatusView.setMessage(getResources().getString(R.string.dkplayer_wifi_tip));
-        mStatusView.setButtonTextAndAction(getResources().getString(R.string.dkplayer_continue_play), new View.OnClickListener() {
+        mStatusView.setMessage(getResources().getString(R.string.suplayer_wifi_tip));
+        mStatusView.setButtonTextAndAction(getResources().getString(R.string.suplayer_continue_play), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideStatusView();

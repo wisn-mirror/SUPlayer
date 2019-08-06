@@ -33,7 +33,7 @@ public class FloatView  extends FrameLayout {
 
 
     private void init() {
-        setBackgroundResource(R.drawable.shape_float_window_background);
+        setBackgroundResource(R.drawable.suplayer_float_window_background);
         int padding = PlayerUtils.dp2px(getContext(), 1);
         setPadding(padding, padding, padding, padding);
         initWindow();

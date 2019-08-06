@@ -3,10 +3,10 @@
 
     <style name="ProgressBar_Scale" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
-        <item name="android:progressDrawable">@drawable/progress_scale</item>
+        <item name="android:progressDrawable">@drawable/suplayer_progress_scale</item>
     </style>
     <style name="FloatWindowAnimation">
-        <item name="android:windowEnterAnimation">@anim/anim_float_window_enter</item>
-        <item name="android:windowExitAnimation">@anim/anim_float_window_exit</item>
+        <item name="android:windowEnterAnimation">@anim/suplayer_anim_float_window_enter</item>
+        <item name="android:windowExitAnimation">@anim/suplayer_anim_float_window_exit</item>
     </style>
 </resources>

@@ -47,8 +47,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
     private boolean isPrepare = false;
     private boolean isScroll = BannerConfig.IS_SCROLL;
     private boolean isLoop = BannerConfig.IS_LOOP;
-    private int mIndicatorSelectedResId = R.drawable.home4_gray_radius;
-    private int mIndicatorUnselectedResId = R.drawable.home4_white_radius;
+    private int mIndicatorSelectedResId = R.drawable.suplayer_gray_radius;
+    private int mIndicatorUnselectedResId = R.drawable.suplayer_white_radius;
     private Drawable mIndicatorSelectedDrawable;
     private Drawable mIndicatorUnselectedDrawable;
     private int titleHeight;
@@ -100,7 +100,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
 
     private void initView(Context context, AttributeSet attrs) {
         handleTypedArray(context, attrs);
-        View view = LayoutInflater.from(context).inflate(R.layout.home4_banner, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.suplayer_home4_banner, this, true);
         bannerDefaultImage = (ImageView) view.findViewById(R.id.bannerDefaultImage);
         ArcShapeView arcShapeView = (ArcShapeView) view.findViewById(R.id.bannerArcView);
         if (mArcHeight <= 0) {
@@ -140,8 +140,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_height, indicatorSize);
         mIndicatorPadding = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_padding, BannerConfig.PADDING_SIZE);
         mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_margin, BannerConfig.MARGIN_BOTTOM);
-        mIndicatorSelectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_selected, R.drawable.home4_gray_radius);
-        mIndicatorUnselectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_unselected, R.drawable.home4_white_radius);
+        mIndicatorSelectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_selected, R.drawable.suplayer_gray_radius);
+        mIndicatorUnselectedResId = typedArray.getResourceId(R.styleable.Banner_indicator_drawable_unselected, R.drawable.suplayer_white_radius);
         delayTime = typedArray.getInt(R.styleable.Banner_delay_time, BannerConfig.TIME);
         scrollTime = typedArray.getInt(R.styleable.Banner_scroll_time, BannerConfig.DURATION);
         isAutoPlay = typedArray.getBoolean(R.styleable.Banner_is_auto_play, BannerConfig.IS_AUTO_PLAY);
@@ -150,7 +150,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         titleHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_title_height, BannerConfig.TITLE_HEIGHT);
         titleTextColor = typedArray.getColor(R.styleable.Banner_title_textcolor, BannerConfig.TITLE_TEXT_COLOR);
         titleTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_title_textsize, BannerConfig.TITLE_TEXT_SIZE);
-        bannerBackgroundImage = typedArray.getResourceId(R.styleable.Banner_banner_default_image, R.drawable.commoditydetails_icon_big);
+        bannerBackgroundImage = typedArray.getResourceId(R.styleable.Banner_banner_default_image, R.drawable.suplayer_commoditydetails_icon_big);
         mPageLeftMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_left_margin, BannerConfig.PAGE_MARGIN);
         mPageRightMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_page_right_margin, BannerConfig.PAGE_MARGIN);
         mArcHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_arc_height, BannerConfig.ARC_HEIGHT);

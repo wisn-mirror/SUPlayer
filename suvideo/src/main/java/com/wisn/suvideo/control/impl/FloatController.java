@@ -33,7 +33,7 @@ public class FloatController  extends BaseVideoController implements View.OnClic
 
     @Override
     protected int getLayoutId() {
-        return R.layout.layout_float_controller;
+        return R.layout.suplayer_layout_float_controller;
     }
 
     @Override

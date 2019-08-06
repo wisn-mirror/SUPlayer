@@ -44,8 +44,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
     private ImageView mThumb;
     private FrameLayout mCompleteContainer;
     private ImageView mStopFullscreen;
-    private Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.dkplayer_anim_alpha_in);
-    private Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.dkplayer_anim_alpha_out);
+    private Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.suplayer_anim_alpha_in);
+    private Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.suplayer_anim_alpha_out);
     private ImageView rePlayButton;
     private FrameLayout fl_newprogress;
     private ProgressBar newprogressBar;
@@ -72,7 +72,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.dkplayer_layout_product_controller;
+        return R.layout.suplayer_layout_product_controller;
     }
 
     @Override
@@ -97,7 +97,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
         newprogressBar = mControllerView.findViewById(R.id.newprogressBar);
         iv_jindui = mControllerView.findViewById(R.id.iv_jindui);
         iv_newtime = mControllerView.findViewById(R.id.iv_newtime);
-
+        mStartPlayButton.setVisibility(GONE);
+        mStartPlayButton.setOnClickListener(this);
         mFullScreenButton.setOnClickListener(this);
         mVideoProgress.setOnSeekBarChangeListener(this);
         mBackButton.setOnClickListener(this);
@@ -107,9 +108,9 @@ public class ProductVideoController extends GestureVideoController implements Vi
         mStopFullscreen.setOnClickListener(this);
         voice_enable.setOnClickListener(this);
         if (isInProduct) {
-            mFullScreenButton.setImageResource(R.drawable.commoditydetails_icon_big);
+            mFullScreenButton.setImageResource(R.drawable.suplayer_commoditydetails_icon_big);
         } else {
-            mFullScreenButton.setImageResource(R.drawable.dkplayer_selector_full_screen_button);
+            mFullScreenButton.setImageResource(R.drawable.suplayer_selector_full_screen_button);
         }
         setVoice(isEnableVoice);
     }
@@ -153,6 +154,12 @@ public class ProductVideoController extends GestureVideoController implements Vi
             mMediaPlayer.replay(true);
         } else if (i == R.id.voice_enable) {
             setVoice(!voice_enable.isSelected());
+        } else if (i == R.id.start_play) {
+            if (mMediaPlayer.isPlaying()) {
+                mMediaPlayer.pause();
+            }else{
+                mMediaPlayer.start();
+            }
         }
     }
     public void setRePlay(boolean rePlay){
@@ -221,7 +228,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mBottomProgress.setVisibility(GONE);
                 mLoadingProgress.setVisibility(GONE);
                 fl_newprogress.setVisibility(GONE);
-                mStartPlayButton.setVisibility(VISIBLE);
+//                mStartPlayButton.setVisibility(VISIBLE);
                 mThumb.setVisibility(VISIBLE);
                 break;
             case SuVideoView.STATE_PLAYING:
@@ -231,18 +238,18 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mLoadingProgress.setVisibility(GONE);
                 mCompleteContainer.setVisibility(GONE);
                 mThumb.setVisibility(GONE);
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 fl_newprogress.setVisibility(GONE);
                 break;
             case SuVideoView.STATE_PAUSED:
                 L.e("STATE_PAUSED");
                 mStartPlayButton.setSelected(false);
-                mStartPlayButton.setVisibility(VISIBLE);
+//                mStartPlayButton.setVisibility(VISIBLE);
                 break;
             case SuVideoView.STATE_PREPARING:
                 L.e("STATE_PREPARING");
                 mCompleteContainer.setVisibility(GONE);
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 mLoadingProgress.setVisibility(VISIBLE);
 //                mThumb.setVisibility(VISIBLE);
                 break;
@@ -250,11 +257,11 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 L.e("STATE_PREPARED");
                 mBottomProgress.setVisibility(VISIBLE);
 //                mLoadingProgress.setVisibility(GONE);
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 break;
             case SuVideoView.STATE_ERROR:
                 L.e("STATE_ERROR");
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 mLoadingProgress.setVisibility(GONE);
                 fl_newprogress.setVisibility(GONE);
 
@@ -264,7 +271,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 break;
             case SuVideoView.STATE_BUFFERING:
                 L.e("STATE_BUFFERING");
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 mLoadingProgress.setVisibility(VISIBLE);
                 mThumb.setVisibility(GONE);
                 mStartPlayButton.setSelected(mMediaPlayer.isPlaying());
@@ -272,7 +279,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
             case SuVideoView.STATE_BUFFERED:
                 L.e("STATE_BUFFERED");
                 mLoadingProgress.setVisibility(GONE);
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 mThumb.setVisibility(GONE);
                 mStartPlayButton.setSelected(mMediaPlayer.isPlaying());
                 break;
@@ -280,7 +287,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 L.e("STATE_PLAYBACK_COMPLETED");
                 hide();
                 removeCallbacks(mShowProgress);
-                mStartPlayButton.setVisibility(GONE);
+//                mStartPlayButton.setVisibility(GONE);
                 mThumb.setVisibility(VISIBLE);
                 mCompleteContainer.setVisibility(VISIBLE);
                 mStopFullscreen.setVisibility(mMediaPlayer.isFullScreen() ? VISIBLE : GONE);
@@ -321,7 +328,6 @@ public class ProductVideoController extends GestureVideoController implements Vi
         if (!fromUser) {
             return;
         }
-
         long duration = mMediaPlayer.getDuration();
         long newPosition = (duration * progress) / mVideoProgress.getMax();
         String currentTime = stringForTime((int) newPosition);
@@ -346,6 +352,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mBottomContainer.setVisibility(GONE);
                 mBottomContainer.startAnimation(mHideAnim);
             }
+            mStartPlayButton.setVisibility(GONE);
             mBottomProgress.setVisibility(VISIBLE);
             mBottomProgress.startAnimation(mShowAnim);
             mShowing = false;
@@ -369,6 +376,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
                 mBottomContainer.setVisibility(VISIBLE);
                 mBottomContainer.startAnimation(mShowAnim);
             }
+            mStartPlayButton.setVisibility(VISIBLE);
             mBottomProgress.setVisibility(GONE);
             mBottomProgress.startAnimation(mHideAnim);
             mShowing = true;

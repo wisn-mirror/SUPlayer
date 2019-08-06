@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#fff</color>
-    <color name="dkplayer_theme_color">#FF8800</color>
-    <color name="dkplayer_theme_color_translucent">#FF8800</color>
-    <color name="dkplayer_background_color">#FF8800</color>
+    <color name="suplayer_theme_color">#FF8800</color>
+    <color name="suplayer_theme_color_translucent">#FF8800</color>
+    <color name="suplayer_background_color">#FF8800</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="colorPrimary">#FF8800</color>
     <color name="colorPrimaryDark">#FF8800</color>

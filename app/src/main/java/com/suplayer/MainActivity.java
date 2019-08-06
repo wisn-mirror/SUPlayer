@@ -9,17 +9,20 @@ import android.widget.Button;
 import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
+import com.suplayer.tv.TVAliveActivity;
 import com.wisn.suvideo.VideoViewConfig;
+import com.wisn.suvideo.base.BaseActivity;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.exoplayer.ExoMediaPlayerFactory;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private Button videolist;
     private Button productDetail;
     private Button Simple;
     private Button douyin;
     private Button hongshu;
+    private Button tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Simple = findViewById(R.id.Simple);
         douyin = findViewById(R.id.douyin);
         hongshu = findViewById(R.id.hongshu);
+        tv = findViewById(R.id.tv);
         videolist.setOnClickListener(this);
         productDetail.setOnClickListener(this);
         Simple.setOnClickListener(this);
         douyin.setOnClickListener(this);
         hongshu.setOnClickListener(this);
+        tv.setOnClickListener(this);
         initconfig();
 
     }
@@ -59,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, DouYinActivity.class));
         } else if (v == hongshu) {
             startActivity(new Intent(this, HongshuActivity.class));
+        } else if (v == tv) {
+            startActivity(new Intent(this, TVAliveActivity.class));
         }
     }
 }

@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="2dp"
-        android:src="@drawable/nav_icon_close_black"/>
+        android:src="@drawable/suplayer_nav_icon_close_black"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

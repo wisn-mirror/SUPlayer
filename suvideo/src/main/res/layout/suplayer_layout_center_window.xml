@@ -10,7 +10,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        tools:src="@drawable/commoditydetails_icon_voice_open"/>
+        tools:src="@drawable/suplayer_commoditydetails_icon_voice_open"/>
 
     <TextView
         android:id="@+id/tv_percent"
@@ -26,6 +26,6 @@
         android:layout_width="100dp"
         android:layout_height="3dp"
         android:max="100"
-        android:progressDrawable="@drawable/dkplayer_layer_progress_bar" />
+        android:progressDrawable="@drawable/suplayer_layer_progress_bar" />
 
 </LinearLayout>

@@ -32,7 +32,7 @@ public class DouYinController extends BaseVideoController {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.layout_douyin_controller;
+        return R.layout.suplayer_layout_douyin_controller;
     }
 
     @Override

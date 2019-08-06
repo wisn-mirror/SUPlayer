@@ -41,7 +41,7 @@
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="12dp"
-                android:src="@drawable/commoditydetails_icon_play_speed" />
+                android:src="@drawable/suplayer_commoditydetails_icon_play_speed" />
 
             <TextView
                 android:layout_width="wrap_content"

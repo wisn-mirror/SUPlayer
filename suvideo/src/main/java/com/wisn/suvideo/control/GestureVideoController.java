@@ -153,9 +153,9 @@ public abstract class GestureVideoController extends BaseVideoController{
         int currentPosition = (int) mMediaPlayer.getCurrentPosition();
         int position = (int) (deltaX / width * 120000 + currentPosition);
         if (position > currentPosition) {
-            mCenterView.setIcon(R.drawable.commoditydetails_icon_play_speed);
+            mCenterView.setIcon(R.drawable.suplayer_commoditydetails_icon_play_speed);
         } else {
-            mCenterView.setIcon(R.drawable.commoditydetails_icon_play_reverse);
+            mCenterView.setIcon(R.drawable.suplayer_commoditydetails_icon_play_reverse);
         }
         if (position > duration) position = duration;
         if (position < 0) position = 0;
@@ -170,7 +170,7 @@ public abstract class GestureVideoController extends BaseVideoController{
         mCenterView.setProVisibility(View.VISIBLE);
         Window window = PlayerUtils.scanForActivity(getContext()).getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
-        mCenterView.setIcon(R.drawable.dkplayer_ic_action_brightness);
+        mCenterView.setIcon(R.drawable.suplayer_ic_action_brightness);
         int height = getMeasuredHeight();
         if (mBrightness == -1.0f) mBrightness = 0.5f;
         float brightness = deltaY * 2 / height * 1.0f + mBrightness;
@@ -195,10 +195,10 @@ public abstract class GestureVideoController extends BaseVideoController{
         float index = mStreamVolume + deltaV;
         if (index > streamMaxVolume) index = streamMaxVolume;
         if (index < 0) {
-            mCenterView.setIcon(R.drawable.commoditydetails_icon_voice_close);
+            mCenterView.setIcon(R.drawable.suplayer_commoditydetails_icon_voice_close);
             index = 0;
         } else {
-            mCenterView.setIcon(R.drawable.commoditydetails_icon_voice_open);
+            mCenterView.setIcon(R.drawable.suplayer_commoditydetails_icon_voice_open);
         }
         int percent = (int) (index / streamMaxVolume * 100);
         mCenterView.setTextView(percent + "%");

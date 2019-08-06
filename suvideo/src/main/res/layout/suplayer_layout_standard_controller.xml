@@ -8,8 +8,8 @@
     <LinearLayout
         android:id="@+id/top_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dkplayer_controller_height"
-        android:background="@drawable/dkplayer_shape_standard_controller_top_bg"
+        android:layout_height="46dp"
+        android:background="@drawable/suplayer_shape_standard_controller_top_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
@@ -17,11 +17,11 @@
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="@dimen/dkplayer_controller_height"
-            android:layout_height="@dimen/dkplayer_controller_height"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
             android:layout_gravity="center"
-            android:padding="@dimen/dkplayer_controller_icon_padding"
-            android:src="@drawable/nav_icon_back_white"
+            android:padding="12dp"
+            android:src="@drawable/suplayer_nav_icon_back_white"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -38,14 +38,14 @@
             android:paddingRight="6dp"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dkplayer_controller_text_size"
+            android:textSize="16dp"
             tools:text="这是一个标题" />
 
         <ImageView
             android:id="@+id/iv_battery"
             android:layout_width="26dp"
             android:layout_height="20dp"
-            android:src="@drawable/dkplayer_battery_level" />
+            android:src="@drawable/suplayer_battery_level" />
 
         <TextView
             android:id="@+id/sys_time"
@@ -63,9 +63,9 @@
     <LinearLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dkplayer_controller_height"
+        android:layout_height="46dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/dkplayer_shape_stardard_controller_bottom_bg"
+        android:background="@drawable/suplayer_shape_stardard_controller_bottom_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
@@ -73,17 +73,17 @@
 
         <ImageView
             android:id="@+id/iv_play"
-            android:layout_width="@dimen/dkplayer_controller_height"
-            android:layout_height="@dimen/dkplayer_controller_height"
-            android:padding="@dimen/dkplayer_controller_icon_padding"
-            android:src="@drawable/dkplayer_selector_play_button" />
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:padding="12dp"
+            android:src="@drawable/suplayer_selector_play_button" />
 
         <ImageView
             android:id="@+id/iv_refresh"
-            android:layout_width="@dimen/dkplayer_controller_height"
-            android:layout_height="@dimen/dkplayer_controller_height"
-            android:padding="@dimen/dkplayer_controller_icon_padding"
-            android:src="@drawable/dkplayer_ic_action_autorenew"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:padding="12dp"
+            android:src="@drawable/suplayer_ic_action_autorenew"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dkplayer_controller_time_text_size"
+            android:textSize="14dp"
             tools:text="00:00" />
 
         <SeekBar
@@ -108,8 +108,8 @@
             android:maxHeight="2dp"
             android:paddingEnd="0dp"
             android:paddingStart="0dp"
-            android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
-            android:thumb="@drawable/dkplayer_seekbar_thumb"
+            android:progressDrawable="@drawable/suplayer_layer_progress_bar"
+            android:thumb="@drawable/suplayer_seekbar_thumb"
             android:thumbOffset="0dp" />
 
         <TextView
@@ -117,27 +117,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dkplayer_controller_time_text_size"
+            android:textSize="14dp"
             tools:text="00:00" />
 
         <TextView
             android:id="@+id/tv_multi_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dkplayer_default_spacing"
-            android:layout_marginStart="@dimen/dkplayer_default_spacing"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/dkplayer_controller_time_text_size"
+            android:textSize="14dp"
             android:visibility="gone"
             tools:text="高清"
             tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/fullscreen"
-            android:layout_width="@dimen/dkplayer_controller_height"
-            android:layout_height="@dimen/dkplayer_controller_height"
-            android:padding="@dimen/dkplayer_controller_icon_padding"
-            android:src="@drawable/dkplayer_selector_full_screen_button" />
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:padding="12dp"
+            android:src="@drawable/suplayer_selector_full_screen_button" />
     </LinearLayout>
 
     <ImageView
@@ -146,9 +146,9 @@
         android:layout_height="40dp"
         android:layout_gravity="center|start"
         android:layout_margin="24dp"
-        android:background="@drawable/dkplayer_shape_back_bg"
-        android:padding="@dimen/dkplayer_default_spacing"
-        android:src="@drawable/dkplayer_selector_lock_button"
+        android:background="@drawable/suplayer_shape_back_bg"
+        android:padding="10dp"
+        android:src="@drawable/suplayer_selector_lock_button"
         android:visibility="gone"
         tools:visibility="visible" />
 
@@ -159,7 +159,7 @@
         android:layout_height="1dp"
         android:layout_gravity="bottom"
         android:max="1000"
-        android:progressDrawable="@drawable/dkplayer_layer_progress_bar"
+        android:progressDrawable="@drawable/suplayer_layer_progress_bar"
         android:visibility="gone" />
 
     <ImageView
@@ -178,10 +178,10 @@
 
         <ImageView
             android:id="@+id/stop_fullscreen"
-            android:layout_width="@dimen/dkplayer_controller_height"
-            android:layout_height="@dimen/dkplayer_controller_height"
-            android:padding="@dimen/dkplayer_controller_icon_padding"
-            android:src="@drawable/nav_icon_back_white"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:padding="12dp"
+            android:src="@drawable/suplayer_nav_icon_back_white"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -193,18 +193,18 @@
 
             <ImageView
                 android:id="@+id/iv_replay"
-                android:layout_width="@dimen/dkplayer_play_btn_size"
-                android:layout_height="@dimen/dkplayer_play_btn_size"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/dkplayer_shape_play_bg"
-                android:padding="@dimen/dkplayer_controller_icon_padding"
-                android:src="@drawable/dkplayer_ic_action_replay" />
+                android:background="@drawable/suplayer_shape_play_bg"
+                android:padding="12dp"
+                android:src="@drawable/suplayer_ic_action_replay" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dkplayer_controller_icon_padding"
-                android:text="@string/dkplayer_replay"
+                android:padding="12dp"
+                android:text="@string/suplayer_replay"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
@@ -212,19 +212,19 @@
 
     <ImageView
         android:id="@+id/start_play"
-        android:layout_width="@dimen/dkplayer_play_btn_size"
-        android:layout_height="@dimen/dkplayer_play_btn_size"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:background="@drawable/dkplayer_shape_play_bg"
-        android:padding="@dimen/dkplayer_default_spacing"
-        android:src="@drawable/dkplayer_selector_play_button" />
+        android:background="@drawable/suplayer_shape_play_bg"
+        android:padding="10dp"
+        android:src="@drawable/suplayer_selector_center_play_button" />
 
     <ProgressBar
         android:id="@+id/loading"
-        android:layout_width="@dimen/dkplayer_play_btn_size"
-        android:layout_height="@dimen/dkplayer_play_btn_size"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:indeterminateDrawable="@drawable/dkplayer_progress_loading"
+        android:indeterminateDrawable="@drawable/suplayer_progress_loading"
         android:visibility="gone"
         tools:visibility="visible" />
 

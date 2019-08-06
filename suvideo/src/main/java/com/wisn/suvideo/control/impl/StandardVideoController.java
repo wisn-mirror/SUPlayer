@@ -51,8 +51,8 @@ public class StandardVideoController extends GestureVideoController implements V
     private ImageView mStopFullscreen;
     private TextView mSysTime;//系统当前时间
     private ImageView mBatteryLevel;//电量
-    private Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.dkplayer_anim_alpha_in);
-    private Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.dkplayer_anim_alpha_out);
+    private Animation mShowAnim = AnimationUtils.loadAnimation(getContext(), R.anim.suplayer_anim_alpha_in);
+    private Animation mHideAnim = AnimationUtils.loadAnimation(getContext(), R.anim.suplayer_anim_alpha_out);
     private BatteryReceiver mBatteryReceiver;
     protected ImageView mRefreshButton;
 
@@ -71,7 +71,7 @@ public class StandardVideoController extends GestureVideoController implements V
 
     @Override
     protected int getLayoutId() {
-        return R.layout.dkplayer_layout_standard_controller;
+        return R.layout.suplayer_layout_standard_controller;
     }
 
     @Override
@@ -277,13 +277,13 @@ public class StandardVideoController extends GestureVideoController implements V
             mIsGestureEnabled = true;
             show();
             mLockButton.setSelected(false);
-            Toast.makeText(getContext(), R.string.dkplayer_unlocked, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.suplayer_unlocked, Toast.LENGTH_SHORT).show();
         } else {
             hide();
             mIsLocked = true;
             mIsGestureEnabled = false;
             mLockButton.setSelected(true);
-            Toast.makeText(getContext(), R.string.dkplayer_locked, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.suplayer_locked, Toast.LENGTH_SHORT).show();
         }
         mMediaPlayer.setLock(mIsLocked);
     }
@@ -448,7 +448,7 @@ public class StandardVideoController extends GestureVideoController implements V
     public boolean onBackPressed() {
         if (mIsLocked) {
             show();
-            Toast.makeText(getContext(), R.string.dkplayer_lock_tip, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.suplayer_lock_tip, Toast.LENGTH_SHORT).show();
             return true;
         }
 
