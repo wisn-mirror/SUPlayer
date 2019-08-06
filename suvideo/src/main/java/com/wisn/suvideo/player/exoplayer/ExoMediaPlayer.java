@@ -58,7 +58,6 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
     private DataSource.Factory mediaDataSourceFactory;
     private Map<String, String> mHeaders;
     private static final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
-    private SimpleCache simpleCache;
 
     public ExoMediaPlayer(Context context) {
         mAppContext = context.getApplicationContext();
@@ -126,8 +125,8 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
 //        File cacheFile = new File(mAppContext.getExternalCacheDir().getAbsolutePath(), "video");
 //        // 本地最多保存512M, 按照LRU原则删除老数据
 //        simpleCache = new SimpleCache(cacheFile, new LeastRecentlyUsedCacheEvictor(1024 * 1024 *     1024));
-        simpleCache =CacheHelper.getSimpleCache(mAppContext.getExternalCacheDir().getAbsolutePath());
-         return new CacheDataSourceFactory(simpleCache,    dataSourceFactory);
+        CacheHelper.getSimpleCache(mAppContext.getExternalCacheDir().getAbsolutePath());
+         return new CacheDataSourceFactory(CacheHelper.simpleCache,    dataSourceFactory);
     }
 
     /**
@@ -233,13 +232,12 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
         try {
             if (mInternalPlayer != null) {
                 mInternalPlayer.release();
-              if(simpleCache!=null)  simpleCache.release();
+              if(CacheHelper.simpleCache!=null)  CacheHelper.simpleCache.release();
                 mInternalPlayer.removeListener(this);
                 mInternalPlayer.removeVideoListener(this);
                 mInternalPlayer = null;
             }
-
-            simpleCache = null;
+            CacheHelper.simpleCache=null;
             mSurface = null;
             mDataSource = null;
             mHeaders = null;

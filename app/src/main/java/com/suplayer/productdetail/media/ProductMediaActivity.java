@@ -143,6 +143,9 @@ public class ProductMediaActivity extends AppCompatActivity {
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
+                if(tabs.size()==1){
+                    return testFragment1;
+                }
                 if (i == 0) {
                     return videoFragment;
                 } else if (i == 1) {

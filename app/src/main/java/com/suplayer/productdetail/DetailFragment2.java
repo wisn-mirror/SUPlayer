@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -51,6 +52,7 @@ public class DetailFragment2 extends BaseFragment {
     private Banner banner_slider;
     private VideoViewManager mVideoViewManager;
     public static final String tag = "DetailFragment2";
+    private FrameLayout videoContent;
 
     @Override
     public void onAttach(Context context) {
@@ -73,7 +75,6 @@ public class DetailFragment2 extends BaseFragment {
         viewContent = view.findViewById(R.id.viewContent);
 
         mVideoViewManager = VideoViewManager.instance();
-
         List<BannerData> bannerData = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             BannerData bannerData1 = new BannerData();
@@ -97,7 +98,6 @@ public class DetailFragment2 extends BaseFragment {
                 .setPages(bannerData, creator)
                 .setCurrentPage(0)
                 .setBannerStyle(BannerConfig.NOT_INDICATOR)
-//                .setBannerAnimation(Transformer.Scale)
                 .start();
         banner_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -142,36 +142,76 @@ public class DetailFragment2 extends BaseFragment {
     public void onStart() {
         super.onStart();
         Log.d(tag, "onStart");
+         if (videoContent != null) {
+//             mVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
+////             removePlayerFormParent();
+//////             videoContent.removeAllViews();
+////             videoContent.addView(mVideoView);
+//             productVideoController.setPlayState(mVideoView.getCurrentPlayState());
+//             productVideoController.setPlayerState(mVideoView.getCurrentPlayerState());
+//             mVideoView.setVideoController(productVideoController);
+//             try {
+////                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
+//                 removePlayerFormParent();
+//             } catch (Exception e) {
+//                 e.printStackTrace();
+//             }
+//             videoContent.addView(mVideoView);
+            /*if (isXiaopin) {
+                viewContent.setVisibility(View.VISIBLE);
+                mVideoView.startTinyScreen(true, viewContent);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mFloatController.setPlayState(mVideoView.getCurrentPlayState());
+                        mFloatController.setPlayerState(mVideoView.getCurrentPlayerState());
+                        mVideoView.setVideoController(mFloatController);
+                    }
+                }, 20);
+
+            } else {
+                viewContent.setVisibility(View.GONE);
+                mVideoView.stopTinyScreen(viewContent);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        productVideoController.setPlayState(mVideoView.getCurrentPlayState());
+                        productVideoController.setPlayerState(mVideoView.getCurrentPlayerState());
+                        mVideoView.setVideoController(productVideoController);
+                        try {
+//                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
+                            removePlayerFormParent();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        videoContent.addView(mVideoView);
+                    }
+                }, 20);
+
+            }*/
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d(tag, "onResume");
-        if(needResume){
+        if (needResume) {
             mVideoViewManager.resume();
         }
-
-       /* if (mVideoView != null && !mVideoView.isPlaying()) {
-            if (playing) {
-//                productVideoController.setPlayState(currentPlayState);
-//                productVideoController.setPlayerState(currentPlayState);
-//                mVideoView.setVideoController(productVideoController);
-                mVideoView.start();
-            }
-        }*/
     }
 
-    public boolean needResume =false;
+    public boolean needResume = false;
+
     @Override
     public void onPause() {
         super.onPause();
         Log.d(tag, "onPause");
-        if(mVideoView.isPlaying()){
+        if (mVideoView != null && mVideoView.isPlaying()) {
             mVideoViewManager.pause();
-            needResume =true;
-        }else{
-            needResume =false;
+            needResume = true;
+        } else {
+            needResume = false;
         }
 
        /* if (mVideoView != null) {
@@ -346,11 +386,13 @@ public class DetailFragment2 extends BaseFragment {
             }
         };
         //播放raw
-        mVideoView = new SuVideoView(getActivity());
+        mVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
+//        mVideoView = new SuVideoView(getActivity());
+        removePlayerFormParent();
         mVideoView.addOnVideoViewStateChangeListener(mOnVideoViewStateChangeListener);
 
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
-        mVideoView.release();
+//        mVideoView.release();
         mVideoView.setUrl(Constants.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
         productVideoController.setDefaultVoiceEnable(false);
@@ -360,6 +402,7 @@ public class DetailFragment2 extends BaseFragment {
                 playing = mVideoView.isPlaying();
                 getActivity().startActivity(new Intent(getActivity(), ProductMediaActivity.class));
                 getActivity().overridePendingTransition(0, 0);
+                videoContent = frameLayout.fl_content;
             }
         });
         mVideoView.setVideoController(productVideoController);
@@ -398,7 +441,8 @@ public class DetailFragment2 extends BaseFragment {
                                 productVideoController.setPlayerState(mVideoView.getCurrentPlayerState());
                                 mVideoView.setVideoController(productVideoController);
                                 try {
-                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
+//                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
+                                    removePlayerFormParent();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -412,5 +456,14 @@ public class DetailFragment2 extends BaseFragment {
         });
     }
 
+    /**
+     * 将播放器从父控件中移除
+     */
+    private void removePlayerFormParent() {
+        ViewParent parent = mVideoView.getParent();
+        if (parent instanceof ViewGroup) {
+            ((ViewGroup) parent).removeView(mVideoView);
+        }
+    }
 
 }

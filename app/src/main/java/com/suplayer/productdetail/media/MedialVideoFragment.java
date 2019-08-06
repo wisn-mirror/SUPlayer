@@ -13,8 +13,11 @@ import android.widget.FrameLayout;
 
 import com.suplayer.Constants;
 import com.suplayer.R;
+import com.suplayer.productdetail.SeamlessPlayerHelper;
 import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.impl.ProductVideoController;
+import com.wisn.suvideo.helper.L;
+import com.wisn.suvideo.listener.OnVideoViewStateChangeListener;
 import com.wisn.suvideo.manager.impl.ProgressManagerMemory;
 
 /**
@@ -36,15 +39,75 @@ public class MedialVideoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        suVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
+        SuVideoView suVideoView1 = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
         suVideoView = new SuVideoView(getContext());
         //播放raw
         suVideoView.setUrl(Constants.VOD_URL);
         suVideoView.setProgressManager(new ProgressManagerMemory());
         ProductVideoController productVideoController = new ProductVideoController(getContext());
+        productVideoController.setPlayState(suVideoView1.getCurrentPlayState());
+        productVideoController.setPlayerState(suVideoView1.getCurrentPlayerState());
         productVideoController.setDefaultVoiceEnable(false);
         productVideoController.setDefaultisInProduct(false);
         suVideoView.setVideoController(productVideoController);
+        suVideoView.seekTo(suVideoView1.getCurrentPosition());
+        OnVideoViewStateChangeListener mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
+            @Override
+            public void onPlayerStateChanged(int playerState) {
+                switch (playerState) {
+                    case SuVideoView.PLAYER_NORMAL://小屏
+                        break;
+                    case SuVideoView.PLAYER_FULL_SCREEN://全屏
+                        break;
+                }
+            }
+
+            @Override
+            public void onPlayStateChanged(int playState) {
+                switch (playState) {
+                    case SuVideoView.STATE_IDLE:
+                        L.d("details STATE_IDLE：");
+
+                        break;
+                    case SuVideoView.STATE_PREPARING:
+                        L.d("details STATE_PREPARING：");
+
+                        break;
+                    case SuVideoView.STATE_PREPARED:
+                        L.d("details STATE_PREPARED：");
+
+                        //需在此时获取视频宽高
+
+                        break;
+                    case SuVideoView.STATE_PLAYING:
+                        L.d("details STATE_PLAYING：");
+                        suVideoView.seekTo(suVideoView1.getCurrentPosition());
+
+                        break;
+                    case SuVideoView.STATE_PAUSED:
+                        L.d("details STATE_PAUSED：");
+
+                        break;
+                    case SuVideoView.STATE_BUFFERING:
+                        L.d("details STATE_BUFFERING：");
+
+                        break;
+                    case SuVideoView.STATE_BUFFERED:
+                        L.d("details STATE_BUFFERED：");
+
+                        break;
+                    case SuVideoView.STATE_PLAYBACK_COMPLETED:
+                        L.d("details STATE_PLAYBACK_COMPLETED：");
+                        break;
+                    case SuVideoView.STATE_ERROR:
+                        L.d("details STATE_ERROR：");
+
+                        break;
+                }
+            }
+        };
+        suVideoView.addOnVideoViewStateChangeListener(mOnVideoViewStateChangeListener);
+
         suVideoView.start();
         fl_container.removeAllViews();
         removePlayerFormParent();
@@ -68,7 +131,10 @@ public class MedialVideoFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView().seekTo(suVideoView.getCurrentPosition());
+
         removePlayerFormParent();
+
         super.onDestroyView();
     }
 }

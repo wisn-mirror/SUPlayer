@@ -1,6 +1,5 @@
 package com.wisn.suvideo.player.exoplayer;
 
-import android.widget.ProgressBar;
 
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
 import com.google.android.exoplayer2.upstream.cache.SimpleCache;
@@ -12,7 +11,7 @@ import java.io.File;
  */
 public class CacheHelper {
 
-    private static SimpleCache simpleCache;
+    public static SimpleCache simpleCache;
 
     public static SimpleCache getSimpleCache(String roorDir){
         if(simpleCache==null) {
@@ -25,7 +24,6 @@ public class CacheHelper {
             }
         }
         return simpleCache;
-
 
     }
 
