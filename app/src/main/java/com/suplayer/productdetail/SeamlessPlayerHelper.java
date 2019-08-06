@@ -19,7 +19,7 @@ public class SeamlessPlayerHelper {
         if(instance==null){
             synchronized (SeamlessPlayerHelper.class){
                 if(instance==null){
-                    instance=new SeamlessPlayerHelper(context.getApplicationContext());
+                    instance=new SeamlessPlayerHelper(context);
                 }
             }
         }

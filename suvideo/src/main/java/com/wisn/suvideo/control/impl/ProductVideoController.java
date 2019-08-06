@@ -155,6 +155,9 @@ public class ProductVideoController extends GestureVideoController implements Vi
             setVoice(!voice_enable.isSelected());
         }
     }
+    public void setRePlay(boolean rePlay){
+        mMediaPlayer.replay(rePlay);
+    }
 
     public void setDefaultVoiceEnable(boolean isEnable) {
         this.isEnableVoice = isEnable;

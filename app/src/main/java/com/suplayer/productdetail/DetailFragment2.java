@@ -53,6 +53,7 @@ public class DetailFragment2 extends BaseFragment {
     private VideoViewManager mVideoViewManager;
     public static final String tag = "DetailFragment2";
     private FrameLayout videoContent;
+    private OnVideoViewStateChangeListener mOnVideoViewStateChangeListener;
 
     @Override
     public void onAttach(Context context) {
@@ -142,54 +143,6 @@ public class DetailFragment2 extends BaseFragment {
     public void onStart() {
         super.onStart();
         Log.d(tag, "onStart");
-         if (videoContent != null) {
-//             mVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
-////             removePlayerFormParent();
-//////             videoContent.removeAllViews();
-////             videoContent.addView(mVideoView);
-//             productVideoController.setPlayState(mVideoView.getCurrentPlayState());
-//             productVideoController.setPlayerState(mVideoView.getCurrentPlayerState());
-//             mVideoView.setVideoController(productVideoController);
-//             try {
-////                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
-//                 removePlayerFormParent();
-//             } catch (Exception e) {
-//                 e.printStackTrace();
-//             }
-//             videoContent.addView(mVideoView);
-            /*if (isXiaopin) {
-                viewContent.setVisibility(View.VISIBLE);
-                mVideoView.startTinyScreen(true, viewContent);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mFloatController.setPlayState(mVideoView.getCurrentPlayState());
-                        mFloatController.setPlayerState(mVideoView.getCurrentPlayerState());
-                        mVideoView.setVideoController(mFloatController);
-                    }
-                }, 20);
-
-            } else {
-                viewContent.setVisibility(View.GONE);
-                mVideoView.stopTinyScreen(viewContent);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        productVideoController.setPlayState(mVideoView.getCurrentPlayState());
-                        productVideoController.setPlayerState(mVideoView.getCurrentPlayerState());
-                        mVideoView.setVideoController(productVideoController);
-                        try {
-//                                    ((ViewGroup) mVideoView.getParent()).removeView(mVideoView);
-                            removePlayerFormParent();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        videoContent.addView(mVideoView);
-                    }
-                }, 20);
-
-            }*/
-        }
     }
 
     @Override
@@ -324,11 +277,14 @@ public class DetailFragment2 extends BaseFragment {
             }
         }
 
-
     }
 
     private void dealVideo(CustomViewHolder2.ViewHolder frameLayout) {
-        OnVideoViewStateChangeListener mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
+       /* if (mVideoView != null && productVideoController != null) {
+            productVideoController.setRePlay(true);
+            return ;
+        }*/
+        mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
             @Override
             public void onPlayerStateChanged(int playerState) {
                 switch (playerState) {
@@ -385,14 +341,15 @@ public class DetailFragment2 extends BaseFragment {
                 }
             }
         };
+
         //播放raw
         mVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
-//        mVideoView = new SuVideoView(getActivity());
+        mVideoView.release();
+
         removePlayerFormParent();
         mVideoView.addOnVideoViewStateChangeListener(mOnVideoViewStateChangeListener);
 
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
-//        mVideoView.release();
         mVideoView.setUrl(Constants.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
         productVideoController.setDefaultVoiceEnable(false);
@@ -417,6 +374,9 @@ public class DetailFragment2 extends BaseFragment {
                 L.e("onScrollChanged x:" + x + " y:" + y + " oldx:" + oldx + " oldy:" + oldy);
                 if (y > dip130) {
                     if (isXiaopin) return;
+                    if (mVideoView != null && !mVideoView.isPlaying()) {
+                        return;
+                    }
                     isXiaopin = true;
                     viewContent.setVisibility(View.VISIBLE);
                     mVideoView.startTinyScreen(true, viewContent);
