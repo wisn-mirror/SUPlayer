@@ -27,9 +27,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, ProdetailActivity.class));
-//        startActivity(new Intent(this, TVAliveActivity.class));
-//        this.finish();
+//        startActivity(new Intent(this, ProdetailActivity.class));
+        startActivity(new Intent(this, TVAliveActivity.class));
+        this.finish();
         setContentView(R.layout.activity_main);
         videolist = findViewById(R.id.videolist);
         productDetail = findViewById(R.id.productDetail);

@@ -175,12 +175,6 @@ public class Constants {
      */
 
     public static final String[][] aliveData = {
-            {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
-            {"港好莱电影轮播 2", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},
-            {"港好莱电影轮播 3", "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"},
-            {"港片电影轮播1", "http://dlhls.cdn.zhanqi.tv/zqlive/35349_iXsXw.m3u8"},
-            {"港片电影轮播2", "http://aldirect.hls.huya.com/huyalive/29106097-2689453724-11551115788685410304-2847687506-10057-A-1525422901-1_1200.m3u8"},
-            {"港片电影轮播3", "http://aldirect.hls.huya.com/huyalive/28466698-2689659358-11551998979990355968-2789274580-10057-A-0-1_1200.m3u8"},
             {"CCTV-1综合高清", "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"},
             {"CCTV-3综艺高清", "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8"},
             {"CCTV-5高清 ", "http://ivi.bupt.edu.cn/hls/cctv4hd.m3u8"},
@@ -250,13 +244,16 @@ public class Constants {
         for (String[] data : aliveData2) {
             resut.add(new AliveBean(data[0], data[1]));
         }
+        for (String[] data : aliveData) {
+            resut.add(new AliveBean(data[0], data[1]));
+        }
         return resut;
     }
 
 
     public static final String[][] aliveData2 = {
-            {"港天映电影频道", "http://45.126.83.51/qwr9ew/s/s33/index2.m3u8"},
-            {"港天映电影频道2", "http://210.210.155.35/qwr9ew/s/s33/index.m3u8"},
+//            {"港天映电影频道", "http://45.126.83.51/qwr9ew/s/s33/index2.m3u8"},
+//            {"港天映电影频道2", "http://210.210.155.35/qwr9ew/s/s33/index.m3u8"},
             {"港片电影轮播1", "http://dlhls.cdn.zhanqi.tv/zqlive/35349_iXsXw.m3u8"},
             {"港片电影轮播2", "http://aldirect.hls.huya.com/huyalive/29106097-2689453724-11551115788685410304-2847687506-10057-A-1525422901-1_1200.m3u8"},
             {"港片电影轮播3", "http://aldirect.hls.huya.com/huyalive/28466698-2689659358-11551998979990355968-2789274580-10057-A-0-1_1200.m3u8"},
@@ -266,7 +263,7 @@ public class Constants {
             {"港好莱坞六人行/老友记", "http://aldirect.hls.huya.com/huyalive/29169025-2686220018-11537227127170531328-2847699120-10057-A-1524041208-1_1200.m3u8"},
             {"港TVB翡翠台", "http://123.207.42.38/tvb.php?type=jade"},
             {"港TVB財經HD", "http://e1.vdowowza.vip.hk1.tvb.com/tvblive/smil:mobilehd_financeintl.smil/playlist.m3u8"},
-            {"港凤凰中文", "http://117.169.72.6:8080/ysten-businessmobile/live/fhchinese/1.m3u8"},
+//            {"港凤凰中文", "http://117.169.72.6:8080/ysten-businessmobile/live/fhchinese/1.m3u8"},
             {"港凤凰资讯", "http://45.126.83.51/qwr9ew/s/s21/index2.m3u8"},
             {"港凤凰香港 慢", "http://live.italkdd.com/cds160/hls/channel016/channel016_2000.m3u8"},
             {"港凤凰美洲 慢 ", "http://live.italkdd.com/cds160/hls/channel001/channel001_2000.m3u8"},
