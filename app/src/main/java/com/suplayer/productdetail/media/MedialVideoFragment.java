@@ -37,7 +37,7 @@ public class MedialVideoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        suVideoView = SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView();
-        suVideoView = new SuVideoView(getContext());;
+        suVideoView = new SuVideoView(getContext());
         //播放raw
         suVideoView.setUrl(Constants.VOD_URL);
         suVideoView.setProgressManager(new ProgressManagerMemory());

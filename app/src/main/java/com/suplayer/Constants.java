@@ -10,8 +10,8 @@ import java.util.List;
  * Created by Wisn on 2019-07-24 12:10.
  */
 public class Constants {
-    public static String data="data";
-    public static String name="name";
+    public static String data = "data";
+    public static String name = "name";
 
 
     public static final String VOD_URL = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4";
@@ -175,6 +175,18 @@ public class Constants {
      */
 
     public static final String[][] aliveData = {
+            {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 2", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 3", "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"},
+            {"港片电影轮播1", "http://dlhls.cdn.zhanqi.tv/zqlive/35349_iXsXw.m3u8"},
+            {"港片电影轮播2", "http://aldirect.hls.huya.com/huyalive/29106097-2689453724-11551115788685410304-2847687506-10057-A-1525422901-1_1200.m3u8"},
+            {"港片电影轮播3", "http://aldirect.hls.huya.com/huyalive/28466698-2689659358-11551998979990355968-2789274580-10057-A-0-1_1200.m3u8"},
+            {"CCTV-1综合高清", "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"},
+            {"CCTV-3综艺高清", "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8"},
+            {"CCTV-5高清 ", "http://ivi.bupt.edu.cn/hls/cctv4hd.m3u8"},
+            {"CCTV-6高清", "http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8"},
+            {"CCTV-8电视剧高清", "http://ivi.bupt.edu.cn/hls/cctv8hd.m3u8"},
+            {"北京卫视高清", "http://ivi.bupt.edu.cn/hls/btv1hd.m3u8"},
             {"CCTV-1综合", "http://ivi.bupt.edu.cn/hls/cctv1.m3u8"},
             {"CCTV-2财经", "http://ivi.bupt.edu.cn/hls/cctv2.m3u8"},
             {"CCTV-3综艺", "http://ivi.bupt.edu.cn/hls/cctv3.m3u8"},
@@ -235,11 +247,106 @@ public class Constants {
 
     public static List<AliveBean> getTestBean() {
         List<AliveBean> resut = new ArrayList<>();
-        for (String[] data : aliveData) {
+        for (String[] data : aliveData2) {
             resut.add(new AliveBean(data[0], data[1]));
         }
         return resut;
     }
+
+
+    public static final String[][] aliveData2 = {
+            {"港天映电影频道", "http://45.126.83.51/qwr9ew/s/s33/index2.m3u8"},
+            {"港天映电影频道2", "http://210.210.155.35/qwr9ew/s/s33/index.m3u8"},
+            {"港片电影轮播1", "http://dlhls.cdn.zhanqi.tv/zqlive/35349_iXsXw.m3u8"},
+            {"港片电影轮播2", "http://aldirect.hls.huya.com/huyalive/29106097-2689453724-11551115788685410304-2847687506-10057-A-1525422901-1_1200.m3u8"},
+            {"港片电影轮播3", "http://aldirect.hls.huya.com/huyalive/28466698-2689659358-11551998979990355968-2789274580-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 2 ", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 3", "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"},
+            {"港好莱坞六人行/老友记", "http://aldirect.hls.huya.com/huyalive/29169025-2686220018-11537227127170531328-2847699120-10057-A-1524041208-1_1200.m3u8"},
+            {"港TVB翡翠台", "http://123.207.42.38/tvb.php?type=jade"},
+            {"港TVB財經HD", "http://e1.vdowowza.vip.hk1.tvb.com/tvblive/smil:mobilehd_financeintl.smil/playlist.m3u8"},
+            {"港凤凰中文", "http://117.169.72.6:8080/ysten-businessmobile/live/fhchinese/1.m3u8"},
+            {"港凤凰资讯", "http://45.126.83.51/qwr9ew/s/s21/index2.m3u8"},
+            {"港凤凰香港 慢", "http://live.italkdd.com/cds160/hls/channel016/channel016_2000.m3u8"},
+            {"港凤凰美洲 慢 ", "http://live.italkdd.com/cds160/hls/channel001/channel001_2000.m3u8"},
+            {"内a湖南卫视HD ", "http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"},
+            {"内a東方卫视HD ", "http://ivi.bupt.edu.cn/hls/dfhd.m3u8"},
+            {"内a江蘇卫视HD ", "http://ivi.bupt.edu.cn/hls/jshd.m3u8"},
+            {"内a浙江卫视HD ", "http://ivi.bupt.edu.cn/hls/zjhd.m3u8"},
+            {"内北京卫视HD ", "http://ivi.bupt.edu.cn/hls/btv1hd.m3u8"},
+            {"内安徽卫视HD ", "http://ivi.bupt.edu.cn/hls/ahhd.m3u8"},
+            {"内黑龙江卫视HD ", "http://ivi.bupt.edu.cn/hls/hljhd.m3u8"},
+            {"内深圳卫视HD ", "http://ivi.bupt.edu.cn/hls/szhd.m3u8"},
+            {"内广东卫视HD ", "http://ivi.bupt.edu.cn/hls/gdhd.m3u8"},
+            {"内天津卫视HD ", "http://ivi.bupt.edu.cn/hls/tjhd.m3u8"},
+            {"内湖北卫视HD ", "http://ivi.bupt.edu.cn/hls/hbhd.m3u8"},
+//            {"内江西卫视HD ", "http://103.242.13.90:5555/udp/239.4.1.29:10000"},
+//            {"内河南卫视HD ", "http://103.242.13.90:5555/udp/239.4.1.28:10000"},
+//            {"内CCTV1 ", "http://183.207.248.71:80/cntv/live1/CCTV-1/cctv-1"},
+            {"内CCTV1 快 ", "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"},
+//            {"内CCTV2 ", "http://183.207.248.71:80/cntv/live1/CCTV-2/cctv-2"},
+//            {"内CCTV3 ", "http://183.207.248.71:80/cntv/live1/CCTV-3/cctv-3"},
+            {"内CCTV3 ", "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8"},
+//            {"内CCTV4 ", "http://183.207.248.71:80/cntv/live1/CCTV-4/cctv-4"},
+//            {"内CCTV5 ", "http://183.207.248.71:80/cntv/live1/CCTV-5/cctv-5"},
+//            {"内CCTV5+ ", "http://183.207.248.71:80/cntv/live1/CCTV5+/hdcctv05plus"},
+            {"内CCTV5+ 快 ", "http://ivi.bupt.edu.cn/hls/cctv5phd.m3u8"},
+//            {"内CCTV6 ", "http://183.207.248.71:80/cntv/live1/CCTV-6/cctv-6"},
+            {"内CCTV6 快 ", "http://ivi.bupt.edu.cn/hls/cctv6hd.m3u8"},
+//            {"内CCTV7 ", "http://183.207.248.71:80/cntv/live1/CCTV-7/cctv-7"},
+            {"内CCTV8 ", "http://ivi.bupt.edu.cn/hls/cctv8hd.m3u8"},
+//            {"内CCTV9 ", "http://183.207.248.71:80/cntv/live1/CCTV-9/cctv-news"},
+//            {"内CCTV10 ", "http://183.207.248.71:80/cntv/live1/CCTV-10/cctv-10"},
+//            {"内CCTV11 ", "http://183.207.248.71:80/cntv/live1/CCTV-11/cctv-11"},
+//            {"内CCTV12 ", "http://183.207.248.71:80/cntv/live1/CCTV-12/cctv-12"},
+//            {"内CCTV13 ", "http://183.207.248.71:80/cntv/live1/CCTV-13/cctv-13"},
+//            {"内CCTV14 ", "http://183.207.248.71:80/cntv/live1/CCTV-14/cctv-14"},
+//            {"内CCTV15 ", "http://183.207.248.71:80/cntv/live1/CCTV-15/cctv-15"},
+            {"内CHC高清 HD ", "http://ivi.bupt.edu.cn/hls/chchd.m3u8"}, {"台星卫电影台HD ", "http://59.120.242.104:9000/live/live10.m3u8"},
+            {"台美亚电影台HD ", "http://59.120.242.104:9000/live/live2.m3u8"},
+            {"台卫视西片台HD ", "http://59.120.242.104:9000/live/live1.m3u8"},
+            {"台民视HD ", "http://59.120.242.104:9000/live/live14.m3u8"},
+            {"台民视新闻HD ", "http://210.61.56.23/hls/ftvtv/index.m3u8"},
+            {"台中天新闻HD ", "http://59.120.242.104:9000/live/live4.m3u8"},
+            {"台三立新闻HD ", "http://60.199.188.61/HLS/WG_ETTV-N/index.m3u8"},
+            {"台年代新闻HD ", "http://59.120.242.104:9000/live/live3.m3u8"},
+            {"台壹新闻HD ", "http://59.120.242.104:9000/live/live8.m3u8"},
+            {"台TVBS新闻台 ", "http://60.199.188.61/HLS/WG_TVBS-N/02.m3u8"},
+            {"台华视资讯台 ", "http://live.italkdd.com/cds160/hls/channel005/channel005.m3u8"},
+            {"台东森美洲 慢 ", "http://live.italkdd.com/cds160/hls/channel020/channel020_2000.m3u8"},
+            {"台台视新闻 ", "http://live.italkdd.com/cds160/hls/channel006/channel006_2000.m3u8"},
+            {"台亚洲旅游 ", "http://live.italkdd.com/cds160/hls/channel007/channel007_2000.m3u8"},
+            {"台民视新闻2 ", "http://live.italkdd.com/cds160/hls/channel012/channel012_2000.m3u8"},
+            {"台MIAO MI", "https://d3kw4vhbdpgtqk.cloudfront.net/hls/miaomipcweb/prog_index.m3u8"},
+            {"台纬来日本HD ", "http://59.120.242.104:9000/live/live11.m3u8"},
+            {"台-GoodTVHD2 ", "http://live.streamingfast.net/osmflivech3.m3u8"},
+            {"台-GoodTVHD ", "http://live.streamingfast.net/osmflivech8.m3u8"},
+            {"台-GoodTV1 ", "http://live.streamingfast.net/osmflivech1.m3u8"},
+            {"台-GoodTV2 ", "http://live.streamingfast.net/osmflivech2.m3u8"},
+            {"台 周星弛电影台HD ", "http://aldirect.hls.huya.com/huyalive/94525224-2460685313-10568562945082523648-2789274524-10057-A-0-1_1200.m3u8"},
+            {"台 HBO ", "http://218.202.220.2:5000/nn_live.m3u8?id=HBO"},
+            {"台 国家地理", "rtmp://ivi.bupt.edu.cn:1935/livetv/natlgeo"},
+            {"台 DISCOVERY探索 慢", "rtmp://58.200.131.2:1935/livetv/discovery"},
+            {"日本動畫ANIMAX HD 1 ", "http://45.126.83.51/dr9445/h/h18/01.m3u8"},
+            {"日本動畫ANIMAX HD 2 ", "http://195.181.170.48:25461/nurcholism22@gmail.com/0831zssVb0/29667?token=GkQJUBUMGwpAUwMCUQkHV11SVAAIAwIGAQxbAQJTVwRQUQBSA1AKUlUQTkQVREIABV08XlRDCgYLD1dSHRVBRQQUPlgCRgMSWgBQUVIIEklGRApaVUMKBQcNUVoEAQEOUUpDQQ8AGwoMRw4KShJVHRBVEVlRDW9QV08LAFQVDlgUCg0dRAtXbwZXDwcIVBJfRgFBGxIIQ0QQA0AgWV5aV0ErDlMPCFwQIV0PCxNeWQYFRApYXhIQd11LEgxDVkBfDghDHUQGUEQQUxYDRApeEAhcTxVTDkVaRksbQQsVd3hDSkNUHhBcXhFbDQhEChIRFxJPFVkSb0ZXShYRVFZZUxNEWxNWRhUSD1MaOQVfXgsBUxdeXw9DFggbU0EdFVlZDw8VXhQ7SVkGEFgIE1xcGA=="},
+            {"日本動畫ANIPLUS HD1 ", "http://45.126.83.51/dr9445/h/h02/01.m3u8"},
+            {"日本動畫ANIPLUS HD2 ", "http://195.181.170.48:25461/nurcholism22@gmail.com/0831zssVb0/29669?token=GkQJUBUMGwpAUwMCUQkHV11SVAAIAwIGAQxbAQJTVwRQUQBSA1AKUlUQTkQVREIABV08XlRDCgYLD1dSHRVBRQQUPlgCRgMSWgBQUVIIEklGRApaVUMKBQcNUVoEAQEOUUpDQQ8AGwoMRw4KShJVHRBVEVlRDW9QV08LAFQVDlgUCg0dRAtXbwZXDwcIVBJfRgFBGxIIQ0QQA0AgWV5aV0ErDlMPCFwQIV0PCxNeWQYFRApYXhIQd11LEgxDVkBfDghDHUQGUEQQUxYDRApeEAhcTxVTDkVaRksbQQsVd3hDSkNUHhBcXhFbDQhEChIRFxJPFVkSb0ZXShYRVFZZUxNEWxNWRhUSD1MaOQVfXgsBUxdeXw9DFggbU0EdFVlZDw8VXhQ7SVkGEFgIE1xcGA=="},
+            {"日本WOWOW MOVIES ", "http://192.240.127.34:1935/live/cs27.stream/playlist.m3u8?wowzasessionid=1300220279"},
+            {"日本NTV News24 ", "http://www.news24.jp/livestream/index.m3u8"},
+            {"日本Shop Channel HD ", "http://stream1.shopch.jp/HLS/out1/prog_index.m3u8"},
+            {"日本Japanet Channel DX ", "http://bcsecurelivehls-i.akamaihd.net/hls/live/265320/5043843989001/140130JTDX/index_600.m3u8"},
+            {"韩Chosun HD ", "http://live.chosun.gscdn.com/live/tvchosun1.stream/playlist.m3u8"},
+            {"韩Sony One HD2 ", "http://210.210.155.35/uq2663/h/h13/index.m3u8"},
+            {"韩Sony One HD3 ", "http://195.181.170.48:25461/nurcholism22@gmail.com/0831zssVb0/29596?token=GkQJUBUMGwpAUwMCUQkHV11SVAAIAwIGAQxbAQJTVwRQUQBSA1AKUlUQTkQVREIABV08XlRDCgYLD1dSHRVBRQQUPlgCRgMSWgBQUVIIEklGRApaVUMKBQcNUVoEAQEOUUpDQQ8AGwoMRw4KShJVHRBVEVlRDW9QV08LAFQVDlgUCg0dRAtXbwZXDwcIVBJfRgFBGxIIQ0QQA0AgWV5aV0ErDlMPCFwQIV0PCxNeWQYFRApYXhIQd11LEgxDVkBfDghDHUQGUEQQUxYDRApeEAhcTxVTDkVaRksbQQsVd3hDSkNUHhBcXhFbDQhEChIRFxJPFVkSb0ZXShYRVFZZUxNEWxNWRhUSD1MaOQVfXgsBUxdeXw9DFggbU0EdFVlZDw8VXhQ7SVkGEFgIE1xcGA=="},
+            {"韩K PLUS HD ", "http://45.126.83.51/uq2663/h/h08/01.m3u8"},
+            {"韩Arirang South Korea HD ", "http://amdlive.ctnd.com.edgesuite.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8"},
+            {"韩KBS WORLD ", "http://edge.linknetott.swiftserve.com/channelgroup5/cg542production/ch262/03.m3u8"},
+            {"韩ktv ", "http://218.38.152.69:1935/da_live/72136989/mp4:ch001/playlist.m3u8"},
+            {"澳亚卫视 ", "http://stream.mastvnet.com/MASTV/sd/live.m3u8"},
+            {"澳门卫视 ", "http://live4.tdm.com.mo:80/ch3/_definst_//ch3.live/playlist.m3u8"},
+            {"澳门资讯 ", "http://live4.tdm.com.mo/ch5/_definst_/info_ch5.live/playlist.m3u8"}
+    };
 }
 
 

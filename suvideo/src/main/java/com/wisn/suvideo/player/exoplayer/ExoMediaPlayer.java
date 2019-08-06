@@ -7,6 +7,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -70,8 +71,10 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
     public void initPlayer() {
         TrackSelection.Factory videoTrackSelectionFactory =
                 new AdaptiveTrackSelection.Factory();
+        DefaultRenderersFactory renderersFactory =
+                new DefaultRenderersFactory(mAppContext, DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER);
         DefaultTrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-        mInternalPlayer = ExoPlayerFactory.newSimpleInstance(mAppContext, trackSelector);
+        mInternalPlayer = ExoPlayerFactory.newSimpleInstance(mAppContext,renderersFactory, trackSelector);
         mInternalPlayer.addListener(this);
         mInternalPlayer.addVideoListener(this);
     }
@@ -99,16 +102,16 @@ public class ExoMediaPlayer extends AbstractPlayer implements VideoListener, Pla
         switch (contentType) {
             case C.TYPE_DASH:
                 return new DashMediaSource.Factory(
-                        new DefaultDashChunkSource.Factory(mediaDataSourceFactory),
+                        new DefaultDashChunkSource.Factory(getDataSourceFactory(true)),
                         getDataSourceFactory(false))
                         .createMediaSource(contentUri);
             case C.TYPE_SS:
                 return new SsMediaSource.Factory(
-                        new DefaultSsChunkSource.Factory(mediaDataSourceFactory),
+                        new DefaultSsChunkSource.Factory(getDataSourceFactory(true)),
                         getDataSourceFactory(false))
                         .createMediaSource(contentUri);
             case C.TYPE_HLS:
-                return new HlsMediaSource.Factory(mediaDataSourceFactory)
+                return new HlsMediaSource.Factory( getDataSourceFactory(true))
                         .createMediaSource(contentUri);
             default:
             case C.TYPE_OTHER:
