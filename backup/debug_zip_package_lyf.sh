@@ -39,7 +39,7 @@ mkdir ${WORKSPACE}/build/outputs/jiagu
 ls ${WORKSPACE}/build/outputs/apk/debug/ |grep -v 'apkjiagulist.txt' > ${WORKSPACE}/build/apkjiagulist.txt
 while read lineapk
 do
-echo ${WORKSPACE}/build/outputs/apk/${lineapk}
+echo ${WORKSPACE}/build/outputs/apk/debug/${lineapk}
 if [[ "${lineapk##*.}"x = "apk"x ]];then
 java -jar ${jgPath}/jiagu.jar -jiagu ${WORKSPACE}/build/outputs/apk/debug/${lineapk} ${WORKSPACE}/build/outputs/jiagu/ -autosign
 fi
@@ -118,7 +118,7 @@ cp -R ${WORKSPACE}/build/* ${backup_Dir}/
 
 echo
 echo 打包完成,请打开链接下载
-echo https://www.pgyer.com/9GQ6
+echo https://www.pgyer.com/9uKH
 
 endTime=$(date +%s)
 timeUsed=$(( $endTime - $startTime ))
