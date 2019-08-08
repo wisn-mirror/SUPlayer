@@ -1,6 +1,5 @@
 package com.wisn.suvideo;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -99,7 +98,6 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
     public static final int STATE_BUFFERING = 6;
     public static final int STATE_BUFFERED = 7;
     protected int mCurrentPlayState = STATE_IDLE;//当前播放器的状态
-
     public static final int PLAYER_NORMAL = 10;        // 普通播放器
     public static final int PLAYER_FULL_SCREEN = 11;   // 全屏播放器
     public static final int PLAYER_TINY_SCREEN = 12;   // 小屏播放器
@@ -132,6 +130,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
     protected boolean mEnableMediaCodec;//启用MediaCodec解码
 
     protected boolean mEnableParallelPlay;//支持多开
+    private boolean isLocalVideo;
 
     public SuVideoView(@NonNull Context context) {
         this(context, null);
@@ -235,7 +234,7 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             return false;
         } else if (!TextUtils.isEmpty(mCurrentUrl)) {
             Uri uri = Uri.parse(mCurrentUrl);
-            if (ContentResolver.SCHEME_ANDROID_RESOURCE.equals(uri.getScheme())
+            if (isLocalVideo||ContentResolver.SCHEME_ANDROID_RESOURCE.equals(uri.getScheme())
                     || ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
                 return false;
             }
@@ -578,7 +577,13 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
             mMediaPlayer.setSpeed(speed);
         }
     }
-
+    /**
+     * 设置视频地址
+     */
+    public void setUrl(String url,boolean isLocalVideo) {
+        setUrl(url, null);
+        this.isLocalVideo=isLocalVideo;
+    }
     /**
      * 设置视频地址
      */

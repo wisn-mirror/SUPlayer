@@ -12,6 +12,9 @@ import java.util.List;
 public class Constants {
     public static String data = "data";
     public static String name = "name";
+    public static String isLocal = "isLocal";
+    public static String isFull = "isFull";
+    public static String isalive = "isAlive";
 
 
     public static final String VOD_URL = "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4";
@@ -170,11 +173,11 @@ public class Constants {
             "http://img.hb.aicdn.com/6775e359b4f49e28c00143db622e5e045bb08ce61390a-1wO40p_sq320",
     };
 
-    /**
-     * 测试直播app
-     */
-
     public static final String[][] aliveData = {
+//            {"CCTV-1Test", "http://cctvtxyh5c.liveplay.myqcloud.com/wstv/cctv1_2_hd.m3u8"},
+//            {"CCTV-1Test", "http://183.207.249.15/PLTV/3/224/3221225530/index.m3u8"},
+//            {"CCTV-1Test", "http://223.110.243.138/PLTV/2510088/224/3221227177/index.m3u8"},
+//            {"CCTV-1Test", "http://223.110.241.204:6610/gitv/live1/G_CCTV-1-HQ/G_CCTV-1-HQ/"},
             {"CCTV-1综合高清", "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8"},
             {"CCTV-3综艺高清", "http://ivi.bupt.edu.cn/hls/cctv3hd.m3u8"},
             {"CCTV-5高清 ", "http://ivi.bupt.edu.cn/hls/cctv4hd.m3u8"},

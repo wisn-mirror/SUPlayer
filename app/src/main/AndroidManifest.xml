@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.suplayer">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -12,10 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".tv.local.LocVideoListActivity"></activity>
         <activity
-            android:name=".tv.AliveActivity"
+            android:name=".tv.PlayActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
+          />
         <activity
             android:name=".example.ProgressActivity"
             android:label="@string/title_activity_progress"
@@ -36,7 +41,7 @@
             android:name=".SimpleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".tv.TVAliveActivity"
+            android:name=".tv.alive.TVAliveActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".productdetail.media.ProductMediaActivity"

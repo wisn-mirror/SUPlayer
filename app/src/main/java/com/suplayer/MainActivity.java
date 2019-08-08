@@ -1,7 +1,6 @@
 package com.suplayer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,8 @@ import android.widget.Button;
 import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
-import com.suplayer.tv.TVAliveActivity;
+import com.suplayer.tv.local.LocVideoListActivity;
+import com.suplayer.tv.alive.TVAliveActivity;
 import com.wisn.suvideo.VideoViewConfig;
 import com.wisn.suvideo.base.BaseActivity;
 import com.wisn.suvideo.manager.VideoViewManager;
@@ -23,19 +23,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button douyin;
     private Button hongshu;
     private Button tv;
+    private Button localvideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        startActivity(new Intent(this, ProdetailActivity.class));
-        startActivity(new Intent(this, TVAliveActivity.class));
-        this.finish();
+//        startActivity(new Intent(this, TVAliveActivity.class));
+//        this.finish();
         setContentView(R.layout.activity_main);
         videolist = findViewById(R.id.videolist);
         productDetail = findViewById(R.id.productDetail);
         Simple = findViewById(R.id.Simple);
         douyin = findViewById(R.id.douyin);
         hongshu = findViewById(R.id.hongshu);
+        localvideo = findViewById(R.id.localvideo);
         tv = findViewById(R.id.tv);
         videolist.setOnClickListener(this);
         productDetail.setOnClickListener(this);
@@ -43,8 +45,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         douyin.setOnClickListener(this);
         hongshu.setOnClickListener(this);
         tv.setOnClickListener(this);
+        localvideo.setOnClickListener(this);
         initconfig();
-
     }
 
     private void initconfig() {
@@ -66,6 +68,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, HongshuActivity.class));
         } else if (v == tv) {
             startActivity(new Intent(this, TVAliveActivity.class));
+        } else if (v == localvideo) {
+            startActivity(new Intent(this, LocVideoListActivity.class));
         }
     }
 }
