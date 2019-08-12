@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.suplayer.example.douyin.DouYinActivity;
+import com.suplayer.example.list.VideoListActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
 import com.suplayer.tv.local.LocVideoListActivity;
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (v == Simple) {
             startActivity(new Intent(this, SimpleActivity.class));
         } else if (v == videolist) {
-//            startActivity(new Intent(this, SimpleActivity.class));
+            startActivity(new Intent(this, VideoListActivity.class));
         } else if (v == productDetail) {
             startActivity(new Intent(this, ProdetailActivity.class));
         } else if (v == douyin) {

@@ -41,6 +41,9 @@
             android:name=".SimpleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
+            android:name=".example.list.VideoListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
             android:name=".tv.alive.TVAliveActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
