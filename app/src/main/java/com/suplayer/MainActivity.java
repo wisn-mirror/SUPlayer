@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.suplayer.example.ProgressActivity;
 import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.list.VideoListActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        startActivity(new Intent(this, ProdetailActivity.class));
+//        startActivity(new Intent(this, ProgressActivity.class));
 //        startActivity(new Intent(this, TVAliveActivity.class));
 //        this.finish();
         setContentView(R.layout.activity_main);

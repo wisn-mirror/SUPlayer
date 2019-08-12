@@ -1,57 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="#22000000"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/bg_card_view">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="00:17/00:300:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:1700:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:32/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:322"
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="140dp"
-        android:layout_height="30dp">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/ProgressBar_Scale"
-            android:layout_width="140dp"
-            android:layout_height="30dp"
-            android:progress="60" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="100dp"
+            android:padding="10dp">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="12dp"
-                android:src="@drawable/suplayer_commoditydetails_icon_play_speed" />
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <ImageView
+                android:id="@+id/id_location"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:background="@drawable/bg_card_view">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
                 android:gravity="center"
-                android:text="00:17/00:32"
-                android:textColor="#FFFFFF"
+                android:text="00:17/00:300:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:1700:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:32/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:3200:17/00:322"
                 android:textSize="12sp" />
         </LinearLayout>
 
-    </FrameLayout>
-</LinearLayout>
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/ProgressBar_Scale"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:progress="60" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/suplayer_commoditydetails_icon_play_speed" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="center"
+                    android:text="00:17/00:32"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_target"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/test" />
+</FrameLayout>
