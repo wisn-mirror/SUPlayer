@@ -352,7 +352,8 @@ public class DetailFragment2 extends BaseFragment {
         if (mVideoView.isTinyScreen()) mVideoView.stopTinyScreen();
         mVideoView.setUrl(Constants.VOD_URL);
         productVideoController = new ProductVideoController(getContext());
-        productVideoController.setDefaultVoiceEnable(false);
+        productVideoController.setDefaultVoiceMute(true);
+        productVideoController.setDefaultisInProduct(true);
         productVideoController.setProductMediaDetais(new ProductVideoController.ProductMediaDetais() {
             @Override
             public void jumpProductMediaDetais() {

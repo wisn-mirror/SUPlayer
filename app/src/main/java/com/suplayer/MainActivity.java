@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handler = new Handler();
-        startActivity(new Intent(this, ProgressActivity.class));
+        startActivity(new Intent(this, ProdetailActivity.class));
 //        startActivity(new Intent(this, TVAliveActivity.class));
 //        this.finish();
         setContentView(R.layout.activity_main);

@@ -47,7 +47,7 @@ public class MedialVideoFragment extends Fragment {
         ProductVideoController productVideoController = new ProductVideoController(getContext());
         productVideoController.setPlayState(suVideoView1.getCurrentPlayState());
         productVideoController.setPlayerState(suVideoView1.getCurrentPlayerState());
-        productVideoController.setDefaultVoiceEnable(false);
+        productVideoController.setDefaultVoiceMute(true);
         productVideoController.setDefaultisInProduct(false);
         suVideoView.setVideoController(productVideoController);
         suVideoView.seekTo(suVideoView1.getCurrentPosition());

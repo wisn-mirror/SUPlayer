@@ -3,7 +3,9 @@ package com.wisn.suvideo.control.impl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.database.ContentObserver;
 import android.media.AudioManager;
+import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -54,7 +56,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
     private long lastPosition;
     private ImageView voice_enable;
     private int streamVolume;
-    private boolean isEnableVoice = true;
+    private boolean isMute = false;
     private boolean isInProduct = true;
 
 
@@ -112,20 +114,10 @@ public class ProductVideoController extends GestureVideoController implements Vi
         } else {
             mFullScreenButton.setImageResource(R.drawable.suplayer_selector_full_screen_button);
         }
-        setVoice(isEnableVoice);
+        setVoice(isMute);
+        registerVolumeChangeReceiver();
     }
 
-    private void setVoice(boolean isEnable) {
-        if (isEnable) {
-            streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
-        } else {
-            if(streamVolume!=0){
-                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
-            }
-        }
-        voice_enable.setSelected(isEnable);
-    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -146,32 +138,47 @@ public class ProductVideoController extends GestureVideoController implements Vi
             } else {
                 doStartStopFullScreen();
             }
-        } else if (i == R.id.back||i == R.id.stop_fullscreen) {
+        } else if (i == R.id.back || i == R.id.stop_fullscreen) {
             doStartStopFullScreen();
         } else if (i == R.id.iv_play || i == R.id.thumb) {
             doPauseResume();
         } else if (i == R.id.iv_replay || i == R.id.iv_refresh) {
             mMediaPlayer.replay(true);
         } else if (i == R.id.voice_enable) {
-            setVoice(!voice_enable.isSelected());
+         this.isMute=   !isMute;
+            setVoice(isMute);
         } else if (i == R.id.start_play) {
             if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.pause();
-            }else{
+            } else {
                 mMediaPlayer.start();
             }
         }
     }
-    public void setRePlay(boolean rePlay){
+
+    public void setRePlay(boolean rePlay) {
         mMediaPlayer.replay(rePlay);
     }
 
-    public void setDefaultVoiceEnable(boolean isEnable) {
-        this.isEnableVoice = isEnable;
+    /**
+     * 是否静音播放
+     *
+     * @param isMute
+     */
+    public void setDefaultVoiceMute(boolean isMute) {
+        this.isMute = isMute;
+        setVoice(isMute);
     }
 
     public void setDefaultisInProduct(boolean isInProduct) {
         this.isInProduct = isInProduct;
+        if (mFullScreenButton != null) {
+            if (isInProduct) {
+                mFullScreenButton.setImageResource(R.drawable.suplayer_commoditydetails_icon_big);
+            } else {
+                mFullScreenButton.setImageResource(R.drawable.suplayer_selector_full_screen_button);
+            }
+        }
     }
 
     public ProductMediaDetais ProductMediaDetais;
@@ -180,7 +187,7 @@ public class ProductVideoController extends GestureVideoController implements Vi
         ProductMediaDetais = productMediaDetais;
     }
 
-    public  interface ProductMediaDetais {
+    public interface ProductMediaDetais {
         void jumpProductMediaDetais();
     }
 
@@ -485,6 +492,62 @@ public class ProductVideoController extends GestureVideoController implements Vi
             mMediaPlayer.stopFullScreen();
             return true;
         }
+        unregisterVolumeChangeReceiver();
         return super.onBackPressed();
+    }
+
+    SettingsContentObserver mSettingsContentObserver = null;
+
+    private void registerVolumeChangeReceiver() {
+        mSettingsContentObserver = new SettingsContentObserver(this.getContext(), new Handler());
+        this.getContext().getApplicationContext().getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, mSettingsContentObserver);
+    }
+
+    private void unregisterVolumeChangeReceiver() {
+        if (mSettingsContentObserver != null) {
+            this.getContext().getApplicationContext().getContentResolver().unregisterContentObserver(mSettingsContentObserver);
+        }
+    }
+
+    private void setVoice(boolean isMute) {
+        if (isMute) {
+            streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+        } else {
+            if (streamVolume != 0) {
+                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
+            } else {
+                streamVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3;
+                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) streamVolume, 0);
+            }
+        }
+        if (voice_enable != null) voice_enable.setSelected(!isMute);
+    }
+
+    public class SettingsContentObserver extends ContentObserver {
+        Context context;
+
+        public SettingsContentObserver(Context c, Handler handler) {
+            super(handler);
+            context = c;
+        }
+
+        @Override
+        public boolean deliverSelfNotifications() {
+            return super.deliverSelfNotifications();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (streamVolume == 0) {
+                ProductVideoController.this.isMute = true;
+            } else {
+                isMute = false;
+            }
+            voice_enable.setSelected(!isMute);
+
+        }
     }
 }
