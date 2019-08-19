@@ -14,10 +14,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.wisn.suvideo.view.banner.Banner
-                android:id="@+id/banner_slider"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp">
+
+                <com.wisn.suvideo.view.banner.Banner
+                    android:id="@+id/banner_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                <include layout="@layout/item_video_small_tab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="16dp"
+                    />
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="match_parent"

@@ -486,7 +486,9 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             isStart = true;
         }
     }
-
+public ViewPager getViewPager(){
+        return viewPager;
+}
     public void stopAutoPlay() {
         if (isAutoPlay) {
             handler.removeCallbacks(task);

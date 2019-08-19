@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.suplayer.Constants;
@@ -26,6 +28,7 @@ import com.wisn.suvideo.control.impl.FloatController;
 import com.wisn.suvideo.control.impl.ProductVideoController;
 import com.wisn.suvideo.helper.L;
 import com.wisn.suvideo.listener.OnVideoViewStateChangeListener;
+import com.wisn.suvideo.listener.StatusBarListener;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.view.LyfScrollView;
 import com.wisn.suvideo.view.banner.Banner;
@@ -41,7 +44,7 @@ import java.util.List;
 /**
  * Created by Wisn on 2019-07-26 17:29.
  */
-public class DetailFragment2 extends BaseFragment {
+public class DetailFragment2 extends BaseFragment implements StatusBarListener {
     private SuVideoView mVideoView;
     private LyfScrollView containerRoot;
     private ProductVideoController productVideoController;
@@ -53,6 +56,8 @@ public class DetailFragment2 extends BaseFragment {
     private VideoViewManager mVideoViewManager;
     public static final String tag = "DetailFragment2";
     private FrameLayout videoContent;
+    boolean isvideo = true;
+
     private OnVideoViewStateChangeListener mOnVideoViewStateChangeListener;
 
     @Override
@@ -74,7 +79,8 @@ public class DetailFragment2 extends BaseFragment {
         containerRoot = view.findViewById(R.id.container);
         banner_slider = view.findViewById(R.id.banner_slider);
         viewContent = view.findViewById(R.id.viewContent);
-
+        initSmallView(view);
+        setSelect(true);
         mVideoViewManager = VideoViewManager.instance();
         List<BannerData> bannerData = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -110,8 +116,11 @@ public class DetailFragment2 extends BaseFragment {
             public void onPageSelected(int i) {
                 if (i != 0) {
                     mVideoViewManager.pause();
+                    setSelect(false);
                 } else {
                     mVideoViewManager.resume();
+                    setSelect(true);
+
                 }
             }
 
@@ -202,6 +211,7 @@ public class DetailFragment2 extends BaseFragment {
         Log.d(tag, "onDetach");
 
     }
+
 
     public static class CustomViewHolder2 implements BannerViewHolder<BannerData> {
 
@@ -363,6 +373,7 @@ public class DetailFragment2 extends BaseFragment {
                 videoContent = frameLayout.fl_content;
             }
         });
+        productVideoController.setStatusBarListener(this);
         mVideoView.setVideoController(productVideoController);
         mVideoView.start();
         frameLayout.fl_content.addView(mVideoView);
@@ -417,6 +428,43 @@ public class DetailFragment2 extends BaseFragment {
         });
     }
 
+    LinearLayout ll_small;
+    LinearLayout ll_small_video;
+    ImageView iv_small_video;
+    TextView tv_small_video;
+    TextView tv_small_image;
+
+    private void initSmallView(View view) {
+        ll_small = view.findViewById(R.id.ll_small);
+        ll_small_video = view.findViewById(R.id.ll_small_video);
+        iv_small_video = view.findViewById(R.id.iv_small_video);
+        tv_small_video = view.findViewById(R.id.tv_small_video);
+        tv_small_image = view.findViewById(R.id.tv_small_image);
+        ll_small_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSelect(true);
+                banner_slider.getViewPager().setCurrentItem(0);
+            }
+        });
+        tv_small_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSelect(false);
+                banner_slider.getViewPager().setCurrentItem(1);
+            }
+        });
+    }
+
+    private void setSelect(boolean isVideo) {
+        this.isvideo = isVideo;
+        ll_small_video.setSelected(isVideo);
+        tv_small_image.setSelected(!isVideo);
+        iv_small_video.setSelected(!isVideo);
+        tv_small_video.setTextColor(isVideo ? getResources().getColor(R.color.white) : getResources().getColor(R.color.black));
+        tv_small_image.setTextColor(isVideo ? getResources().getColor(R.color.black) : getResources().getColor(R.color.white));
+    }
+
     /**
      * 将播放器从父控件中移除
      */
@@ -424,6 +472,16 @@ public class DetailFragment2 extends BaseFragment {
         ViewParent parent = mVideoView.getParent();
         if (parent instanceof ViewGroup) {
             ((ViewGroup) parent).removeView(mVideoView);
+        }
+    }
+
+    @Override
+    public void stateBarShow(boolean isShow) {
+        if(isShow){
+            ll_small.setVisibility(View.GONE);
+        }else{
+            ll_small.setVisibility(View.VISIBLE);
+
         }
     }
 

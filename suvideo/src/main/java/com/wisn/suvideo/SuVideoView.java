@@ -31,6 +31,7 @@ import com.wisn.suvideo.helper.L;
 import com.wisn.suvideo.helper.PlayerUtils;
 import com.wisn.suvideo.listener.OnVideoViewStateChangeListener;
 import com.wisn.suvideo.listener.PlayerEventListener;
+import com.wisn.suvideo.listener.StatusBarListener;
 import com.wisn.suvideo.manager.ProgressManager;
 import com.wisn.suvideo.manager.VideoViewManager;
 import com.wisn.suvideo.player.AbstractPlayer;
@@ -131,7 +132,6 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
 
     protected boolean mEnableParallelPlay;//支持多开
     private boolean isLocalVideo;
-
     public SuVideoView(@NonNull Context context) {
         this(context, null);
     }
@@ -1339,44 +1339,5 @@ public class SuVideoView extends FrameLayout implements MediaPlayerControl, Play
         boolean result = super.onTouchEvent(event);
         return result;
     }
-  /*  private WindowManager mWindowManager;
-    private WindowManager.LayoutParams mParams;
 
-    private int mDownRawX, mDownRawY;//手指按下时相对于屏幕的坐标
-    private int mDownX, mDownY;//手指按下时相对于悬浮窗的坐标
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean intercepted = false;
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                intercepted = false;
-                mDownRawX = (int) ev.getRawX();
-                mDownRawY = (int) ev.getRawY();
-                mDownX = (int) ev.getX();
-                mDownY = (int) (ev.getY() + PlayerUtils.getStatusBarHeight(getContext()));
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float absDeltaX = Math.abs(ev.getRawX() - mDownRawX);
-                float absDeltaY = Math.abs(ev.getRawY() - mDownRawY);
-                intercepted = absDeltaX > ViewConfiguration.get(getContext()).getScaledTouchSlop() ||
-                        absDeltaY > ViewConfiguration.get(getContext()).getScaledTouchSlop();
-                break;
-        }
-        return intercepted;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-                int x = (int) event.getRawX();
-                int y = (int) event.getRawY();
-                mParams.x = x - mDownX;
-                mParams.y = y - mDownY;
-                mWindowManager.updateViewLayout(this, mParams);
-                break;
-        }
-        return super.onTouchEvent(event);
-    }*/
 }

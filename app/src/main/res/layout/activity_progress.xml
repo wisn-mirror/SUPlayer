@@ -71,51 +71,8 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_small"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="visible">
-
-            <LinearLayout
-                android:id="@+id/ll_small_video"
-                android:layout_width="44dp"
-                android:layout_height="20dp"
-                android:background="@drawable/suplayer_select_small_play_bg"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <!--suplayer_small_play_icon.xml-->
-
-                <ImageView
-                    android:id="@+id/iv_small_video"
-                    android:layout_width="5dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/suplayer_small_play_icon" />
-
-                <TextView
-                    android:id="@+id/tv_small_video"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:gravity="center"
-                    android:text="视频"
-                    android:textSize="10sp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_small_image"
-                android:layout_width="44dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="12dp"
-                android:background="@drawable/suplayer_select_small_play_bg"
-
-                android:gravity="center"
-                android:text="图片"
-                android:textSize="10sp" />
-        </LinearLayout>
+       <include
+           layout="@layout/item_video_small_tab"/>
 
         <FrameLayout
             android:layout_width="140dp"

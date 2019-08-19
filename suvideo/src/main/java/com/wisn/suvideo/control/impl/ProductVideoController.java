@@ -27,6 +27,7 @@ import com.wisn.suvideo.SuVideoView;
 import com.wisn.suvideo.control.GestureVideoController;
 import com.wisn.suvideo.helper.L;
 import com.wisn.suvideo.helper.PlayerUtils;
+import com.wisn.suvideo.listener.StatusBarListener;
 
 /**
  * Created by Wisn on 2019-07-24 15:17.
@@ -363,6 +364,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
             mBottomProgress.setVisibility(VISIBLE);
             mBottomProgress.startAnimation(mShowAnim);
             mShowing = false;
+            if(statusBarListener!=null)statusBarListener.stateBarShow(mShowing);
+
         }
     }
 
@@ -387,6 +390,8 @@ public class ProductVideoController extends GestureVideoController implements Vi
             mBottomProgress.setVisibility(GONE);
             mBottomProgress.startAnimation(mHideAnim);
             mShowing = true;
+            if(statusBarListener!=null)statusBarListener.stateBarShow(mShowing);
+
         }
         removeCallbacks(mFadeOut);
         if (timeout != 0) {
@@ -550,4 +555,10 @@ public class ProductVideoController extends GestureVideoController implements Vi
 
         }
     }
+    private StatusBarListener statusBarListener;
+
+    public void setStatusBarListener(StatusBarListener statusBarListener) {
+        this.statusBarListener = statusBarListener;
+    }
+
 }
