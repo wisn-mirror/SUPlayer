@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#fff</color>
+    <color name="black">#333333</color>
     <color name="suplayer_theme_color">#FF8800</color>
     <color name="suplayer_theme_color_translucent">#FF8800</color>
     <color name="suplayer_background_color">#FF8800</color>

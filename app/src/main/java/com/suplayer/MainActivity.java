@@ -2,8 +2,10 @@ package com.suplayer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.suplayer.example.ProgressActivity;
 import com.suplayer.example.douyin.DouYinActivity;
@@ -26,11 +28,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button hongshu;
     private Button tv;
     private Button localvideo;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        startActivity(new Intent(this, ProgressActivity.class));
+        handler = new Handler();
+        startActivity(new Intent(this, ProgressActivity.class));
 //        startActivity(new Intent(this, TVAliveActivity.class));
 //        this.finish();
         setContentView(R.layout.activity_main);
@@ -60,8 +64,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         if (v == Simple) {
             startActivity(new Intent(this, SimpleActivity.class));
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(MainActivity.this,"test",Toast.LENGTH_SHORT).show();
+                }
+            },2000);
         } else if (v == videolist) {
             startActivity(new Intent(this, VideoListActivity.class));
+            handler.removeCallbacksAndMessages(null);
         } else if (v == productDetail) {
             startActivity(new Intent(this, ProdetailActivity.class));
         } else if (v == douyin) {
