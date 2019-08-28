@@ -55,26 +55,12 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
     private Banner banner_slider;
     private VideoViewManager mVideoViewManager;
     public static final String tag = "DetailFragment2";
-    private FrameLayout videoContent;
     boolean isvideo = true;
+    public boolean needResume = false;
+
 
     private OnVideoViewStateChangeListener mOnVideoViewStateChangeListener;
     private TextView tv_index;
-
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(tag, "onAttach");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d(tag, "onCreate");
-
-    }
-*/
 
 
     @Override
@@ -149,19 +135,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Log.d(tag, "onViewCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(tag, "onStart");
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -170,8 +143,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
             mVideoViewManager.resume();
         }
     }
-
-    public boolean needResume = false;
 
     @Override
     public void onPause() {
@@ -183,26 +154,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
         } else {
             needResume = false;
         }
-
-       /* if (mVideoView != null) {
-            currentPlayState = mVideoView.getCurrentPlayState();
-            currentPlayerState = mVideoView.getCurrentPlayerState();
-            mVideoView.pause();
-        }*/
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(tag, "onStop");
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(tag, "onDestroyView");
-
     }
 
     @Override
@@ -213,12 +164,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
 
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(tag, "onDetach");
-
-    }
 
 
     public static class CustomViewHolder2 implements BannerViewHolder<BannerData> {
@@ -236,7 +181,7 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
 
         @Override
         public View createView(Context context) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_productdetail_media2, null);
+            view = LayoutInflater.from(context).inflate(R.layout.productdetail_item_productdetail_media2, null);
             ViewHolder viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
             return view;
@@ -298,10 +243,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
     }
 
     private void dealVideo(CustomViewHolder2.ViewHolder frameLayout) {
-       /* if (mVideoView != null && productVideoController != null) {
-            productVideoController.setRePlay(true);
-            return ;
-        }*/
         mOnVideoViewStateChangeListener = new OnVideoViewStateChangeListener() {
             @Override
             public void onPlayerStateChanged(int playerState) {
@@ -378,7 +319,7 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
                 playing = mVideoView.isPlaying();
                 getActivity().startActivity(new Intent(getActivity(), ProductMediaActivity.class));
                 getActivity().overridePendingTransition(0, 0);
-                videoContent = frameLayout.fl_content;
+//                videoContent = frameLayout.fl_content;
             }
         });
         productVideoController.setStatusBarListener(this);
@@ -489,7 +430,6 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
             ll_small.setVisibility(View.GONE);
         }else{
             ll_small.setVisibility(View.VISIBLE);
-
         }
     }
 

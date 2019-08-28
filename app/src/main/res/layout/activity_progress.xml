@@ -72,7 +72,7 @@
         </LinearLayout>
 
        <include
-           layout="@layout/item_video_small_tab"/>
+           layout="@layout/productdetail_item_video_small_tab"/>
 
         <FrameLayout
             android:layout_width="140dp"

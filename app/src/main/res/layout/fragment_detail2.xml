@@ -33,7 +33,7 @@
                     android:layout_height="300dp" />
 
                 <include
-                    layout="@layout/item_video_small_tab"
+                    layout="@layout/productdetail_item_video_small_tab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
