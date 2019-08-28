@@ -59,7 +59,9 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
     boolean isvideo = true;
 
     private OnVideoViewStateChangeListener mOnVideoViewStateChangeListener;
+    private TextView tv_index;
 
+/*
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -72,6 +74,7 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
         Log.d(tag, "onCreate");
 
     }
+*/
 
 
     @Override
@@ -79,6 +82,7 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
         containerRoot = view.findViewById(R.id.container);
         banner_slider = view.findViewById(R.id.banner_slider);
         viewContent = view.findViewById(R.id.viewContent);
+        tv_index = view.findViewById(R.id.tv_index);
         initSmallView(view);
         setSelect(true);
         mVideoViewManager = VideoViewManager.instance();
@@ -117,11 +121,15 @@ public class DetailFragment2 extends BaseFragment implements StatusBarListener {
                 if (i != 0) {
                     mVideoViewManager.pause();
                     setSelect(false);
+                    tv_index.setVisibility(View.VISIBLE);
+
                 } else {
                     mVideoViewManager.resume();
                     setSelect(true);
+                    tv_index.setVisibility(View.GONE);
 
                 }
+                tv_index.setText(i+"/"+bannerData.size());
             }
 
             @Override

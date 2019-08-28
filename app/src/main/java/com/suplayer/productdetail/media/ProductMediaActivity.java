@@ -52,6 +52,7 @@ public class ProductMediaActivity extends AppCompatActivity {
     private int dip_20;
     private int dip_4;
     private List<String> tabs = new ArrayList<>();
+    private LinearLayout ll_bottom_lick_cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class ProductMediaActivity extends AppCompatActivity {
         magicIndicator = (MagicIndicator) findViewById(R.id.indicator);
         viewPager = findViewById(R.id.viewpager);
         ImageView media_iv_back = findViewById(R.id.media_iv_back);
+        ll_bottom_lick_cart = findViewById(R.id.ll_bottom_lick_cart);
         media_iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +82,6 @@ public class ProductMediaActivity extends AppCompatActivity {
         tabs.add("图片");
         MedialVideoFragment videoFragment = new MedialVideoFragment();
         MedialImageFragment testFragment1 = new MedialImageFragment();
-//        magicIndicator.setBackgroundColor(Color.parseColor("#00000000"));
         CommonNavigator commonNavigator7 = new CommonNavigator(this);
         commonNavigatorAdapter = new CommonNavigatorAdapter() {
             @Override
@@ -176,8 +177,10 @@ public class ProductMediaActivity extends AppCompatActivity {
             public void onPageSelected(int i) {
                 if (i != 0) {
                     mVideoViewManager.pause();
+                    ll_bottom_lick_cart.setVisibility(View.GONE);
                 } else {
                     mVideoViewManager.resume();
+                    ll_bottom_lick_cart.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,23 +27,40 @@ import java.util.List;
 public class MedialImageFragment extends Fragment {
 
     private ViewPager viewpager;
+    private TextView tv_index;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image, null);
         viewpager = view.findViewById(R.id.viewpager);
+        tv_index = view.findViewById(R.id.tv_index);
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        List<String> urls=new ArrayList<>();
-        for(int i=0;i<5;i++){
+        List<String> urls = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
             urls.add(Constants.res[i]);
         }
         viewpager.setAdapter(new SamplePagerAdapter(urls));
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                tv_index.setText((i + 1) + "/" + urls.size());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+            }
+        });
 
     }
 
@@ -74,11 +92,11 @@ public class MedialImageFragment extends Fragment {
                 }
             });*/
             String sdr = sDrawables.get(position);
-            RequestOptions  options = new RequestOptions()
+            RequestOptions options = new RequestOptions()
                     .centerCrop()
 //                    .placeholder(R.drawable.lib_replactimage)
 //                    .error(R.drawable.lib_replactimage)
-                    .override(400,400)
+                    .override(400, 400)
 //                    .fallback(R.drawable.lib_replactimage)
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
 //            GlideUtil.load(ViewPagerActivity.this,options,sdr,0,0,photoView);

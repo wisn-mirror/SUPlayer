@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.suplayer.example.ProgressActivity;
 import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.list.VideoListActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;

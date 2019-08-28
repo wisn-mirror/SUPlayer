@@ -29,6 +29,7 @@
         android:src="@drawable/suplayer_nav_icon_close_black"/>
 
     <LinearLayout
+        android:id="@+id/ll_bottom_lick_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
