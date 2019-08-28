@@ -2,7 +2,6 @@ package com.suplayer.productdetail;
 
 import android.content.Context;
 import com.wisn.suvideo.SuVideoView;
-import com.wisn.suvideo.control.impl.ProductVideoController;
 
 /**
  * Created by Wisn on 2019-08-01 14:02.

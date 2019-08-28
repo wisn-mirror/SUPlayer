@@ -65,7 +65,7 @@ public class ProductMediaActivity extends AppCompatActivity {
         dip_8 = UIUtil.dip2px(this, 8);
         dip_6 = UIUtil.dip2px(this, 6);
         dip_20 = UIUtil.dip2px(this, 16);
-        setContentView(R.layout.activity_product_media);
+        setContentView(R.layout.productdetail_activity_product_media);
         setStatusBarTransparent();
         magicIndicator = (MagicIndicator) findViewById(R.id.indicator);
         viewPager = findViewById(R.id.viewpager);
@@ -213,7 +213,6 @@ public class ProductMediaActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        mVideoViewManager.release();
     }
 
    /* @Override

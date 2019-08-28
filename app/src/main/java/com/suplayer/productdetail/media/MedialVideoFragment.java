@@ -31,8 +31,7 @@ public class MedialVideoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        return super.onCreateView(inflater, container, savedInstanceState);
-        fl_container = (FrameLayout) inflater.inflate(R.layout.fragment_video, null);
+        fl_container = (FrameLayout) inflater.inflate(R.layout.productdetail_fragment_video, null);
         return fl_container;
     }
 
@@ -132,9 +131,7 @@ public class MedialVideoFragment extends Fragment {
     @Override
     public void onDestroyView() {
         SeamlessPlayerHelper.getInstance(getActivity()).getSuVideoView().seekTo(suVideoView.getCurrentPosition());
-
         removePlayerFormParent();
-
         super.onDestroyView();
     }
 }
