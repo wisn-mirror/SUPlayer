@@ -11,6 +11,7 @@ import com.suplayer.example.douyin.DouYinActivity;
 import com.suplayer.example.list.VideoListActivity;
 import com.suplayer.example.xiaohongshu.HongshuActivity;
 import com.suplayer.productdetail.ProdetailActivity;
+import com.suplayer.tv.PlayActivity;
 import com.suplayer.tv.local.LocVideoListActivity;
 import com.suplayer.tv.alive.TVAliveActivity;
 import com.wisn.suvideo.VideoViewConfig;
@@ -27,13 +28,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button hongshu;
     private Button tv;
     private Button localvideo;
+    private Button zhibo;
+    private Button zhibo2;
     private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handler = new Handler();
-        startActivity(new Intent(this, ProdetailActivity.class));
+//        startActivity(new Intent(this, ProdetailActivity.class));
 //        startActivity(new Intent(this, TVAliveActivity.class));
 //        this.finish();
         setContentView(R.layout.activity_main);
@@ -44,6 +47,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         hongshu = findViewById(R.id.hongshu);
         localvideo = findViewById(R.id.localvideo);
         tv = findViewById(R.id.tv);
+        zhibo = findViewById(R.id.zhibo);
+        zhibo2 = findViewById(R.id.zhibo2);
         videolist.setOnClickListener(this);
         productDetail.setOnClickListener(this);
         Simple.setOnClickListener(this);
@@ -51,6 +56,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         hongshu.setOnClickListener(this);
         tv.setOnClickListener(this);
         localvideo.setOnClickListener(this);
+        zhibo.setOnClickListener(this);
+        zhibo2.setOnClickListener(this);
         initconfig();
     }
 
@@ -82,6 +89,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, TVAliveActivity.class));
         } else if (v == localvideo) {
             startActivity(new Intent(this, LocVideoListActivity.class));
+        } else if (v == zhibo) {
+           /* {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 2 ", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 3", "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"},
+*/
+            Intent intent = new Intent(this, PlayActivity.class);
+            intent.putExtra(Constants.data, "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8");
+            intent.putExtra(Constants.name, "港好莱电影轮播 1");
+            intent.putExtra(Constants.isalive, true);
+            intent.putExtra(Constants.isFull, true);
+            this.startActivity(intent);
+        } else if (v == zhibo2) {
+           /* {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 2 ", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},
+            {"港好莱电影轮播 3", "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8"},
+*/
+            Intent intent = new Intent(this, PlayActivity.class);
+            intent.putExtra(Constants.data, "http://aldirect.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1_1200.m3u8");
+            intent.putExtra(Constants.name, "港好莱电影轮播 2");
+            intent.putExtra(Constants.isalive, true);
+            intent.putExtra(Constants.isFull, true);
+            this.startActivity(intent);
         }
     }
 }
