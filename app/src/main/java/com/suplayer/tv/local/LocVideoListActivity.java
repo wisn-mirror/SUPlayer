@@ -1,7 +1,10 @@
 package com.suplayer.tv.local;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +28,9 @@ public class LocVideoListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            setTaskDescription(new ActivityManager.TaskDescription("本地视频aa", BitmapFactory.decodeResource(getResources(),R.drawable.suplayer_action_play_arrow)));
+        }
         setContentView(R.layout.activity_loc_video_list);
         recyclerView = findViewById(R.id.recycleview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -88,7 +88,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else if (v == tv) {
             startActivity(new Intent(this, TVAliveActivity.class));
         } else if (v == localvideo) {
-            startActivity(new Intent(this, LocVideoListActivity.class));
+            Intent intent = new Intent(this, LocVideoListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+            intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            startActivity(intent);
+//            startActivity(new Intent(this, LocVideoListActivity.class));
         } else if (v == zhibo) {
            /* {"港好莱电影轮播 1", "http://aldirect.hls.huya.com/huyalive/29169025-2686219962-11537226886652362752-2710080226-10057-A-0-1_1200.m3u8"},
             {"港好莱电影轮播 2 ", "http://js.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8"},

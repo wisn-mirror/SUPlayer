@@ -33,7 +33,10 @@
         <activity android:name=".example.xiaohongshu.HongshuActivity" />
         <activity
             android:name=".productdetail.ProdetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:documentLaunchMode="intoExisting"
+            android:excludeFromRecents="true"
+            android:maxRecents="3" />
         <activity
             android:name=".example.douyin.DouYinActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
